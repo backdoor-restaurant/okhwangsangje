@@ -7,8 +7,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace commons
 {    public class Socket
     {
-        private TcpClient client = null;
         private TcpListener listener = null;
+        private TcpClient client = null;
         private NetworkStream nstream = null;
 
         public void connect(in string ip="127.0.0.1", in int port=49152)
@@ -21,8 +21,11 @@ namespace commons
 
         public void listen(in int port=49152)
         {
-            listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
-            listener.Start();
+            if(listener == null)
+            {
+                listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+                listener.Start();
+            }
 
             client = listener.AcceptTcpClient();
 
@@ -35,9 +38,13 @@ namespace commons
             {
                 byte[] buffer = new byte[1024];
 
-                int bytesRead = nstream.Read(buffer, 0, buffer.Length);
+                int bytesRead;
+                do
+                {
+                    bytesRead = nstream.Read(buffer, 0, buffer.Length);
+                    ms.Write(buffer, 0, bytesRead);
+                } while (bytesRead == buffer.Length);
 
-                ms.Write(buffer, 0, bytesRead);
                 ms.Position = 0;
                 
                 return (T)(new BinaryFormatter()).Deserialize(ms);
@@ -59,9 +66,9 @@ namespace commons
         public void disconnect()
         {
             nstream.Flush();
-
             client.Dispose();
             client.Close();
+            nstream = null;
             client = null;
         }
     }

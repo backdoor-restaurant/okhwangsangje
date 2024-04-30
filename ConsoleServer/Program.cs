@@ -34,9 +34,7 @@ namespace ConsoleServer
                     };
 
                     if(request.table == commons.Table.Type.MEMBER_INFO)
-                    {
-                        response.table = commons.Table.Type.MEMBER_INFO;
-                        
+                    {                        
                         var key = request.Deserialize<string>();
                         Console.WriteLine($"{request.type} {request.table} {key}");
 
@@ -58,8 +56,6 @@ namespace ConsoleServer
                     Console.WriteLine($"Response: {response}");
                     socket.write(response);
                     socket.disconnect();
-
-                    break;
                 }
             }
             catch(SocketException se)
