@@ -7,7 +7,8 @@ namespace commons.Table
         LOGIN_INFO,
         MEMBER_INFO,
         ITEM_INFO,
-        LENT_INFO
+        LENT_INFO,
+        SCHEDULE_INFO
     }
 
     [Serializable]
@@ -16,7 +17,7 @@ namespace commons.Table
         const Type type = Type.LOGIN_INFO;
 
         public string studentId;
-        public string password;
+        public string password = "default password";
     }
 
     [Serializable]
@@ -48,5 +49,26 @@ namespace commons.Table
 
         public string name;
         public int amount;
+    }
+
+    [Serializable]
+    public class LentInfo
+    {
+        const Type type = Type.LENT_INFO;
+
+        public string itemName;
+        public int amount;
+        public string studentId;
+        public string startDate;
+    }
+
+    [Serializable]
+    public class ScheduleInfo
+    {
+        private static int seed = 0;
+        public string id = (seed++).ToString();
+        public string date;
+        public string title;
+        public string content;
     }
 }
