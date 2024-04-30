@@ -62,12 +62,11 @@ namespace commons
             {
                 byte[] buffer = new byte[1024];
 
-                int bytesRead;
                 do
                 {
-                    bytesRead = nstream.Read(buffer, 0, buffer.Length);
+                    int bytesRead = nstream.Read(buffer, 0, buffer.Length);
                     ms.Write(buffer, 0, bytesRead);
-                } while (bytesRead == buffer.Length);
+                } while (nstream.DataAvailable);
 
                 ms.Position = 0;
                 
