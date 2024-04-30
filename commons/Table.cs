@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.InteropServices.ComTypes;
+using System.Xml.Linq;
 
 namespace commons.Table
 {
@@ -18,6 +20,13 @@ namespace commons.Table
 
         public string studentId;
         public string password = "default password";
+
+        public new string ToString()
+        {
+            return $"{type}{{" +
+                studentId + ", " +
+                password + "}";
+        }
     }
 
     [Serializable]
@@ -33,7 +42,7 @@ namespace commons.Table
 
         public new string ToString()
         {
-            return "MemberInfo{" +
+            return $"{type}{{" +
                 studentId + ", " +
                 name + ", " +
                 department + ", " +
@@ -49,6 +58,13 @@ namespace commons.Table
 
         public string name;
         public int amount;
+
+        public new string ToString()
+        {
+            return $"{type}{{" +
+                name + ", " +
+                amount + "}";
+        }
     }
 
     [Serializable]
@@ -60,15 +76,35 @@ namespace commons.Table
         public int amount;
         public string studentId;
         public string startDate;
+
+        public new string ToString()
+        {
+            return $"{type}{{" +
+                itemName + ", " +
+                amount + ", " +
+                studentId + ", " +
+                startDate + "}";
+        }
     }
 
     [Serializable]
     public class ScheduleInfo
     {
+        const Type type = Type.SCHEDULE_INFO;
+
         private static int seed = 0;
         public string id = (seed++).ToString();
         public string date;
         public string title;
         public string content;
+
+        public new string ToString()
+        {
+            return $"{type}{{" +
+                id + ", " +
+                date + ", " +
+                title + ", " +
+                content + "}";
+        }
     }
 }

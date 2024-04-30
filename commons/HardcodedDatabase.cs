@@ -98,7 +98,7 @@ namespace commons.Database
 
         public MemberInfo find(string studentId)
         {
-            return Array.Find<MemberInfo>(members, m => studentId.Equals(m.studentId));
+            return Array.Find(members, m => studentId.Equals(m.studentId));
         }
     }
 }
