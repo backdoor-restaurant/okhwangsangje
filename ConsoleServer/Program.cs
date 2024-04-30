@@ -22,7 +22,7 @@ namespace ConsoleServer
                 var request = socket.read<Request>();
                 Console.WriteLine($"Request: {request}");
 
-                // <-- make packet
+                // <-- make Response packet
                 var response = new Response()
                 {
                     table = request.table

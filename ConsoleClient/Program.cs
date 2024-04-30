@@ -17,12 +17,14 @@ namespace ConsoleClient
 
             socket.connect();
 
+            // <-- make Request packet
             var request = new Request()
             {
                 type = Request.Type.READ,
                 table = commons.Table.Type.MEMBER_INFO
             };
             request.Serialize("4");
+            // end -->
 
             Console.WriteLine($"Request: {request}");
             socket.write(request);
