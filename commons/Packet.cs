@@ -50,8 +50,7 @@ namespace commons
 
         public override string ToString()
         {
-            return type.ToString() + " " + table.ToString() +
-                " primary_key=" + Deserialize<string>();
+            return $"{type} {table} primary_key={Deserialize<string>()}";
         }
     }
     [Serializable]
@@ -68,7 +67,7 @@ namespace commons
 
         public override string ToString()
         {
-            var result = type.ToString() +" "+ table.ToString() + " ";
+            var result = $"{type} {table} ";
             switch (table)
             {
                 case Table.Type.MEMBER_INFO:

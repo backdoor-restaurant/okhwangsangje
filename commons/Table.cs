@@ -23,9 +23,7 @@ namespace commons.Table
 
         public new string ToString()
         {
-            return $"{type}{{" +
-                studentId + ", " +
-                password + "}";
+            return $"{type}{{{studentId}, {password}}}";
         }
     }
 
@@ -42,12 +40,7 @@ namespace commons.Table
 
         public new string ToString()
         {
-            return $"{type}{{" +
-                studentId + ", " +
-                name + ", " +
-                department + ", " +
-                phoneNumber + ", " +
-                isAdministrator.ToString() + "}";
+            return $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
         }
     }
 
@@ -61,9 +54,7 @@ namespace commons.Table
 
         public new string ToString()
         {
-            return $"{type}{{" +
-                name + ", " +
-                amount + "}";
+            return $"{type}{{{name}, {amount}}}";
         }
     }
 
@@ -79,11 +70,7 @@ namespace commons.Table
 
         public new string ToString()
         {
-            return $"{type}{{" +
-                itemName + ", " +
-                amount + ", " +
-                studentId + ", " +
-                startDate + "}";
+            return $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
         }
     }
 
@@ -100,11 +87,7 @@ namespace commons.Table
 
         public new string ToString()
         {
-            return $"{type}{{" +
-                id + ", " +
-                date + ", " +
-                title + ", " +
-                content + "}";
+            return $"{type}{{{id}, {date}, {title}, {content}}}";
         }
     }
 }
