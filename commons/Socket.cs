@@ -2,7 +2,6 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace commons
 {    public class Socket
@@ -59,31 +58,24 @@ namespace commons
         public T read<T>()
         {
             using(var ms = new MemoryStream(1024))
-            {
-                byte[] buffer = new byte[1024];
-
+            { 
                 do
                 {
-                    int bytesRead = nstream.Read(buffer, 0, buffer.Length);
-                    ms.Write(buffer, 0, bytesRead);
+                    byte[] buffer = new byte[1024];
+                    
+                    nstream.Read(buffer, 0, buffer.Length);
+                    ms.Write(buffer, 0, buffer.Length);
                 } while (nstream.DataAvailable);
-
-                ms.Position = 0;
                 
-                return (T)(new BinaryFormatter()).Deserialize(ms);
+                return Parser.parse<T>(ms);
             }
         }
 
         public void write<T>(in T obj)
         {
-            using (var ms = new MemoryStream(1024))
-            {
-                (new BinaryFormatter()).Serialize(ms, obj);
+            var bytes = Serializer.serialize(obj);
 
-                byte[] buffer = ms.ToArray();
-
-                nstream.Write(buffer, 0, buffer.Length);
-            }
+            nstream.Write(bytes, 0, bytes.Length);
         }
 
         public void disconnect()

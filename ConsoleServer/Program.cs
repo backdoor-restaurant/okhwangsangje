@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 using commons;
 using commons.Database;
@@ -12,7 +8,7 @@ namespace ConsoleServer
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var socket = new commons.Socket();
 
@@ -32,9 +28,9 @@ namespace ConsoleServer
                 switch (request.table)
                 {
                     case commons.Table.Type.MEMBER_INFO:
-                        response.Serialize(
+                        response.payload = Serializer.serialize(
                             HardcodedDatabase.db.find(
-                                request.Deserialize<string>()
+                                PacketParser.parse(request)
                             )
                         );
                         response.type = Response.Type.OK;
@@ -47,6 +43,8 @@ namespace ConsoleServer
 
                 Console.WriteLine($"Response: {response}");
                 socket.write(response);
+
+                Thread.Sleep(100);
 
                 socket.disconnect();
             }

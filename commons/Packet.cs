@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 using commons.Table;
 
@@ -11,29 +9,7 @@ namespace commons
     {
         public Table.Type table;
         
-        public int payloadLength;
-        protected byte[] payload;
-
-        public void Serialize<T>(T obj)
-        {
-            using (var ms = new MemoryStream(1024))
-            {
-                (new BinaryFormatter()).Serialize(ms, obj);
-                payload = ms.ToArray();
-                payloadLength = payload.Length;
-            }
-        }
-
-        public T Deserialize<T>()
-        {
-            using(var ms = new MemoryStream(1024))
-            {
-                ms.Write(payload, 0, payloadLength);
-                ms.Position = 0;
-
-                return (T)(new BinaryFormatter()).Deserialize(ms);
-            }
-        }
+        public byte[] payload;
     }
 
     [Serializable]
@@ -50,7 +26,7 @@ namespace commons
 
         public override string ToString()
         {
-            return $"{type} {table} primary_key={Deserialize<string>()}";
+            return $"{type} {table} primary_key={PacketParser.parse(this)}";
         }
     }
     [Serializable]
@@ -71,7 +47,7 @@ namespace commons
             switch (table)
             {
                 case Table.Type.MEMBER_INFO:
-                    return result + Deserialize<MemberInfo>().ToString();
+                    return result + PacketParser.parse<MemberInfo>(this);
                 default:
                     return result;
             }
