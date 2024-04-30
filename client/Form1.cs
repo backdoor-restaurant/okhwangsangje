@@ -10,11 +10,44 @@ using System.Windows.Forms;
 
 namespace client
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        public enum Mode
+        {
+            User = 0,
+            Admin = 1
+        }
+        public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void btnTmp_Click(object sender, EventArgs e)
+        {
+            MainForm newForm = new MainForm(Mode.User);
+
+            // 현재 폼 닫기
+            this.Hide();
+
+            // 새로운 폼 표시
+            newForm.ShowDialog();
+
+            // 새로운 폼이 닫히면 현재 폼 다시 보이기
+            this.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainForm newForm = new MainForm(Mode.Admin);
+
+            // 현재 폼 닫기
+            this.Hide();
+
+            // 새로운 폼 표시
+            newForm.ShowDialog();
+
+            // 새로운 폼이 닫히면 현재 폼 다시 보이기
+            this.Show();
         }
     }
 }
