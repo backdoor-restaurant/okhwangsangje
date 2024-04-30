@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using commons;
-using commons.Table;
 
 namespace ConsoleClient
 {
@@ -14,34 +13,22 @@ namespace ConsoleClient
     {
         static void Main(string[] args)
         {
-            try
+            var socket = new commons.Socket();
+
+            socket.connect();
+
+            var request = new Request()
             {
-                var socket = new commons.Socket();
+                type = Request.Type.READ,
+                table = commons.Table.Type.MEMBER_INFO
+            };
+            request.Serialize("4");
 
-                socket.connect();
-                Console.WriteLine("Connected");
+            Console.WriteLine($"Request: {request}");
+            socket.write(request);
 
-                var request = new Request();
-                request.type = Request.Type.READ;
-                request.table = commons.Table.Type.MEMBER_INFO;
-                request.Serialize("2020203077");
-
-                Console.WriteLine($"Request: {request}");
-                socket.write(request);
-
-                var response = socket.read<Response>();
-                Console.WriteLine($"Response: {response}");
-
-                if(response.table == commons.Table.Type.MEMBER_INFO)
-                {
-                    var memberInfo = response.Deserialize<MemberInfo>();
-                    Console.WriteLine($"{memberInfo.department} {memberInfo.name} {memberInfo.studentId} {memberInfo.phoneNumber}");
-                }
-            }
-            catch (SocketException se)
-            {
-                Console.WriteLine($"Socket Exception: {se}");
-            }
+            var response = socket.read<Response>();
+            Console.WriteLine($"Response: {response}");
         }
     }
 }

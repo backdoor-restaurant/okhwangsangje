@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using commons;
-using commons.Table;
+using commons.Database;
 
 namespace ConsoleServer
 {
@@ -14,53 +14,41 @@ namespace ConsoleServer
     {
         static void Main(string[] args)
         {
-            try
-            {
-                var socket = new commons.Socket();
+            var socket = new commons.Socket();
 
-                while (true)
+            while (true)
+            {
+                socket.listen();
+                var request = socket.read<Request>();
+                Console.WriteLine($"Request: {request}");
+
+                // <-- make packet
+                var response = new Response()
                 {
-                    Console.WriteLine("Waiting...");
-                    socket.listen();
+                    table = request.table
 
-                    Console.WriteLine("Connected!");
+                };
 
-                    var request = socket.read<Request>();
-
-                    // <-- make packet
-                    var response = new Response()
-                    {
-                        table = request.table
-                    };
-
-                    if(request.table == commons.Table.Type.MEMBER_INFO)
-                    {                        
-                        var key = request.Deserialize<string>();
-                        Console.WriteLine($"{request.type} {request.table} {key}");
-
-                        // Assume member info found.
+                switch (request.table)
+                {
+                    case commons.Table.Type.MEMBER_INFO:
+                        response.Serialize(
+                            HardcodedDatabase.db.find(
+                                request.Deserialize<string>()
+                            )
+                        );
                         response.type = Response.Type.OK;
-
-                        var memberInfo = new MemberInfo()
-                        {
-                            name = "홍길동",
-                            department = "Software",
-                            studentId = "1234567890",
-                            phoneNumber = "010-1234-5678"
-                        };
-
-                        response.Serialize(memberInfo);
-                    }
-
-                    // end -->
-                    Console.WriteLine($"Response: {response}");
-                    socket.write(response);
-                    socket.disconnect();
+                        break;
+                    default:
+                        response.type = Response.Type.NOT_FOUND;
+                        break;
                 }
-            }
-            catch(SocketException se)
-            {
-                Console.WriteLine($"Socket Exception: {se}");
+                // end -->
+
+                Console.WriteLine($"Response: {response}");
+                socket.write(response);
+
+                socket.disconnect();
             }
         }
     }

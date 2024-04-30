@@ -27,8 +27,18 @@ namespace commons.Table
         public string studentId;
         public string name;
         public string department;
-        public string phoneNumber;
+        public string phoneNumber = "";
         public bool isAdministrator = false;
+
+        public new string ToString()
+        {
+            return "MemberInfo{" +
+                studentId + ", " +
+                name + ", " +
+                department + ", " +
+                phoneNumber + ", " +
+                isAdministrator.ToString() + "}";
+        }
     }
 
     [Serializable]

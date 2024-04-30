@@ -2,6 +2,8 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+using commons.Table;
+
 namespace commons
 {
     [Serializable]
@@ -9,8 +11,8 @@ namespace commons
     {
         public Table.Type table;
         
-        int payloadLength;
-        byte[] payload;
+        public int payloadLength;
+        protected byte[] payload;
 
         public void Serialize<T>(T obj)
         {
@@ -45,6 +47,12 @@ namespace commons
             DELETE
         }
         public Type type;
+
+        public override string ToString()
+        {
+            return type.ToString() + " " + table.ToString() +
+                " primary_key=" + Deserialize<string>();
+        }
     }
     [Serializable]
     public class Response : Packet
@@ -57,5 +65,17 @@ namespace commons
             REJECTED
         }
         public Type type;
+
+        public override string ToString()
+        {
+            var result = type.ToString() +" "+ table.ToString() + " ";
+            switch (table)
+            {
+                case Table.Type.MEMBER_INFO:
+                    return result + Deserialize<MemberInfo>().ToString();
+                default:
+                    return result;
+            }
+        }
     }
 }

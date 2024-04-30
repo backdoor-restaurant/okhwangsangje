@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HardcodedDatabase.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Socket.cs" />
