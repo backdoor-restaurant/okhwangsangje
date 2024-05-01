@@ -26,7 +26,23 @@ namespace commons
 
         public override string ToString()
         {
-            return $"{type} {table} primary_key={PacketParser.parse(this)}";
+            string result = $"{type} {table} ";
+
+            switch (type)
+            {
+                case Type.CREATE:
+                    switch (table)
+                    {
+                        case Table.Type.MEMBER_INFO:
+                            return result + PacketParser.parse<MemberInfo>(this);
+                        default:
+                            return result;
+                    }
+                case Type.READ:
+                    return result + PacketParser.parse(this);
+                default:
+                    return result;
+            }
         }
     }
     [Serializable]
@@ -43,11 +59,18 @@ namespace commons
 
         public override string ToString()
         {
-            var result = $"{type} {table} ";
-            switch (table)
+            var result = $"{type} {table}";
+
+            switch (type)
             {
-                case Table.Type.MEMBER_INFO:
-                    return result + PacketParser.parse<MemberInfo>(this);
+                case Type.OK:
+                    switch (table)
+                    {
+                        case Table.Type.MEMBER_INFO:
+                            return $"{result} primary_key={PacketParser.parse<MemberInfo>(this)}";
+                        default:
+                            return result;
+                    }
                 default:
                     return result;
             }

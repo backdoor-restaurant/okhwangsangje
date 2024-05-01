@@ -37,14 +37,11 @@ namespace commons
 
     public static class PacketParser
     {
+        public static T parse<T>(Request request)
+            => Parser.parse<T>(request.payload);
         public static string parse(Request request)
-        {
-            return Parser.parse<string>(request.payload);
-        }
-
+            => Parser.parse<string>(request.payload);
         public static T parse<T>(Response response)
-        {
-            return Parser.parse<T>(response.payload);
-        }
+            => Parser.parse<T>(response.payload);
     }
 }

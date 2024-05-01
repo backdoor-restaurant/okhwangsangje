@@ -2,58 +2,16 @@
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace commons
 {    public class Socket
     {
-        private TcpListener listener = null;
-        private TcpClient client = null;
-        private NetworkStream nstream = null;
+        protected const string defaultIp = "127.0.0.1";
+        protected const int defaultPort = 49152;
 
-        public void listen(in int port=49152)
-        {
-            try
-            {
-                if(listener == null)
-                {
-                    listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
-                    listener.Start();
-                }
-
-                Console.WriteLine("Waiting...");
-                client = listener.AcceptTcpClient();
-
-                Console.WriteLine("Connected.");
-                nstream = client.GetStream();
-            }
-            catch(Exception e)
-            {
-                nstream.Close();
-                client.Close();
-                listener.Stop();
-
-                throw e;
-            }
-        }
-
-        public void connect(in string ip="127.0.0.1", in int port=49152)
-        {
-            try
-            {
-                Console.WriteLine("Connecting...");
-                client = new TcpClient(ip, port);
-
-                Console.WriteLine("Connected.");
-                nstream = client.GetStream();
-            }
-            catch(Exception e)
-            {
-                nstream.Close();
-                client.Close();
-
-                throw e;
-            }
-        }
+        protected TcpClient client = null;
+        protected NetworkStream nstream = null;
 
         public T read<T>()
         {
@@ -87,5 +45,55 @@ namespace commons
             nstream = null;
             client = null;
         }
+    }
+
+    public class ClientSocket: Socket, IDisposable
+    {
+        public ClientSocket(string ip = defaultIp, int port = defaultPort)
+        {
+            try
+            {
+                client = new TcpClient(ip, port);
+                nstream = client.GetStream();
+            }
+            catch (Exception e)
+            {
+                nstream.Close();
+                client.Close();
+
+                throw e;
+            }
+        }
+        public void Dispose() => disconnect();
+    }
+
+    public class ServerSocket: Socket, IDisposable
+    {
+        private TcpListener listener;
+
+        public ServerSocket()
+        {
+            listener = new TcpListener(IPAddress.Parse(defaultIp), defaultPort);
+            listener.Start();
+        }
+
+        public void listen()
+        {
+            try
+            {
+                client = listener.AcceptTcpClient();
+                nstream = client.GetStream();
+            }
+            catch (Exception e)
+            {
+                nstream.Close();
+                client.Close();
+                listener.Stop();
+
+                throw e;
+            }
+        }
+
+        public void Dispose() => disconnect();
     }
 }

@@ -19,7 +19,7 @@ namespace commons.Table
         public string studentId;
         public string password = "default password";
 
-        public new string ToString()
+        public override string ToString()
         {
             return $"{type}{{{studentId}, {password}}}";
         }
@@ -36,7 +36,7 @@ namespace commons.Table
         public string phoneNumber = "";
         public bool isAdministrator = false;
 
-        public new string ToString()
+        public override string ToString()
         {
             return $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
         }
@@ -50,7 +50,7 @@ namespace commons.Table
         public string name;
         public int amount;
 
-        public new string ToString()
+        public override string ToString()
         {
             return $"{type}{{{name}, {amount}}}";
         }
@@ -66,7 +66,7 @@ namespace commons.Table
         public string studentId;
         public string startDate;
 
-        public new string ToString()
+        public override string ToString()
         {
             return $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
         }
@@ -83,7 +83,7 @@ namespace commons.Table
         public string title;
         public string content;
 
-        public new string ToString()
+        public override string ToString()
         {
             return $"{type}{{{id}, {date}, {title}, {content}}}";
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 
 using commons;
+using commons.Table;
 
 namespace ConsoleClient
 {
@@ -8,24 +9,26 @@ namespace ConsoleClient
     {
         static void Main()
         {
-            var socket = new commons.Socket();
-
-            socket.connect();
-
-            // <-- make Request packet
-            var request = new Request()
+            MemberInfo newMember = new MemberInfo()
             {
-                type = Request.Type.READ,
-                table = commons.Table.Type.MEMBER_INFO,
-                payload = Serializer.serialize("4")
+                studentId = "1234",
+                name = "Dummy",
+                department = "Software",
+                phoneNumber = "010-0000-0000"
             };
-            // end -->
+            Console.WriteLine($"New Member {newMember}");
 
-            Console.WriteLine($"Request: {request}");
-            socket.write(request);
+            var c_result = ClientWrapper.createMemberInfo(newMember);
+            Console.WriteLine($"Create Result: {c_result}");
 
-            var response = socket.read<Response>();
-            Console.WriteLine($"Response: {response}");
+            var r_result = ClientWrapper.readMemberInfo(newMember.studentId);
+            Console.WriteLine($"Read Result: {r_result}");
+
+            var u_result = ClientWrapper.updateMemberInfo(newMember.studentId, newMember);
+            Console.WriteLine($"Update Result: {u_result}");
+
+            var d_result = ClientWrapper.deleteMemberInfo(newMember.studentId);
+            Console.WriteLine($"Delete Result: {d_result}");
         }
     }
 }
