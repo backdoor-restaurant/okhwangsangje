@@ -75,5 +75,36 @@ namespace commons
         {
             return false;
         }
+
+        // Schedule Info
+        public static bool createSchedule(in ScheduleInfo scheduleInfo)
+        {
+            return false;
+        }
+
+        public static ScheduleInfo readSchedule(in string scheduleId)
+        {
+            return null;
+        }
+
+        public static ScheduleInfo[] readSchedules(in string date)
+        {
+            return null;
+        }
+
+        public static ScheduleInfo[] readAllSchedule()
+        {
+            return null;
+        }
+
+        public static bool updateSchdeule(in string scheduleId, in ScheduleInfo newSchedule)
+        {
+            return false;
+        }
+
+        public static bool deleteSchedule(in string scheduleId)
+        {
+            return false;
+        }
     }
 }
