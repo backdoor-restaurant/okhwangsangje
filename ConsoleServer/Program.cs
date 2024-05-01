@@ -35,12 +35,16 @@ namespace ConsoleServer
                                 case Request.Type.CREATE:
                                     goto case Request.Type.UPDATE;
                                 case Request.Type.READ:
-                                    response.payload = Serializer.serialize(
-                                        HardcodedDatabase.db.find(
-                                            PacketParser.parse<string>(request)
-                                        )
-                                    );
-                                    response.type = Response.Type.OK;
+                                    var info = HardcodedDatabase.db.find(PacketParser.parse<string>(request));
+                                    if(info != null)
+                                    {
+                                        response.payload = Serializer.serialize(info);
+                                        response.type = Response.Type.OK;
+                                    }
+                                    else
+                                    {
+                                        response.type = Response.Type.NOT_FOUND;
+                                    }
                                     break;
                                 case Request.Type.UPDATE:
                                     goto case Request.Type.DELETE;
