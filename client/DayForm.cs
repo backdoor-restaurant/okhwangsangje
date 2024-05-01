@@ -59,17 +59,11 @@ namespace client
                 preForm.Close();
                 preForm = null;
             }
-            switch (mode)
-            {
-                case LoginForm.Mode.User:
-                    break;
-                case LoginForm.Mode.Admin:
-                    DayDetailForm newForm = new DayDetailForm(date,mainForm);
-                    newForm.Show();
-                    newForm.Location = new Point(this.Location.X+ mainForm.Location.X+ mainForm.getCalendar().X+8, this.Location.Y+ mainForm.Location.Y + mainForm.getCalendar().Y+30);
-                    mainForm.setSelectDay(newForm);
-                    break;
-            }
+            DayDetailForm newForm = new DayDetailForm(date, mainForm);
+            newForm.Show();
+            newForm.Location = new Point(this.Location.X + mainForm.Location.X + mainForm.getCalendar().X + 8, this.Location.Y + mainForm.Location.Y + mainForm.getCalendar().Y + 30);
+            mainForm.setSelectDay(newForm);
+            newForm.setMode(mode);
         }
 
 

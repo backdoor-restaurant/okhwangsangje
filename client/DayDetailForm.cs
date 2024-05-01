@@ -57,5 +57,19 @@ namespace client
             mainForm.dicDays[date.ToString("yyyy-M-d")] = calDatas;
             mainForm.displayDays();
         }
+
+        public void setMode(LoginForm.Mode mode)
+        {
+            switch (mode)
+            {
+                case LoginForm.Mode.User:
+                    foreach (DayDetailItemForm control in Details.Controls)
+                    {
+                        control.setUserMode();
+                    }
+                    btnAdd.Visible = false;
+                    break;
+            }
+        }
     }
 }

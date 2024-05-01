@@ -46,5 +46,12 @@ namespace client
         {
             Parent.Controls.Remove(this);
         }
+
+        public void setUserMode()
+        {
+            tbTitle.ReadOnly = true;
+            txContent.ReadOnly = true;
+            btnRemove.Visible = false;
+        }
     }
 }
