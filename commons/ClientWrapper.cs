@@ -8,6 +8,69 @@ using commons.Table;
 
 namespace commons
 {
+    public abstract class VirtualDatabase<Key, T>
+    {
+        protected Dictionary<Key, T> cache;
+
+        public abstract bool create(in T item);
+        public abstract bool createItems(in T[] items);
+        public abstract T read(in Key primaryKey);
+        public abstract T[] readItems(in Key[] keys);
+        public abstract bool update(in T item);
+        public abstract bool updateItems(in T[] items);
+        public abstract bool delete(in Key primaryKey);
+        public abstract bool deleteItems(in Key[] keys);
+        public abstract bool sync();
+    };
+    
+    public class ScheduleVDB: VirtualDatabase<ScheduleInfo>
+    {
+        public override bool create(in ScheduleInfo item)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool createItems(in ScheduleInfo[] items)
+        {
+            throw new NotImplementedException();
+        }
+        public override ScheduleInfo read(in string scheduleId)
+        {
+            throw new NotImplementedException();
+        }
+        public ScheduleInfo readFromDate(in string date)
+        {
+            throw new NotImplementedException();
+        }
+        public override ScheduleInfo[] readItems(in string[] ids)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool update(in ScheduleInfo item)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool updateItems(in ScheduleInfo[] items)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool delete(in string scheduleId)
+        {
+            throw new NotImplementedException();
+        }
+        public bool deleteFromDate(in string date)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool deleteItems(in string[] ids)
+        {
+            throw new NotImplementedException();
+        }
+        public override bool sync()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public static class ClientWrapper
     {
         public static bool createMemberInfo(in MemberInfo newMember)
