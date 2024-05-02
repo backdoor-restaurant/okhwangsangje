@@ -37,7 +37,7 @@ namespace commons
         {
             throw new NotImplementedException();
         }
-        public ScheduleInfo readFromDate(in string date)
+        public ScheduleInfo[] readFromDate(in string date)
         {
             throw new NotImplementedException();
         }
