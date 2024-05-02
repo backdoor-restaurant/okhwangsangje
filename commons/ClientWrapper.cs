@@ -23,7 +23,7 @@ namespace commons
         public abstract bool sync();
     };
     
-    public class ScheduleVDB: VirtualDatabase<ScheduleInfo>
+    public class ScheduleVDB: VirtualDatabase<string, ScheduleInfo>
     {
         public override bool create(in ScheduleInfo item)
         {
