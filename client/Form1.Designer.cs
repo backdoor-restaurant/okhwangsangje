@@ -31,12 +31,13 @@
             this.btnTmp = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnTmp
             // 
             this.btnTmp.Location = new System.Drawing.Point(17, 18);
-            this.btnTmp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTmp.Margin = new System.Windows.Forms.Padding(4);
             this.btnTmp.Name = "btnTmp";
             this.btnTmp.Size = new System.Drawing.Size(290, 39);
             this.btnTmp.TabIndex = 0;
@@ -47,7 +48,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(17, 66);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(290, 39);
             this.button1.TabIndex = 1;
@@ -64,19 +65,28 @@
             this.button2.Text = "Login";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(551, 256);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 28);
+            this.textBox1.TabIndex = 3;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1143, 675);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnTmp);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginForm";
             this.Text = "Login";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -85,6 +95,7 @@
         private System.Windows.Forms.Button btnTmp;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
