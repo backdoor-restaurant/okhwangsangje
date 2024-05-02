@@ -30,13 +30,15 @@
         {
             this.btnTmp = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTmp
             // 
-            this.btnTmp.Location = new System.Drawing.Point(12, 12);
+            this.btnTmp.Location = new System.Drawing.Point(17, 18);
+            this.btnTmp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTmp.Name = "btnTmp";
-            this.btnTmp.Size = new System.Drawing.Size(203, 26);
+            this.btnTmp.Size = new System.Drawing.Size(290, 39);
             this.btnTmp.TabIndex = 0;
             this.btnTmp.Text = "임시 메인 창 가는 버튼(유저)";
             this.btnTmp.UseVisualStyleBackColor = true;
@@ -44,22 +46,34 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 44);
+            this.button1.Location = new System.Drawing.Point(17, 66);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(203, 26);
+            this.button1.Size = new System.Drawing.Size(290, 39);
             this.button1.TabIndex = 1;
             this.button1.Text = "임시 메인 창 가는 버튼(어드민)";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(672, 262);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "Login";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1143, 675);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnTmp);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "LoginForm";
             this.Text = "Login";
             this.ResumeLayout(false);
@@ -70,6 +84,7 @@
 
         private System.Windows.Forms.Button btnTmp;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
