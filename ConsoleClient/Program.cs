@@ -7,6 +7,8 @@ namespace ConsoleClient
 {
     internal class Program
     {
+        private static readonly MemberVBD memberVDB = new MemberVBD();
+
         static void Main()
         {
             MemberInfo newMember = new MemberInfo()
@@ -18,16 +20,16 @@ namespace ConsoleClient
             };
             Console.WriteLine($"New Member {newMember}");
 
-            var c_result = ClientWrapper.createMemberInfo(newMember);
+            var c_result = memberVDB.create(newMember);
             Console.WriteLine($"Create Result: {c_result}");
 
-            var r_result = ClientWrapper.readMemberInfo(newMember.studentId);
-            Console.WriteLine($"Read Result: {r_result}");
+            var r_result = memberVDB.read(newMember.studentId, out MemberInfo member);
+            Console.WriteLine($"Read Result: {r_result}, {member}");
 
-            var u_result = ClientWrapper.updateMemberInfo(newMember.studentId, newMember);
+            var u_result = memberVDB.update(newMember);
             Console.WriteLine($"Update Result: {u_result}");
 
-            var d_result = ClientWrapper.deleteMemberInfo(newMember.studentId);
+            var d_result = memberVDB.delete(newMember.studentId);
             Console.WriteLine($"Delete Result: {d_result}");
         }
     }

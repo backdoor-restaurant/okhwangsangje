@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientWrapper.cs" />
+    <Compile Include="MemberVDB.cs" />
+    <Compile Include="VirtualDB.cs" />
     <Compile Include="HardcodedDatabase.cs" />
     <Compile Include="LoginVDB.cs" />
     <Compile Include="Packet.cs" />

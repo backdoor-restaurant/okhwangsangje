@@ -66,7 +66,14 @@ namespace commons.VirtualDB
 
                 // receive response
                 var response = socket.read<Response>();
-                item = PacketParser.parse<T>(response);
+                if(response.type == Response.Type.OK)
+                {
+                    item = PacketParser.parse<T>(response);
+                }
+                else
+                {
+                    item = null;
+                }
                 return parseResponse(response);
             }
         }

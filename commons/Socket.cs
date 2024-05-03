@@ -69,7 +69,7 @@ namespace commons
 
     public class ServerSocket: Socket, IDisposable
     {
-        private TcpListener listener;
+        private readonly TcpListener listener;
 
         public ServerSocket()
         {

@@ -43,6 +43,7 @@ namespace ConsoleServer
                                     }
                                     else
                                     {
+                                        response.payload = new byte[0];
                                         response.type = Response.Type.NOT_FOUND;
                                     }
                                     break;

@@ -10,6 +10,8 @@ namespace commons.Table
         LENT_INFO,
         SCHEDULE_INFO
     }
+
+    [Serializable]
     public abstract class InfoBase {
         public readonly Type type;
         public InfoBase(Type type) { this.type = type; }
