@@ -30,8 +30,14 @@
         {
             this.btnTmp = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.LoginUIsigninBtn = new System.Windows.Forms.Button();
+            this.LoginUIidtxtBox = new System.Windows.Forms.TextBox();
+            this.LoginUIidLabel = new System.Windows.Forms.Label();
+            this.LoginUIpasswordLabel = new System.Windows.Forms.Label();
+            this.LoginUIpwtxtBox = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.LoginUIsignupBtn = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTmp
@@ -56,21 +62,65 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // LoginUIsigninBtn
             // 
-            this.button2.Location = new System.Drawing.Point(672, 262);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Login";
-            this.button2.UseVisualStyleBackColor = true;
+            this.LoginUIsigninBtn.Location = new System.Drawing.Point(682, 262);
+            this.LoginUIsigninBtn.Name = "LoginUIsigninBtn";
+            this.LoginUIsigninBtn.Size = new System.Drawing.Size(75, 75);
+            this.LoginUIsigninBtn.TabIndex = 2;
+            this.LoginUIsigninBtn.Text = "Login";
+            this.LoginUIsigninBtn.UseVisualStyleBackColor = true;
+            this.LoginUIsigninBtn.Click += new System.EventHandler(this.LoginUIsigninBtn_Click);
             // 
-            // textBox1
+            // LoginUIidtxtBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(551, 256);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 28);
-            this.textBox1.TabIndex = 3;
+            this.LoginUIidtxtBox.Location = new System.Drawing.Point(499, 257);
+            this.LoginUIidtxtBox.Name = "LoginUIidtxtBox";
+            this.LoginUIidtxtBox.Size = new System.Drawing.Size(167, 28);
+            this.LoginUIidtxtBox.TabIndex = 3;
+            // 
+            // LoginUIidLabel
+            // 
+            this.LoginUIidLabel.AutoSize = true;
+            this.LoginUIidLabel.Location = new System.Drawing.Point(427, 262);
+            this.LoginUIidLabel.Name = "LoginUIidLabel";
+            this.LoginUIidLabel.Size = new System.Drawing.Size(44, 18);
+            this.LoginUIidLabel.TabIndex = 4;
+            this.LoginUIidLabel.Text = "학번";
+            // 
+            // LoginUIpasswordLabel
+            // 
+            this.LoginUIpasswordLabel.AutoSize = true;
+            this.LoginUIpasswordLabel.Location = new System.Drawing.Point(413, 312);
+            this.LoginUIpasswordLabel.Name = "LoginUIpasswordLabel";
+            this.LoginUIpasswordLabel.Size = new System.Drawing.Size(80, 18);
+            this.LoginUIpasswordLabel.TabIndex = 5;
+            this.LoginUIpasswordLabel.Text = "비밀번호";
+            // 
+            // LoginUIpwtxtBox
+            // 
+            this.LoginUIpwtxtBox.Location = new System.Drawing.Point(499, 309);
+            this.LoginUIpwtxtBox.Name = "LoginUIpwtxtBox";
+            this.LoginUIpwtxtBox.Size = new System.Drawing.Size(167, 28);
+            this.LoginUIpwtxtBox.TabIndex = 6;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(430, 172);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(327, 64);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // LoginUIsignupBtn
+            // 
+            this.LoginUIsignupBtn.Location = new System.Drawing.Point(511, 367);
+            this.LoginUIsignupBtn.Name = "LoginUIsignupBtn";
+            this.LoginUIsignupBtn.Size = new System.Drawing.Size(155, 23);
+            this.LoginUIsignupBtn.TabIndex = 8;
+            this.LoginUIsignupBtn.Text = "회원가입";
+            this.LoginUIsignupBtn.UseVisualStyleBackColor = true;
             // 
             // LoginForm
             // 
@@ -78,13 +128,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1143, 675);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.LoginUIsignupBtn);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.LoginUIpwtxtBox);
+            this.Controls.Add(this.LoginUIpasswordLabel);
+            this.Controls.Add(this.LoginUIidLabel);
+            this.Controls.Add(this.LoginUIidtxtBox);
+            this.Controls.Add(this.LoginUIsigninBtn);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnTmp);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginForm";
             this.Text = "Login";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,8 +150,13 @@
 
         private System.Windows.Forms.Button btnTmp;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button LoginUIsigninBtn;
+        private System.Windows.Forms.TextBox LoginUIidtxtBox;
+        private System.Windows.Forms.Label LoginUIidLabel;
+        private System.Windows.Forms.Label LoginUIpasswordLabel;
+        private System.Windows.Forms.TextBox LoginUIpwtxtBox;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button LoginUIsignupBtn;
     }
 }
 
