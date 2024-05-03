@@ -1,6 +1,6 @@
 ﻿using System;
 
-using commons;
+using commons.VirtualDB;
 using commons.Table;
 
 namespace ConsoleClient
