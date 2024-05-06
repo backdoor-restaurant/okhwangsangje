@@ -1,14 +1,16 @@
 ﻿using System;
+using commons.Network;
+using server.Database;
+using server.Network;
 
-using commons;
-using commons.Database;
-
-namespace ConsoleServer
+namespace server
 {
-    internal class Program
+    internal static class Example
     {
-        static void Main()
+        public static void main()
         {
+            commons.Environment.Environment.AllocConsole();
+
             using (var socket = new ServerSocket())
             {
                 while (true)
@@ -35,7 +37,7 @@ namespace ConsoleServer
                                 case Request.Type.CREATE:
                                     goto case Request.Type.UPDATE;
                                 case Request.Type.READ:
-                                    var info = HardcodedDatabase.db.find(PacketParser.parse<string>(request));
+                                    var info = Hardcoded.db.find(PacketParser.parse<string>(request));
                                     if(info != null)
                                     {
                                         response.payload = Serializer.serialize(info);
@@ -43,6 +45,7 @@ namespace ConsoleServer
                                     }
                                     else
                                     {
+                                        response.payload = new byte[0];
                                         response.type = Response.Type.NOT_FOUND;
                                     }
                                     break;

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Net.Sockets;
-using System.Runtime.InteropServices.ComTypes;
 
-namespace commons
-{    public class Socket
+namespace commons.Network
+{
+    public class Socket
     {
         protected const string defaultIp = "127.0.0.1";
         protected const int defaultPort = 49152;
@@ -47,7 +46,7 @@ namespace commons
         }
     }
 
-    public class ClientSocket: Socket, IDisposable
+    public class ClientSocket : Socket, IDisposable
     {
         public ClientSocket(string ip = defaultIp, int port = defaultPort)
         {
@@ -64,36 +63,6 @@ namespace commons
                 throw e;
             }
         }
-        public void Dispose() => disconnect();
-    }
-
-    public class ServerSocket: Socket, IDisposable
-    {
-        private TcpListener listener;
-
-        public ServerSocket()
-        {
-            listener = new TcpListener(IPAddress.Parse(defaultIp), defaultPort);
-            listener.Start();
-        }
-
-        public void listen()
-        {
-            try
-            {
-                client = listener.AcceptTcpClient();
-                nstream = client.GetStream();
-            }
-            catch (Exception e)
-            {
-                nstream.Close();
-                client.Close();
-                listener.Stop();
-
-                throw e;
-            }
-        }
-
         public void Dispose() => disconnect();
     }
 }
