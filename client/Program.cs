@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace client
@@ -14,6 +12,12 @@ namespace client
         [STAThread]
         static void Main()
         {
+            if (ConfigurationManager.AppSettings["Console"] == "true")
+            {
+                Example.main();
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());

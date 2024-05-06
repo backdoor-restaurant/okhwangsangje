@@ -2,7 +2,7 @@
 
 using commons.Table;
 
-namespace commons
+namespace commons.Network
 {
     [Serializable]
     public class Packet
@@ -45,6 +45,7 @@ namespace commons
             }
         }
     }
+
     [Serializable]
     public class Response : Packet
     {

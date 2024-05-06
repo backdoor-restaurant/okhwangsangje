@@ -3,13 +3,13 @@
 using commons.VirtualDB;
 using commons.Table;
 
-namespace ConsoleClient
+namespace client
 {
-    internal class Program
+    internal class Example
     {
         private static readonly MemberVBD memberVDB = new MemberVBD();
 
-        static void Main()
+        public static void main()
         {
             MemberInfo newMember = new MemberInfo()
             {

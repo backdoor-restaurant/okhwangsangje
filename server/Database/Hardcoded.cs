@@ -2,11 +2,11 @@
 
 using commons.Table;
 
-namespace commons.Database
+namespace server.Database
 {
-    public class HardcodedDatabase
+    public class Hardcoded
     {
-        public static HardcodedDatabase db = new HardcodedDatabase();
+        public static Hardcoded db = new Hardcoded();
 
         private LoginInfo[] logins = new LoginInfo[]
         {

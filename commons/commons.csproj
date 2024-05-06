@@ -46,14 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MemberVDB.cs" />
-    <Compile Include="VirtualDB.cs" />
-    <Compile Include="HardcodedDatabase.cs" />
-    <Compile Include="LoginVDB.cs" />
-    <Compile Include="Packet.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="ScheduleVDB.cs" />
-    <Compile Include="Socket.cs" />
+    <Compile Include="Environment.cs" />
+    <Compile Include="VirtualDB\MemberVDB.cs" />
+    <Compile Include="VirtualDB\VirtualDB.cs" />
+    <Compile Include="VirtualDB\LoginVDB.cs" />
+    <Compile Include="Network\Packet.cs" />
+    <Compile Include="Network\Parser.cs" />
+    <Compile Include="VirtualDB\ScheduleVDB.cs" />
+    <Compile Include="Network\Socket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Table.cs" />
   </ItemGroup>

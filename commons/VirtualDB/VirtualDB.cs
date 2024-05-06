@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using commons.Network;
 using commons.Table;
 
 namespace commons.VirtualDB
 {
     public class VirtualDatabase<Key, T> where T : InfoBase<Key>, new()
     {
-        private readonly commons.Table.Type type = (new T()).type;
+        private readonly commons.Table.Type type;
         protected Dictionary<Key, T> cache;
+
+        public VirtualDatabase()
+        {
+            type = (new T()).type;
+            cache = new Dictionary<Key, T>();
+        }
 
         private static bool parseResponse(in Response response)
         {
@@ -71,12 +77,13 @@ namespace commons.VirtualDB
         public bool read(in Key primaryKey, out T item)
         {
             bool succeed = false;
-            item = null;
 
             if(cache.TryGetValue(primaryKey, out item))
             {
                 return true;
             }
+
+            Console.WriteLine("Hello");
 
             // item not found in cache
             // connect to server
