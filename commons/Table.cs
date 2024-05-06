@@ -12,13 +12,14 @@ namespace commons.Table
     }
 
     [Serializable]
-    public abstract class InfoBase {
+    public abstract class InfoBase<Key>{
         public readonly Type type;
         public InfoBase(Type type) { this.type = type; }
+        public abstract Key getKey();
     }
 
     [Serializable]
-    public class LoginInfo : InfoBase
+    public class LoginInfo : InfoBase<string>
     {
         public string studentId;
         public string password = "default password";
@@ -28,10 +29,14 @@ namespace commons.Table
         {
             return $"{type}{{{studentId}, {password}}}";
         }
+        public override string getKey()
+        {
+            return studentId;
+        }
     }
 
     [Serializable]
-    public class MemberInfo : InfoBase
+    public class MemberInfo : InfoBase<string>
     {
         public string studentId;
         public string name;
@@ -44,10 +49,14 @@ namespace commons.Table
         {
             return $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
         }
+        public override string getKey()
+        {
+            return studentId;
+        }
     }
 
     [Serializable]
-    public class ItemInfo : InfoBase
+    public class ItemInfo : InfoBase<string>
     {
         public string name;
         public int amount;
@@ -57,10 +66,14 @@ namespace commons.Table
         {
             return $"{type}{{{name}, {amount}}}";
         }
+        public override string getKey()
+        {
+            return name;
+        }
     }
 
     [Serializable]
-    public class LentInfo : InfoBase
+    public class LentInfo : InfoBase<string>
     {
         public string itemName;
         public int amount;
@@ -72,13 +85,16 @@ namespace commons.Table
         {
             return $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
         }
+        public override string getKey()
+        {
+            return itemName;
+        }
     }
 
     [Serializable]
-    public class ScheduleInfo : InfoBase
+    public class ScheduleInfo : InfoBase<string>
     {
-        private static int seed = 0;
-        public string id = (seed++).ToString();
+        public string id;
         public string date;
         public string title;
         public string content;
@@ -87,6 +103,10 @@ namespace commons.Table
         public override string ToString()
         {
             return $"{type}{{{id}, {date}, {title}, {content}}}";
+        }
+        public override string getKey()
+        {
+            return id;
         }
     }
 }

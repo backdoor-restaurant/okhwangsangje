@@ -5,7 +5,7 @@ using commons.Table;
 
 namespace commons.VirtualDB
 {
-    public class VirtualDatabase<Key, T> where T : InfoBase, new()
+    public class VirtualDatabase<Key, T> where T : InfoBase<Key>, new()
     {
         private readonly commons.Table.Type type = (new T()).type;
         protected Dictionary<Key, T> cache;
@@ -29,6 +29,8 @@ namespace commons.VirtualDB
 
         public bool create(in T newItem)
         {
+            bool succeed = false;
+
             // connect to server
             using (var socket = new ClientSocket())
             {
@@ -42,17 +44,41 @@ namespace commons.VirtualDB
 
                 // recv response
                 var response = socket.read<Response>();
-                return parseResponse(response);
+                succeed = parseResponse(response);
             }
+
+            if (succeed)
+            {
+                cache.Add(newItem.getKey(), newItem);
+            }
+
+            return succeed;
         }
 
         public bool createItems(in T[] items)
         {
-            throw new NotImplementedException();
+            foreach (var item in items)
+            {
+                if (!create(item))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public bool read(in Key primaryKey, out T item)
         {
+            bool succeed = false;
+            item = null;
+
+            if(cache.TryGetValue(primaryKey, out item))
+            {
+                return true;
+            }
+
+            // item not found in cache
             // connect to server
             using (var socket = new ClientSocket())
             {
@@ -66,25 +92,44 @@ namespace commons.VirtualDB
 
                 // receive response
                 var response = socket.read<Response>();
-                if(response.type == Response.Type.OK)
+                if((succeed=parseResponse(response)))
                 {
                     item = PacketParser.parse<T>(response);
                 }
-                else
-                {
-                    item = null;
-                }
-                return parseResponse(response);
             }
+
+            // memorize it.
+            if (succeed)
+            {
+                cache.Add(primaryKey, item);
+            }
+
+            return succeed;
         }
 
         public bool readItems(in Key[] keys, out T[] items)
         {
-            throw new NotImplementedException();
+            int idx = 0;
+
+            T[] tempItems = new T[keys.Length];
+
+            foreach (var key in keys)
+            {
+                if (!read(key, out tempItems[idx++]))
+                {
+                    items = tempItems;
+                    return false;
+                }
+            }
+
+            items = tempItems;
+            return true;
         }
 
         public bool update(in T item)
         {
+            bool succeed = false;
+
             // connect to server
             using (var socket = new ClientSocket())
             {
@@ -98,12 +143,27 @@ namespace commons.VirtualDB
 
                 // receive response
                 var response = socket.read<Response>();
-                return parseResponse(response);
+                succeed = parseResponse(response);
             }
+
+            if (succeed)
+            {
+                cache[item.getKey()] = item;
+            }
+
+            return succeed;
         }
         public bool updateItems(in T[] items)
         {
-            throw new NotImplementedException();
+            foreach (var item in items)
+            {
+                if (!update(item))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         public bool delete(in Key primaryKey)
         {
@@ -125,11 +185,19 @@ namespace commons.VirtualDB
         }
         public bool deleteItems(in Key[] keys)
         {
-            throw new NotImplementedException();
+            foreach (var key in keys)
+            {
+                if (!delete(key))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
-        public bool sync()
+        public void flush()
         {
-            throw new NotImplementedException();
+            cache = null;
         }
     };
 }
