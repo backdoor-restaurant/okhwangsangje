@@ -16,7 +16,7 @@ namespace client
     {
         private LoginForm.Mode mode;
         private DateTime date;
-        private MainForm mainForm;
+        private CalendarForm mainForm;
 
         public DayForm(LoginForm.Mode mode, DateTime date)
         {
@@ -31,12 +31,12 @@ namespace client
 
         private void DayForm_Load(object sender, EventArgs e)
         {
-            mainForm = ParentForm as MainForm;
+            mainForm = ParentForm as CalendarForm;
             lbDay.Text = date.Day.ToString();
             if (mainForm.dicDays.ContainsKey(date.ToString("yyyy-M-d")))
             {
-                MainForm.CalData c = mainForm.dicDays[date.ToString("yyyy-M-d")];
-                foreach(MainForm.CalMemo m in c.memos)
+                CalendarForm.CalData c = mainForm.dicDays[date.ToString("yyyy-M-d")];
+                foreach(CalendarForm.CalMemo m in c.memos)
                 {
                     tbDayMemo.Text += m.title + "\r\n";
                 }
@@ -61,7 +61,7 @@ namespace client
             }
             DayDetailForm newForm = new DayDetailForm(date, mainForm);
             newForm.Show();
-            newForm.Location = new Point(this.Location.X + mainForm.Location.X + mainForm.getCalendar().X + 8, this.Location.Y + mainForm.Location.Y + mainForm.getCalendar().Y + 30);
+            newForm.Location = new Point(this.Location.X + mainForm.Location.X + mainForm.GetCalendarLocation().X+8, this.Location.Y + mainForm.Location.Y + mainForm.GetCalendarLocation().Y+110);
             mainForm.setSelectDay(newForm);
             newForm.setMode(mode);
         }
@@ -75,6 +75,11 @@ namespace client
                 preForm.Close();
                 preForm = null;
             }
+        }
+
+        private void tbDayMemo_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
