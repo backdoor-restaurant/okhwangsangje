@@ -117,7 +117,11 @@ namespace client
 
         private void CalendarForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            selectDay.Close();
+            if (selectDay != null)
+            {
+                selectDay.Close();
+                selectDay = null;
+            }
         }
     }
 }
