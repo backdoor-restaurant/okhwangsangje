@@ -13,8 +13,8 @@ namespace client
 {
     public partial class DayDetailItemForm : UserControl
     {
-        private MainForm.CalMemo TmpData;
-        public DayDetailItemForm(MainForm.CalMemo tmpData)
+        private CalendarForm.CalMemo TmpData;
+        public DayDetailItemForm(CalendarForm.CalMemo tmpData)
         {
             this.TmpData = tmpData; 
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace client
                 txContent.Height += 20;
             }
         }
-        public MainForm.CalMemo getCalMemo()
+        public CalendarForm.CalMemo getCalMemo()
         {
             TmpData.title = tbTitle.Text;
             TmpData.content = txContent.Text;
