@@ -24,7 +24,7 @@ namespace client
 
         private void btnTmp_Click(object sender, EventArgs e)
         {
-            MainForm newForm = new MainForm(Mode.User);
+            CalendarForm newForm = new CalendarForm(Mode.User);
 
             // 현재 폼 닫기
             this.Hide();
@@ -38,7 +38,21 @@ namespace client
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MainForm newForm = new MainForm(Mode.Admin);
+            CalendarForm newForm = new CalendarForm(Mode.Admin);
+
+            // 현재 폼 닫기
+            this.Hide();
+
+            // 새로운 폼 표시
+            newForm.ShowDialog();
+
+            // 새로운 폼이 닫히면 현재 폼 다시 보이기
+            this.Show();
+        }
+
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            MainForm newForm = new MainForm();
 
             // 현재 폼 닫기
             this.Hide();

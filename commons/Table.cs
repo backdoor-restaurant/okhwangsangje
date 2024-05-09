@@ -12,80 +12,101 @@ namespace commons.Table
     }
 
     [Serializable]
-    public class LoginInfo
-    {
-        const Type type = Type.LOGIN_INFO;
+    public abstract class InfoBase<Key>{
+        public readonly Type type;
+        public InfoBase(Type type) { this.type = type; }
+        public abstract Key getKey();
+    }
 
+    [Serializable]
+    public class LoginInfo : InfoBase<string>
+    {
         public string studentId;
         public string password = "default password";
 
+        public LoginInfo() : base(Type.LOGIN_INFO) { }
         public override string ToString()
         {
             return $"{type}{{{studentId}, {password}}}";
         }
+        public override string getKey()
+        {
+            return studentId;
+        }
     }
 
     [Serializable]
-    public class MemberInfo
+    public class MemberInfo : InfoBase<string>
     {
-        const Type type = Type.MEMBER_INFO;
-
         public string studentId;
         public string name;
         public string department;
         public string phoneNumber = "";
         public bool isAdministrator = false;
 
+        public MemberInfo() : base(Type.MEMBER_INFO) { }
         public override string ToString()
         {
             return $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
         }
-    }
-
-    [Serializable]
-    public class ItemInfo
-    {
-        const Type type = Type.ITEM_INFO;
-
-        public string name;
-        public int amount;
-
-        public override string ToString()
+        public override string getKey()
         {
-            return $"{type}{{{name}, {amount}}}";
+            return studentId;
         }
     }
 
     [Serializable]
-    public class LentInfo
+    public class ItemInfo : InfoBase<string>
     {
-        const Type type = Type.LENT_INFO;
+        public string name;
+        public int amount;
 
+        public ItemInfo() : base(Type.ITEM_INFO) { }
+        public override string ToString()
+        {
+            return $"{type}{{{name}, {amount}}}";
+        }
+        public override string getKey()
+        {
+            return name;
+        }
+    }
+
+    [Serializable]
+    public class LentInfo : InfoBase<string>
+    {
         public string itemName;
         public int amount;
         public string studentId;
         public string startDate;
 
+        public LentInfo() : base(Type.LENT_INFO) { }
         public override string ToString()
         {
             return $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
         }
+        public override string getKey()
+        {
+            return itemName;
+        }
     }
 
     [Serializable]
-    public class ScheduleInfo
+    public class ScheduleInfo : InfoBase<string>
     {
-        const Type type = Type.SCHEDULE_INFO;
-
-        private static int seed = 0;
-        public string id = (seed++).ToString();
+        public string id;
         public string date;
         public string title;
         public string content;
 
+        public ScheduleInfo() : base(Type.SCHEDULE_INFO) { }
         public override string ToString()
         {
             return $"{type}{{{id}, {date}, {title}, {content}}}";
+        }
+        public override string getKey()
+        {
+            return id;
         }
     }
 }

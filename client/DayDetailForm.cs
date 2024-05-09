@@ -14,25 +14,25 @@ namespace client
     public partial class DayDetailForm : Form
     {
         private DateTime date;
-        private MainForm.CalData calDatas;
-        private MainForm mainForm;
+        private CalendarForm.CalData calDatas;
+        private CalendarForm mainForm;
         
         
-        public DayDetailForm(DateTime date,MainForm mainForm)
+        public DayDetailForm(DateTime date,CalendarForm mainForm)
         {
             this.date = date;
             this.mainForm = mainForm;
             if(mainForm.dicDays.ContainsKey(date.ToString("yyyy-M-d")))
             {
                 calDatas = mainForm.dicDays[date.ToString("yyyy-M-d")];
-            } else calDatas = new MainForm.CalData(date.ToString("yyyy-M-d"), new List<MainForm.CalMemo>());
+            } else calDatas = new CalendarForm.CalData(date.ToString("yyyy-M-d"), new List<CalendarForm.CalMemo>());
             InitializeComponent();
         }
 
         private void DayDetailForm_Load(object sender, EventArgs e)
         {
             lbDetailYMD.Text = date.Year + "년 " + date.Month + "월 " + date.Day + "일";
-            foreach (MainForm.CalMemo memo in calDatas.memos) {
+            foreach (CalendarForm.CalMemo memo in calDatas.memos) {
                 DayDetailItemForm dayForm = new DayDetailItemForm(memo);
                 Details.Controls.Add(dayForm);
             }
@@ -40,7 +40,7 @@ namespace client
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            MainForm.CalMemo c = new MainForm.CalMemo("제목", "내용");
+            CalendarForm.CalMemo c = new CalendarForm.CalMemo("제목", "내용");
             calDatas.memos.Add(c);
             DayDetailItemForm dayForm = new DayDetailItemForm(c);
             Details.Controls.Add(dayForm);
