@@ -1,52 +1,64 @@
 ﻿using System;
 
-using commons.Table;
-
 namespace commons.Network
 {
     [Serializable]
-    public class Header
-    {
-        public uint authToken=0;
-    }
-
-    [Serializable]
     public class Packet
     {
-        Header header;
+        // packet header
+        public enum PacketType
+        {
+            Hello,
+            Auth,
+            Replication,
+            Disconnect
+        }
+        public PacketType packetType;
+
+        public const uint GUEST = 0;
+        public uint authToken = GUEST;
 
         // packet body
-        public Table.Type table;
-        public byte[] payload;
+        public Table.Type payloadType;
+        public byte[] payload = null;
+
+        public Packet(in uint token)
+        {
+            authToken = token;
+        }
     }
 
     [Serializable]
     public class Request : Packet
     {
-        public enum Type
+        public enum RequestType
         {
             CREATE,
             READ,
             UPDATE,
             DELETE
         }
-        public Type type;
+        public RequestType requestType;
 
+        public Request(in uint token) : base(token)
+        {
+            packetType = PacketType.Replication;
+        }
         public override string ToString()
         {
-            string result = $"{type} {table} ";
+            string result = $"{requestType} {payloadType} ";
 
-            switch (type)
+            switch (requestType)
             {
-                case Type.CREATE:
-                    switch (table)
+                case RequestType.CREATE:
+                    switch (payloadType)
                     {
                         case Table.Type.MEMBER_INFO:
-                            return result + PacketParser.parse<MemberInfo>(this);
+                            return result + PacketParser.parse<Table.MemberInfo>(this);
                         default:
                             return result;
                     }
-                case Type.READ:
+                case RequestType.READ:
                     return result + PacketParser.parse(this);
                 default:
                     return result;
@@ -57,26 +69,30 @@ namespace commons.Network
     [Serializable]
     public class Response : Packet
     {
-        public enum Type
+        public enum ResponseType
         {
             OK,
             NOT_FOUND,
             BAD_REQUEST,
             REJECTED
         }
-        public Type type;
+        public ResponseType type;
 
+        public Response(in uint token) : base(token)
+        {
+            packetType = PacketType.Replication;
+        }
         public override string ToString()
         {
-            var result = $"{type} {table}";
+            var result = $"{type} {payloadType}";
 
             switch (type)
             {
-                case Type.OK:
-                    switch (table)
+                case ResponseType.OK:
+                    switch (payloadType)
                     {
                         case Table.Type.MEMBER_INFO:
-                            return $"{result} primary_key={PacketParser.parse<MemberInfo>(this)}";
+                            return $"{result} primary_key={PacketParser.parse<Table.MemberInfo>(this)}";
                         default:
                             return result;
                     }
