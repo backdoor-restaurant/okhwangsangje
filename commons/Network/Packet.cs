@@ -5,10 +5,18 @@ using commons.Table;
 namespace commons.Network
 {
     [Serializable]
+    public class Header
+    {
+        public uint authToken=0;
+    }
+
+    [Serializable]
     public class Packet
     {
+        Header header;
+
+        // packet body
         public Table.Type table;
-        
         public byte[] payload;
     }
 
