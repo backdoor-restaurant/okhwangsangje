@@ -158,7 +158,6 @@
             this.Controls.Add(this.LoginUIidtxtBox);
             this.Controls.Add(this.LoginUIsigninBtn);
             this.Controls.Add(this.button1);
-            this.Contrors.Add(this.btnTmp);
             this.Controls.Add(this.btnMain);
             this.Controls.Add(this.button2);
             this.Margin = new System.Windows.Forms.Padding(4);
