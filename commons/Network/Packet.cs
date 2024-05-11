@@ -26,6 +26,10 @@ namespace commons.Network
         {
             authToken = token;
         }
+        public override string ToString()
+        {
+            return $"{packetType} {authToken}";
+        }
     }
 
     [Serializable]

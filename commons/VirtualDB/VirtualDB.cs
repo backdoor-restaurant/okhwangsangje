@@ -27,7 +27,12 @@ namespace commons.VirtualDB
 
         ~VirtualDatabase()
         {
-            throw new NotImplementedException();
+            using (var socket = new ClientSocket())
+            {
+                socket.write(PacketFactory.newDisconnect(token));
+
+                var recv = socket.read<Packet>();
+            }
         }
 
         private static bool parseResponse(in Response response)
@@ -110,8 +115,6 @@ namespace commons.VirtualDB
             {
                 return true;
             }
-
-            Console.WriteLine("Hello");
 
             // item not found in cache
             // connect to server

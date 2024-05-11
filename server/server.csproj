@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Database\Hardcoded.cs" />
     <Compile Include="Example.cs" />
+    <Compile Include="Network\Gate.cs" />
     <Compile Include="Network\Socket.cs" />
     <Compile Include="Server.cs">
       <SubType>Form</SubType>
