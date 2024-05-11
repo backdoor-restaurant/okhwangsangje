@@ -52,16 +52,6 @@ namespace client
 
         private void btnMain_Click(object sender, EventArgs e)
         {
-            MainForm newForm = new MainForm();
-
-            // 현재 폼 닫기
-            this.Hide();
-
-            // 새로운 폼 표시
-            newForm.ShowDialog();
-
-            // 새로운 폼이 닫히면 현재 폼 다시 보이기
-            this.Show();
         }
 
         private bool isValidDataUser(string id, string pw)
@@ -85,6 +75,13 @@ namespace client
             // 함수명에 대해 기준을 세우는 회의가 필요할 듯
             if (isValidDataUser(userId, userPw))
             {
+                MainForm newForm = new MainForm();
+                // 현재 폼 닫기
+                this.Hide();
+                // 새로운 폼 표시
+                newForm.ShowDialog();
+                // 새로운 폼이 닫히면 현재 폼 다시 보이기
+                this.Show();
                 MessageBox.Show("test Login sucesss");
             }
             else
