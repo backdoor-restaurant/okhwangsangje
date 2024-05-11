@@ -76,7 +76,6 @@ namespace client
                 return true;
             }
             return false;
-
         }
         private void LoginUIsigninBtn_Click(object sender, EventArgs e)
         {
@@ -98,6 +97,13 @@ namespace client
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             // 사진을 넣을 것
+        }
+
+        private void LoginUIsignupBtn_Click(object sender, EventArgs e)
+        {
+            signUp signupForm = new signUp();
+            signupForm.ShowDialog();
+
         }
     }
 }

@@ -37,9 +37,9 @@
             this.LoginUIpwtxtBox = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LoginUIsignupBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.button2 = new System.Windows.Forms.Button();
             this.btnMain = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTmp
@@ -78,7 +78,7 @@
             // 
             this.LoginUIidtxtBox.Location = new System.Drawing.Point(499, 257);
             this.LoginUIidtxtBox.Name = "LoginUIidtxtBox";
-            this.LoginUIidtxtBox.Size = new System.Drawing.Size(167, 28);
+            this.LoginUIidtxtBox.Size = new System.Drawing.Size(167, 21);
             this.LoginUIidtxtBox.TabIndex = 3;
             // 
             // LoginUIidLabel
@@ -86,7 +86,7 @@
             this.LoginUIidLabel.AutoSize = true;
             this.LoginUIidLabel.Location = new System.Drawing.Point(427, 262);
             this.LoginUIidLabel.Name = "LoginUIidLabel";
-            this.LoginUIidLabel.Size = new System.Drawing.Size(44, 18);
+            this.LoginUIidLabel.Size = new System.Drawing.Size(29, 12);
             this.LoginUIidLabel.TabIndex = 4;
             this.LoginUIidLabel.Text = "학번";
             // 
@@ -95,7 +95,7 @@
             this.LoginUIpasswordLabel.AutoSize = true;
             this.LoginUIpasswordLabel.Location = new System.Drawing.Point(413, 312);
             this.LoginUIpasswordLabel.Name = "LoginUIpasswordLabel";
-            this.LoginUIpasswordLabel.Size = new System.Drawing.Size(80, 18);
+            this.LoginUIpasswordLabel.Size = new System.Drawing.Size(53, 12);
             this.LoginUIpasswordLabel.TabIndex = 5;
             this.LoginUIpasswordLabel.Text = "비밀번호";
             // 
@@ -103,7 +103,7 @@
             // 
             this.LoginUIpwtxtBox.Location = new System.Drawing.Point(499, 309);
             this.LoginUIpwtxtBox.Name = "LoginUIpwtxtBox";
-            this.LoginUIpwtxtBox.Size = new System.Drawing.Size(167, 28);
+            this.LoginUIpwtxtBox.Size = new System.Drawing.Size(167, 21);
             this.LoginUIpwtxtBox.TabIndex = 6;
             // 
             // pictureBox1
@@ -123,6 +123,7 @@
             this.LoginUIsignupBtn.TabIndex = 8;
             this.LoginUIsignupBtn.Text = "회원가입";
             this.LoginUIsignupBtn.UseVisualStyleBackColor = true;
+            this.LoginUIsignupBtn.Click += new System.EventHandler(this.LoginUIsignupBtn_Click);
             // 
             // button2
             // 
