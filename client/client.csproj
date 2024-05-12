@@ -62,17 +62,23 @@
     <Compile Include="DayDetailItemForm.Designer.cs">
       <DependentUpon>DayDetailItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EquipAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EquipAdd.Designer.cs">
+      <DependentUpon>EquipAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="EquipmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EquipmentForm.Designer.cs">
       <DependentUpon>EquipmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="EquipmentStatusForm.cs">
+    <Compile Include="EquipmentHistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EquipmentStatusForm.Designer.cs">
-      <DependentUpon>EquipmentStatusForm.cs</DependentUpon>
+    <Compile Include="EquipmentHistoryForm.Designer.cs">
+      <DependentUpon>EquipmentHistoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Example.cs" />
     <Compile Include="LoginForm.cs">
@@ -113,8 +119,14 @@
     <EmbeddedResource Include="DayDetailItemForm.resx">
       <DependentUpon>DayDetailItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EquipmentStatusForm.resx">
-      <DependentUpon>EquipmentStatusForm.cs</DependentUpon>
+    <EmbeddedResource Include="EquipAdd.resx">
+      <DependentUpon>EquipAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EquipmentForm.resx">
+      <DependentUpon>EquipmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EquipmentHistoryForm.resx">
+      <DependentUpon>EquipmentHistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
