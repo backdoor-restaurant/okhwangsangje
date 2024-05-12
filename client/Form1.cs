@@ -102,41 +102,5 @@ namespace client
             signupForm.ShowDialog();
 
         }
-
-        private bool isValidDataUser(string id, string pw)
-        {
-            if(id == ""||pw == "")
-            {
-                return false;
-            }
-            if (true)
-            {
-                // 데이터베이스
-                return true;
-            }
-            return false;
-
-        }
-        private void LoginUIsigninBtn_Click(object sender, EventArgs e)
-        {
-            string userId = this.LoginUIidtxtBox.Text;
-            string userPw = this.LoginUIpwtxtBox.Text;
-            
-            // 함수명에 대해 기준을 세우는 회의가 필요할 듯
-            if (isValidDataUser(userId, userPw))
-            {
-                MessageBox.Show("test Login sucesss");
-            }
-            else
-            {
-                MessageBox.Show("test Login fail");
-            }
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            // 사진을 넣을 것
-        }
     }
 }
