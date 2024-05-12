@@ -12,6 +12,13 @@ namespace client
         {
             commons.Environment.Environment.AllocConsole();
 
+            LoginInfo loginInfo = new LoginInfo()
+            {
+                studentId = "1234",
+                password = "secret"
+            };
+            memberVDB.signin(loginInfo);
+
             MemberInfo newMember = new MemberInfo()
             {
                 studentId = "1234",

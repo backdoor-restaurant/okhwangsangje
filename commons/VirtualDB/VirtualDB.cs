@@ -7,29 +7,62 @@ namespace commons.VirtualDB
 {
     public class VirtualDatabase<Key, T> where T : InfoBase<Key>, new()
     {
-        private readonly commons.Table.Type type;
+        private readonly Table.Type type = (new T()).type;
         protected Dictionary<Key, T> cache;
+
+        private uint token = Packet.GUEST;
 
         public VirtualDatabase()
         {
-            type = (new T()).type;
             cache = new Dictionary<Key, T>();
+
+            using (var socket = new ClientSocket())
+            {
+                // ping
+                socket.write(PacketFactory.newHello());
+
+                var pong = socket.read<Packet>();
+            }
+        }
+
+        ~VirtualDatabase()
+        {
+            using (var socket = new ClientSocket())
+            {
+                socket.write(PacketFactory.newDisconnect(token));
+
+                var recv = socket.read<Packet>();
+            }
         }
 
         private static bool parseResponse(in Response response)
         {
             switch(response.type)
             {
-                case Response.Type.OK:
+                case Response.ResponseType.OK:
                     return true;
-                case Response.Type.BAD_REQUEST:
+                case Response.ResponseType.BAD_REQUEST:
                     throw new Exception("Bad Request");
-                case Response.Type.REJECTED:
+                case Response.ResponseType.REJECTED:
                     goto default;
-                case Response.Type.NOT_FOUND:
+                case Response.ResponseType.NOT_FOUND:
                     goto default;
                 default:
                     return false;
+            }
+        }
+
+        public void signin(in LoginInfo loginInfo)
+        {
+            cache = new Dictionary<Key, T>();
+
+            using (var socket = new ClientSocket())
+            {
+                socket.write(PacketFactory.newAuth(loginInfo));
+
+                var resp = socket.read<Packet>();
+
+                token = resp.authToken;
             }
         }
 
@@ -41,10 +74,10 @@ namespace commons.VirtualDB
             using (var socket = new ClientSocket())
             {
                 // sent request
-                socket.write(new Request()
+                socket.write(new Request(token)
                 {
-                    type = Request.Type.CREATE,
-                    table = type,
+                    requestType = Request.RequestType.CREATE,
+                    payloadType = type,
                     payload = Serializer.serialize(newItem)
                 });
 
@@ -83,17 +116,15 @@ namespace commons.VirtualDB
                 return true;
             }
 
-            Console.WriteLine("Hello");
-
             // item not found in cache
             // connect to server
             using (var socket = new ClientSocket())
             {
                 // send request
-                socket.write(new Request()
+                socket.write(new Request(token)
                 {
-                    type = Request.Type.READ,
-                    table = type,
+                    requestType = Request.RequestType.READ,
+                    payloadType = type,
                     payload = Serializer.serialize(primaryKey)
                 });
 
@@ -141,10 +172,10 @@ namespace commons.VirtualDB
             using (var socket = new ClientSocket())
             {
                 // send request
-                socket.write(new Request()
+                socket.write(new Request(token)
                 {
-                    type = Request.Type.UPDATE,
-                    table = type,
+                    requestType = Request.RequestType.UPDATE,
+                    payloadType = type,
                     payload = Serializer.serialize(item)
                 });
 
@@ -178,10 +209,10 @@ namespace commons.VirtualDB
             using (var socket = new ClientSocket())
             {
                 // send request
-                socket.write(new Request()
+                socket.write(new Request(token)
                 {
-                    type = Request.Type.DELETE,
-                    table = type,
+                    requestType = Request.RequestType.DELETE,
+                    payloadType = type,
                     payload = Serializer.serialize(primaryKey)
                 });
 
