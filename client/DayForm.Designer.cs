@@ -48,15 +48,16 @@
             // tbDayMemo
             // 
             this.tbDayMemo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.tbDayMemo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tbDayMemo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDayMemo.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tbDayMemo.Location = new System.Drawing.Point(0, 14);
             this.tbDayMemo.Multiline = true;
             this.tbDayMemo.Name = "tbDayMemo";
             this.tbDayMemo.ReadOnly = true;
-            this.tbDayMemo.Size = new System.Drawing.Size(150, 89);
+            this.tbDayMemo.Size = new System.Drawing.Size(152, 89);
             this.tbDayMemo.TabIndex = 1;
             this.tbDayMemo.WordWrap = false;
-            this.tbDayMemo.TextChanged += new System.EventHandler(this.tbDayMemo_TextChanged);
             this.tbDayMemo.DoubleClick += new System.EventHandler(this.tbDayMemo_DoubleClick);
             // 
             // DayForm
@@ -68,7 +69,7 @@
             this.Controls.Add(this.tbDayMemo);
             this.Controls.Add(this.lbDay);
             this.Name = "DayForm";
-            this.Size = new System.Drawing.Size(150, 103);
+            this.Size = new System.Drawing.Size(152, 103);
             this.Load += new System.EventHandler(this.DayForm_Load);
             this.Click += new System.EventHandler(this.DayForm_Click);
             this.ResumeLayout(false);

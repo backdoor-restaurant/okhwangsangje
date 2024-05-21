@@ -35,10 +35,16 @@ namespace client
             lbDay.Text = date.Day.ToString();
             if (mainForm.dicDays.ContainsKey(date.ToString("yyyy-M-d")))
             {
+                int count = 0;
                 CalendarForm.CalData c = mainForm.dicDays[date.ToString("yyyy-M-d")];
                 foreach(CalendarForm.CalMemo m in c.memos)
                 {
-                    tbDayMemo.Text += m.title + "\r\n";
+                    if (count > 4) break;
+                    if (count == 4 && c.memos.Count>3)
+                        tbDayMemo.Text += "•••";
+                    else
+                        tbDayMemo.Text += m.title + "\r\n";
+                    count++;
                 }
             }
         }
@@ -61,7 +67,7 @@ namespace client
             }
             DayDetailForm newForm = new DayDetailForm(date, mainForm);
             newForm.Show();
-            newForm.Location = new Point(this.Location.X + mainForm.Location.X + mainForm.GetCalendarLocation().X+8, this.Location.Y + mainForm.Location.Y + mainForm.GetCalendarLocation().Y+110);
+            newForm.Location = new Point(this.Location.X + mainForm.Location.X + mainForm.GetCalendarLocation().X+15, this.Location.Y + mainForm.Location.Y + mainForm.GetCalendarLocation().Y+130);
             mainForm.setSelectDay(newForm);
             newForm.setMode(mode);
         }
@@ -77,9 +83,5 @@ namespace client
             }
         }
 
-        private void tbDayMemo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

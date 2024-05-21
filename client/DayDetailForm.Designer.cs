@@ -36,10 +36,10 @@
             // lbDetailYMD
             // 
             this.lbDetailYMD.AutoSize = true;
-            this.lbDetailYMD.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbDetailYMD.Location = new System.Drawing.Point(12, 9);
+            this.lbDetailYMD.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbDetailYMD.Location = new System.Drawing.Point(15, 9);
             this.lbDetailYMD.Name = "lbDetailYMD";
-            this.lbDetailYMD.Size = new System.Drawing.Size(107, 15);
+            this.lbDetailYMD.Size = new System.Drawing.Size(133, 17);
             this.lbDetailYMD.TabIndex = 0;
             this.lbDetailYMD.Text = "2024년 4월 30일";
             // 
@@ -50,13 +50,15 @@
             this.Details.AutoSize = true;
             this.Details.BackColor = System.Drawing.SystemColors.HighlightText;
             this.Details.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.Details.Location = new System.Drawing.Point(0, 37);
+            this.Details.Location = new System.Drawing.Point(6, 37);
             this.Details.Name = "Details";
-            this.Details.Size = new System.Drawing.Size(400, 276);
+            this.Details.Size = new System.Drawing.Size(388, 276);
             this.Details.TabIndex = 1;
             // 
             // btnAdd
             // 
+            this.btnAdd.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnAdd.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnAdd.Location = new System.Drawing.Point(313, 9);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
@@ -70,13 +72,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(75)))), ((int)(((byte)(105)))));
             this.ClientSize = new System.Drawing.Size(400, 313);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.Details);
             this.Controls.Add(this.lbDetailYMD);
+            this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DayDetailForm";
+            this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DayDetailForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DayDetailForm_FormClosing);
