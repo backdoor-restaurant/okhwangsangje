@@ -38,21 +38,25 @@
             this.txContent.Location = new System.Drawing.Point(3, 29);
             this.txContent.Multiline = true;
             this.txContent.Name = "txContent";
-            this.txContent.Size = new System.Drawing.Size(378, 40);
+            this.txContent.Size = new System.Drawing.Size(363, 40);
             this.txContent.TabIndex = 1;
             this.txContent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txContent_KeyDown);
             // 
             // tbTitle
             // 
-            this.tbTitle.BackColor = System.Drawing.SystemColors.Info;
+            this.tbTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(75)))), ((int)(((byte)(105)))));
+            this.tbTitle.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.tbTitle.ForeColor = System.Drawing.SystemColors.Window;
             this.tbTitle.Location = new System.Drawing.Point(3, 2);
             this.tbTitle.Name = "tbTitle";
-            this.tbTitle.Size = new System.Drawing.Size(115, 21);
+            this.tbTitle.Size = new System.Drawing.Size(115, 22);
             this.tbTitle.TabIndex = 2;
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(306, 2);
+            this.btnRemove.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnRemove.ForeColor = System.Drawing.Color.Black;
+            this.btnRemove.Location = new System.Drawing.Point(291, 2);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(75, 23);
             this.btnRemove.TabIndex = 3;
@@ -66,12 +70,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.txContent);
             this.Name = "DayDetailItemForm";
             this.Padding = new System.Windows.Forms.Padding(10);
-            this.Size = new System.Drawing.Size(394, 82);
+            this.Size = new System.Drawing.Size(379, 82);
             this.Load += new System.EventHandler(this.DayDetailItemForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

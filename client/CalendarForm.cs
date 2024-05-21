@@ -123,5 +123,17 @@ namespace client
                 selectDay = null;
             }
         }
+
+        private void preBtn_Click(object sender, EventArgs e)
+        {
+            date = date.AddMonths(-1);
+            displayDays();
+        }
+
+        private void nxtBtn_Click(object sender, EventArgs e)
+        {
+            date = date.AddMonths(1);
+            displayDays();
+        }
     }
 }
