@@ -54,8 +54,8 @@
       <DependentUpon>DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Database\DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Database\Hardcoded.cs" />
@@ -113,7 +113,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\CheonWoonDB.xml" />
+    <Content Include="Database\Dummy.xml" />
+    <Content Include="Database\DummyBackup.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

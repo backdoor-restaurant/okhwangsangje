@@ -14,7 +14,7 @@ namespace server
         {
             if (ConfigurationManager.AppSettings["Console"] == "true")
             {
-                Example.run2();
+                Example.run1();
                 return;
             }
 

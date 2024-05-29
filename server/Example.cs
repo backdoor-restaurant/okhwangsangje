@@ -16,16 +16,16 @@ namespace server
         }
 
         public static void run2() {
-            commons.Environment.Environment.AllocConsole();
+            // commons.Environment.Environment.AllocConsole();
 
             var dataSet = new Database.DataSet();
-            dataSet.ReadXml("../../Database/CheonWoonDB.xml");
+            dataSet.ReadXml("../../Database/Dummy.xml");
 
 
-            dataSet.WriteXml("../../Database/Result.xml");
+            dataSet.WriteXml("../../Database/Dummy.xml");
 
             foreach(var m in dataSet.MemberInfo){
-                Console.WriteLine(m.Name);
+                Console.WriteLine("{0} {1}", m.Name, m.isAdministrator);
             }
 
             Console.ReadLine();

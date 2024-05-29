@@ -580,6 +580,7 @@ namespace server.Database {
                                 this.columnStudentID}, true));
                 this.columnStudentID.AllowDBNull = false;
                 this.columnStudentID.Unique = true;
+                this.columnPassword.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -833,7 +834,7 @@ namespace server.Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public MemberInfoRow AddMemberInfoRow(string StudentID, string Name, string Department, string PhoneNumber, string isAdministrator) {
+            public MemberInfoRow AddMemberInfoRow(string StudentID, string Name, string Department, string PhoneNumber, bool isAdministrator) {
                 MemberInfoRow rowMemberInfoRow = ((MemberInfoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         StudentID,
@@ -888,12 +889,13 @@ namespace server.Database {
                 base.Columns.Add(this.columnDepartment);
                 this.columnPhoneNumber = new global::System.Data.DataColumn("PhoneNumber", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPhoneNumber);
-                this.columnisAdministrator = new global::System.Data.DataColumn("isAdministrator", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnisAdministrator = new global::System.Data.DataColumn("isAdministrator", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnisAdministrator);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnStudentID}, true));
                 this.columnStudentID.AllowDBNull = false;
                 this.columnStudentID.Unique = true;
+                this.columnName.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1117,7 +1119,7 @@ namespace server.Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public ItemInfoRow AddItemInfoRow(string ItemName, string amount) {
+            public ItemInfoRow AddItemInfoRow(string ItemName, int amount) {
                 ItemInfoRow rowItemInfoRow = ((ItemInfoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ItemName,
@@ -1153,11 +1155,13 @@ namespace server.Database {
             private void InitClass() {
                 this.columnItemName = new global::System.Data.DataColumn("ItemName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItemName);
-                this.columnamount = new global::System.Data.DataColumn("amount", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnamount);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnItemName}, false));
+                this.columnItemName.AllowDBNull = false;
                 this.columnItemName.Unique = true;
+                this.columnamount.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1401,7 +1405,7 @@ namespace server.Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public LentInfoRow AddLentInfoRow(string ItemName, string amount, string StudentID, string StartDate) {
+            public LentInfoRow AddLentInfoRow(string ItemName, int amount, string StudentID, string StartDate) {
                 LentInfoRow rowLentInfoRow = ((LentInfoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ItemName,
@@ -1449,7 +1453,7 @@ namespace server.Database {
             private void InitClass() {
                 this.columnItemName = new global::System.Data.DataColumn("ItemName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItemName);
-                this.columnamount = new global::System.Data.DataColumn("amount", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnamount = new global::System.Data.DataColumn("amount", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnamount);
                 this.columnStudentID = new global::System.Data.DataColumn("StudentID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnStudentID);
@@ -1459,7 +1463,9 @@ namespace server.Database {
                                 this.columnItemName,
                                 this.columnStudentID}, true));
                 this.columnItemName.AllowDBNull = false;
+                this.columnamount.AllowDBNull = false;
                 this.columnStudentID.AllowDBNull = false;
+                this.columnStartDate.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1735,6 +1741,9 @@ namespace server.Database {
                 base.Columns.Add(this.columnTitle);
                 this.columnContent = new global::System.Data.DataColumn("Content", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnContent);
+                this.columnDate.AllowDBNull = false;
+                this.columnTitle.AllowDBNull = false;
+                this.columnContent.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1890,28 +1899,11 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Password {
                 get {
-                    try {
-                        return ((string)(this[this.tableLoginInfo.PasswordColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'LoginInfo\' 테이블의 \'Password\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((string)(this[this.tableLoginInfo.PasswordColumn]));
                 }
                 set {
                     this[this.tableLoginInfo.PasswordColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsPasswordNull() {
-                return this.IsNull(this.tableLoginInfo.PasswordColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetPasswordNull() {
-                this[this.tableLoginInfo.PasswordColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1944,12 +1936,7 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Name {
                 get {
-                    try {
-                        return ((string)(this[this.tableMemberInfo.NameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'MemberInfo\' 테이블의 \'Name\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((string)(this[this.tableMemberInfo.NameColumn]));
                 }
                 set {
                     this[this.tableMemberInfo.NameColumn] = value;
@@ -1960,11 +1947,11 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Department {
                 get {
-                    try {
-                        return ((string)(this[this.tableMemberInfo.DepartmentColumn]));
+                    if (this.IsDepartmentNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'MemberInfo\' 테이블의 \'Department\' 열의 값이 DBNull입니다.", e);
+                    else {
+                        return ((string)(this[this.tableMemberInfo.DepartmentColumn]));
                     }
                 }
                 set {
@@ -1976,11 +1963,11 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string PhoneNumber {
                 get {
-                    try {
-                        return ((string)(this[this.tableMemberInfo.PhoneNumberColumn]));
+                    if (this.IsPhoneNumberNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'MemberInfo\' 테이블의 \'PhoneNumber\' 열의 값이 DBNull입니다.", e);
+                    else {
+                        return ((string)(this[this.tableMemberInfo.PhoneNumberColumn]));
                     }
                 }
                 set {
@@ -1990,30 +1977,18 @@ namespace server.Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string isAdministrator {
+            public bool isAdministrator {
                 get {
-                    try {
-                        return ((string)(this[this.tableMemberInfo.isAdministratorColumn]));
+                    if (this.IsisAdministratorNull()) {
+                        return false;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'MemberInfo\' 테이블의 \'isAdministrator\' 열의 값이 DBNull입니다.", e);
+                    else {
+                        return ((bool)(this[this.tableMemberInfo.isAdministratorColumn]));
                     }
                 }
                 set {
                     this[this.tableMemberInfo.isAdministratorColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsNameNull() {
-                return this.IsNull(this.tableMemberInfo.NameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetNameNull() {
-                this[this.tableMemberInfo.NameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2071,12 +2046,7 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string ItemName {
                 get {
-                    try {
-                        return ((string)(this[this.tableItemInfo.ItemNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'ItemInfo\' 테이블의 \'ItemName\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((string)(this[this.tableItemInfo.ItemNameColumn]));
                 }
                 set {
                     this[this.tableItemInfo.ItemNameColumn] = value;
@@ -2085,42 +2055,13 @@ namespace server.Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string amount {
+            public int amount {
                 get {
-                    try {
-                        return ((string)(this[this.tableItemInfo.amountColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'ItemInfo\' 테이블의 \'amount\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((int)(this[this.tableItemInfo.amountColumn]));
                 }
                 set {
                     this[this.tableItemInfo.amountColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsItemNameNull() {
-                return this.IsNull(this.tableItemInfo.ItemNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetItemNameNull() {
-                this[this.tableItemInfo.ItemNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsamountNull() {
-                return this.IsNull(this.tableItemInfo.amountColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetamountNull() {
-                this[this.tableItemInfo.amountColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2151,14 +2092,9 @@ namespace server.Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string amount {
+            public int amount {
                 get {
-                    try {
-                        return ((string)(this[this.tableLentInfo.amountColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'LentInfo\' 테이블의 \'amount\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((int)(this[this.tableLentInfo.amountColumn]));
                 }
                 set {
                     this[this.tableLentInfo.amountColumn] = value;
@@ -2180,40 +2116,11 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string StartDate {
                 get {
-                    try {
-                        return ((string)(this[this.tableLentInfo.StartDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'LentInfo\' 테이블의 \'StartDate\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((string)(this[this.tableLentInfo.StartDateColumn]));
                 }
                 set {
                     this[this.tableLentInfo.StartDateColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsamountNull() {
-                return this.IsNull(this.tableLentInfo.amountColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetamountNull() {
-                this[this.tableLentInfo.amountColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsStartDateNull() {
-                return this.IsNull(this.tableLentInfo.StartDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetStartDateNull() {
-                this[this.tableLentInfo.StartDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2235,12 +2142,7 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Date {
                 get {
-                    try {
-                        return ((string)(this[this.tableScheduleInfo.DateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'ScheduleInfo\' 테이블의 \'Date\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((string)(this[this.tableScheduleInfo.DateColumn]));
                 }
                 set {
                     this[this.tableScheduleInfo.DateColumn] = value;
@@ -2251,12 +2153,7 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Title {
                 get {
-                    try {
-                        return ((string)(this[this.tableScheduleInfo.TitleColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'ScheduleInfo\' 테이블의 \'Title\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((string)(this[this.tableScheduleInfo.TitleColumn]));
                 }
                 set {
                     this[this.tableScheduleInfo.TitleColumn] = value;
@@ -2267,52 +2164,11 @@ namespace server.Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string Content {
                 get {
-                    try {
-                        return ((string)(this[this.tableScheduleInfo.ContentColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("\'ScheduleInfo\' 테이블의 \'Content\' 열의 값이 DBNull입니다.", e);
-                    }
+                    return ((string)(this[this.tableScheduleInfo.ContentColumn]));
                 }
                 set {
                     this[this.tableScheduleInfo.ContentColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsDateNull() {
-                return this.IsNull(this.tableScheduleInfo.DateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetDateNull() {
-                this[this.tableScheduleInfo.DateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsTitleNull() {
-                return this.IsNull(this.tableScheduleInfo.TitleColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetTitleNull() {
-                this[this.tableScheduleInfo.TitleColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsContentNull() {
-                return this.IsNull(this.tableScheduleInfo.ContentColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetContentNull() {
-                this[this.tableScheduleInfo.ContentColumn] = global::System.Convert.DBNull;
             }
         }
         

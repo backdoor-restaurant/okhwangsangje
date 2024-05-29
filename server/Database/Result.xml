@@ -1,15 +1,5 @@
-﻿<?xml version="1.0" standalone="yes"?>
+<?xml version="1.0" standalone="yes"?>
 <DataSet xmlns="http://tempuri.org/DataSet.xsd">
-  <ItemInfo>
-    <ItemName>46 장궁</ItemName>
-    <amount>1</amount>
-  </ItemInfo>
-  <LentInfo>
-    <ItemName>46 장궁</ItemName>
-    <amount>1</amount>
-    <StudentID>1</StudentID>
-    <StartDate>2024-03-21</StartDate>
-  </LentInfo>
   <MemberInfo>
     <StudentID>0</StudentID>
     <Name>root</Name>
@@ -24,6 +14,21 @@
     <PhoneNumber>010-1234-5678</PhoneNumber>
     <isAdministrator>false</isAdministrator>
   </MemberInfo>
+  <MemberInfo>
+    <StudentID>2</StudentID>
+    <Name>Elon Musk</Name>
+    <Department>Engineering</Department>
+  </MemberInfo>
+  <ItemInfo>
+    <ItemName>46 장궁</ItemName>
+    <amount>1</amount>
+  </ItemInfo>
+  <LentInfo>
+    <ItemName>46 장궁</ItemName>
+    <amount>1</amount>
+    <StudentID>1</StudentID>
+    <StartDate>2024-03-21</StartDate>
+  </LentInfo>
   <ScheduleInfo>
     <Date>2024-04-30</Date>
     <Title>간식행사</Title>
