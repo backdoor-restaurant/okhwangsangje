@@ -2,13 +2,11 @@
 using System.Data;
 using commons.Network;
 using server.Network;
+using server.Database;
 
-namespace server
-{
-    internal static class Example
-    {
-        public static void run1()
-        {
+namespace server {
+    internal static class Example {
+        public static void run1() {
             commons.Environment.Environment.AllocConsole();
 
             var gate = new Gate();
@@ -18,17 +16,10 @@ namespace server
         public static void run2() {
             // commons.Environment.Environment.AllocConsole();
 
-            var dataSet = new Database.DataSet();
-            dataSet.ReadXml("../../Database/Dummy.xml");
+            var db = new XmlDatabase("Dummy.xml");
+            db.doSomething();
 
-
-            dataSet.WriteXml("../../Database/Dummy.xml");
-
-            foreach(var m in dataSet.MemberInfo){
-                Console.WriteLine("{0} {1}", m.Name, m.isAdministrator);
-            }
-
-            Console.ReadLine();
+            // Console.ReadLine();
         }
     }
 }

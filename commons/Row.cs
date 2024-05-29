@@ -11,8 +11,12 @@ namespace commons.Table
         SCHEDULE_INFO
     }
 
+    public interface Row {
+        string ToString();
+    }
+
     [Serializable]
-    public abstract class InfoBase<Key>{
+    public abstract class InfoBase<Key> : Row{
         public readonly Type type;
         public InfoBase(Type type) { this.type = type; }
         public abstract Key getKey();
