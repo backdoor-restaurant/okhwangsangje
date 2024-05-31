@@ -8,7 +8,7 @@ namespace commons.VirtualDB {
         private readonly Table.Type type = (new R()).type;
         protected Dictionary<Key, R> cache;
 
-        private uint token = Packet.GUEST;
+        private int token = Packet.GUEST;
 
         public VirtualTable() {
             cache = new Dictionary<Key, R>();
@@ -30,10 +30,11 @@ namespace commons.VirtualDB {
         }
 
         private static bool parseResponse(in Response response) {
-            switch (response.type) {
+            switch (response.responseType) {
             case Response.ResponseType.OK:
                 return true;
             case Response.ResponseType.BAD_REQUEST:
+                goto default;
                 throw new Exception("Bad Request");
             case Response.ResponseType.REJECTED:
                 goto default;
@@ -110,7 +111,7 @@ namespace commons.VirtualDB {
                 // receive response
                 var response = socket.read<Response>();
                 if ((succeed = parseResponse(response))) {
-                    item = PacketParser.parse<R>(response);
+                    item = Parser.parse<R>(response.payload);
                 }
             }
 

@@ -7,19 +7,10 @@ using server.Database;
 namespace server {
     internal static class Example {
         public static void run1() {
-            commons.Environment.Environment.AllocConsole();
+            // commons.Environment.Environment.AllocConsole();
 
             var gate = new Gate();
             gate.start();
-        }
-
-        public static void run2() {
-            // commons.Environment.Environment.AllocConsole();
-
-            var db = new XmlDatabase("Dummy.xml");
-            db.doSomething();
-
-            // Console.ReadLine();
         }
     }
 }

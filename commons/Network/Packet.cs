@@ -15,14 +15,14 @@ namespace commons.Network
         }
         public PacketType packetType;
 
-        public const uint GUEST = 0;
-        public uint authToken = GUEST;
+        public const int GUEST = 0;
+        public int authToken = GUEST;
 
         // packet body
         public Table.Type payloadType;
         public byte[] payload = null;
 
-        public Packet(in uint token)
+        public Packet(in int token)
         {
             authToken = token;
         }
@@ -44,7 +44,7 @@ namespace commons.Network
         }
         public RequestType requestType;
 
-        public Request(in uint token) : base(token)
+        public Request(in int token) : base(token)
         {
             packetType = PacketType.Replication;
         }
@@ -52,18 +52,20 @@ namespace commons.Network
         {
             string result = $"{requestType} {payloadType} ";
 
+            if (payload is null) return result;
+
             switch (requestType)
             {
                 case RequestType.CREATE:
                     switch (payloadType)
                     {
                         case Table.Type.MEMBER_INFO:
-                            return result + PacketParser.parse<Table.MemberInfo>(this);
+                            return result + Parser.parse<Table.MemberInfo>(payload);
                         default:
                             return result;
                     }
                 case RequestType.READ:
-                    return result + PacketParser.parse(this);
+                    return result + Parser.parse<string>(payload);
                 default:
                     return result;
             }
@@ -80,23 +82,25 @@ namespace commons.Network
             BAD_REQUEST,
             REJECTED
         }
-        public ResponseType type;
+        public ResponseType responseType;
 
-        public Response(in uint token) : base(token)
+        public Response(in int token) : base(token)
         {
             packetType = PacketType.Replication;
         }
         public override string ToString()
         {
-            var result = $"{type} {payloadType}";
+            var result = $"{responseType} {payloadType}";
 
-            switch (type)
+            if (payload is null) return result;
+
+            switch (responseType)
             {
                 case ResponseType.OK:
                     switch (payloadType)
                     {
                         case Table.Type.MEMBER_INFO:
-                            return $"{result} primary_key={PacketParser.parse<Table.MemberInfo>(this)}";
+                            return $"{result} primary_key={Parser.parse<Table.MemberInfo>(payload)}";
                         default:
                             return result;
                     }

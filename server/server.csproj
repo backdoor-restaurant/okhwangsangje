@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\XmlDatabase.cs" />
+    <Compile Include="Database\XmlAccessor.cs" />
     <Compile Include="Database\DataSet.cs">
       <DependentUpon>DataSet.xsd</DependentUpon>
     </Compile>
@@ -134,6 +134,7 @@
   <ItemGroup>
     <Content Include="Database\Dummy.xml" />
     <Content Include="Database\DummyBackup.xml" />
+    <Content Include="Database\Result.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
