@@ -2,7 +2,9 @@
 using commons.Table;
 using server.Database;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace server.Network {
     using static commons.Table.Type;
@@ -13,6 +15,7 @@ namespace server.Network {
     internal class Gate {
         private readonly XmlAccessor db = new XmlAccessor("Dummy.xml");
         private int tokenSeed = 0;
+        private readonly Dictionary<int, string> sessions = new Dictionary<int, string>();
 
         public void start() {
             using (var socket = new ServerSocket()) {
@@ -67,14 +70,19 @@ namespace server.Network {
                 };
             }
 
-            return new Packet(++tokenSeed) {
+            int newToken = ++tokenSeed;
+            sessions.Add(newToken, info.studentId);
+
+            return new Packet(newToken) {
                 packetType = Auth,
             };
         }
 
         private bool verified(in LoginInfo info) {
-            // id - pw pair verification process...
-            return true;
+            db.read(new LoginInfoKey(info), out LoginInfo pair);
+
+            // id - pw pair verification
+            return info.password.Equals(pair.password);
         }
 
         private Response query(in Request request) {
@@ -196,7 +204,7 @@ namespace server.Network {
                 response.responseType = result ? OK : NOT_FOUND;
             }
             catch (ArgumentException) {
-                response.responseType = BAD_REQUEST;
+                response.responseType = NOT_ACCEPTED;
             }
         }
 
@@ -250,7 +258,7 @@ namespace server.Network {
                 response.responseType = result ? OK : NOT_FOUND;
             }
             catch (ArgumentException) {
-                response.responseType = BAD_REQUEST;
+                response.responseType = NOT_ACCEPTED;
             }
         }
 
@@ -262,8 +270,8 @@ namespace server.Network {
             return recv;
         }
 
-        private void closeSession(in int token) {
-            // remove authToken from session list...
+        private void closeSession(int token) {
+            sessions.Remove(token);
         }
     }
 }
