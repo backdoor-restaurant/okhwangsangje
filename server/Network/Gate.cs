@@ -2,6 +2,7 @@
 using commons.Table;
 using server.Database;
 using System;
+using System.Data;
 
 namespace server.Network {
     using static commons.Table.Type;
@@ -89,12 +90,26 @@ namespace server.Network {
                 return response;
             }
 
-            switch (request.payloadType) {
-            case MEMBER_INFO:
-                aboutMemberDB(request, ref response);
+            if(request.payload is null) {
+                response.responseType = BAD_REQUEST;
+                return response;
+            }
+
+            switch (request.requestType) {
+            case CREATE:
+                create(request, ref response);
+                break;
+            case READ:
+                read(request, ref response);
+                break;
+            case UPDATE:
+                update(request, ref response);
+                break;
+            case DELETE:
+                delete(request, ref response);
                 break;
             default:
-                response.responseType = REJECTED;
+                response.responseType = NOT_IMPLEMENTED;
                 break;
             }
 
@@ -107,40 +122,136 @@ namespace server.Network {
             return authToken != 0;
         }
 
-
-        private void aboutMemberDB(in Request request, ref Response response) {
-
+        private void create(in Request request, ref Response response) {
             bool result;
-            switch (request.requestType) {
-            case CREATE:
-                result = db.create(
-                    Parser.parse<MemberInfo>(request.payload)
-                );
+            switch (request.payloadType) {
+            case MEMBER_INFO:
+                result = db.create(Parser.parse<MemberInfo>(request.payload));
                 break;
-            case READ:
-                result = db.read(
-                    Parser.parse<string>(request.payload),
-                    out MemberInfo read
-                );
-                if (result)
-                    response.payload = Serializer.serialize(read);
+            case ITEM_INFO:
+                result = db.create(Parser.parse<ItemInfo>(request.payload));
                 break;
-            case UPDATE:
-                result = db.update(
-                    Parser.parse<MemberInfo>(request.payload)
-                );
+            case LOGIN_INFO:
+                result = db.create(Parser.parse<LoginInfo>(request.payload));
                 break;
-            case DELETE:
-                result = db.deleteMember(
-                    Parser.parse<string>(request.payload)
-                );
+            case LENT_INFO:
+                result = db.create(Parser.parse<LentInfo>(request.payload));
+                break;
+            case SCHEDULE_INFO:
+                result = db.create(Parser.parse<ScheduleInfo>(request.payload));
                 break;
             default:
-                result = false;
-                break;
+                response.responseType = NOT_IMPLEMENTED;
+                return;
             }
 
-            response.responseType = result ? OK : BAD_REQUEST;
+            response.responseType = result ? OK : NOT_ACCEPTED;
+        }
+
+        private void read(in Request request, ref Response response) {
+            try {
+                bool result;
+                switch (request.payloadType) {
+                case MEMBER_INFO:
+                    result = db.read(
+                        Parser.parse<MemberInfoKey>(request.payload),
+                        out MemberInfo member
+                    );
+                    response.payload = Serializer.serialize(member);
+                    break;
+                case ITEM_INFO:
+                    result = db.read(
+                        Parser.parse<ItemInfoKey>(request.payload),
+                        out ItemInfo item
+                    );
+                    response.payload = Serializer.serialize(item);
+                    break;
+                case LOGIN_INFO:
+                    result = db.read(
+                        Parser.parse<LoginInfoKey>(request.payload),
+                        out LoginInfo pair
+                    );
+                    response.payload = Serializer.serialize(pair);
+                    break;
+                case LENT_INFO:
+
+                    result = db.readFromStudentID(
+                        Parser.parse<string>(request.payload),
+                        out LentInfo[] info
+                    );
+                    response.payload = Serializer.serialize(info);
+                    break;
+                case SCHEDULE_INFO:
+                    result = db.readFromDate(
+                        Parser.parse<string>(request.payload),
+                        out ScheduleInfo[] schedules
+                    );
+                    response.payload = Serializer.serialize(schedules);
+                    break;
+                default:
+                    response.responseType = NOT_IMPLEMENTED;
+                    return;
+                }
+
+                response.responseType = result ? OK : NOT_FOUND;
+            }
+            catch (ArgumentException) {
+                response.responseType = BAD_REQUEST;
+            }
+        }
+
+        private void update(in Request request, ref Response response) {
+            try {
+                bool result;
+                switch (request.payloadType) {
+                case MEMBER_INFO:
+                    result = db.tryUpdate(Parser.parse<MemberInfo>(request.payload));
+                    break;
+                case ITEM_INFO:
+                    result = db.tryUpdate(Parser.parse<ItemInfo>(request.payload));
+                    break;
+                default:
+                    response.responseType = NOT_IMPLEMENTED;
+                    return;
+                }
+                response.responseType = result ? OK : NOT_FOUND;
+            }
+            catch (NoNullAllowedException) {
+                response.responseType = NOT_ACCEPTED;
+            }
+            catch (ConstraintException) {
+                response.responseType = NOT_ACCEPTED;
+            }
+        }
+
+        private void delete(in Request request, ref Response response) {
+            try {
+                bool result;
+                switch(request.payloadType) {
+                case MEMBER_INFO:
+                    result = db.delete(Parser.parse<MemberInfoKey>(request.payload));
+                    break;
+                case ITEM_INFO:
+                    result = db.delete(Parser.parse<ItemInfoKey>(request.payload));
+                    break;
+                case LOGIN_INFO:
+                    result = db.delete(Parser.parse<LoginInfoKey>(request.payload));
+                    break;
+                case LENT_INFO:
+                    result = db.delete(Parser.parse<LentInfoKey>(request.payload));
+                    break;
+                case SCHEDULE_INFO:
+                    result = db.delete(Parser.parse<ScheduleInfoKey>(request.payload));
+                    break;
+                default:
+                    response.responseType = NOT_IMPLEMENTED;
+                    return;
+                }
+                response.responseType = result ? OK : NOT_FOUND;
+            }
+            catch (ArgumentException) {
+                response.responseType = BAD_REQUEST;
+            }
         }
 
         private Packet disconnect(in Packet recv) {

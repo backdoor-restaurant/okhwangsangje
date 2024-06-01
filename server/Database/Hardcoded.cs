@@ -67,7 +67,7 @@ namespace server.Database
         {
             new ItemInfo()
             {
-                name = "46 장궁",
+                itemName = "46 장궁",
                 amount = 1
             }
         };

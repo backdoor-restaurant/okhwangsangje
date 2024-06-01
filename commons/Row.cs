@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace commons.Table
-{
-    public enum Type
-    {
+namespace commons.Table {
+    public enum Type {
         LOGIN_INFO,
         MEMBER_INFO,
         ITEM_INFO,
@@ -16,32 +14,14 @@ namespace commons.Table
     }
 
     [Serializable]
-    public abstract class InfoBase<Key> : Row{
+    public abstract class InfoBase<Key> : Row {
         public readonly Type type;
         public InfoBase(Type type) { this.type = type; }
         public abstract Key getKey();
     }
 
     [Serializable]
-    public class LoginInfo : InfoBase<string>
-    {
-        public string studentId;
-        public string password = "default password";
-
-        public LoginInfo() : base(Type.LOGIN_INFO) { }
-        public override string ToString()
-        {
-            return $"{type}{{{studentId}, {password}}}";
-        }
-        public override string getKey()
-        {
-            return studentId;
-        }
-    }
-
-    [Serializable]
-    public class MemberInfo : InfoBase<string>
-    {
+    public class MemberInfo : InfoBase<MemberInfoKey> {
         public string studentId;
         public string name;
         public string department;
@@ -49,68 +29,118 @@ namespace commons.Table
         public bool isAdministrator = false;
 
         public MemberInfo() : base(Type.MEMBER_INFO) { }
-        public override string ToString()
-        {
+        public override string ToString() {
             return $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
         }
-        public override string getKey()
-        {
-            return studentId;
+        public override MemberInfoKey getKey() {
+            return new MemberInfoKey(this);
         }
     }
 
     [Serializable]
-    public class ItemInfo : InfoBase<string>
-    {
-        public string name;
+    public class MemberInfoKey {
+        public readonly string studentId;
+
+        public MemberInfoKey(in MemberInfo member) {
+            studentId = member.studentId;
+        }
+    }
+
+    [Serializable]
+    public class ItemInfo : InfoBase<ItemInfoKey> {
+        public string itemName;
         public int amount;
 
         public ItemInfo() : base(Type.ITEM_INFO) { }
-        public override string ToString()
-        {
-            return $"{type}{{{name}, {amount}}}";
+        public override string ToString() {
+            return $"{type}{{{itemName}, {amount}}}";
         }
-        public override string getKey()
-        {
-            return name;
+        public override ItemInfoKey getKey() {
+            return new ItemInfoKey(this);
         }
     }
 
     [Serializable]
-    public class LentInfo : InfoBase<string>
-    {
+    public class ItemInfoKey {
+        public readonly string itemName;
+
+        public ItemInfoKey(in ItemInfo item) {
+            itemName = item.itemName;
+        }
+    }
+
+    [Serializable]
+    public class LoginInfo : InfoBase<LoginInfoKey> {
+        public string studentId;
+        public string password = "default password";
+
+        public LoginInfo() : base(Type.LOGIN_INFO) { }
+        public override string ToString() {
+            return $"{type}{{{studentId}, {password}}}";
+        }
+        public override LoginInfoKey getKey() {
+            return new LoginInfoKey(this);
+        }
+    }
+
+    [Serializable]
+    public class LoginInfoKey {
+        public readonly string studentId;
+
+        public LoginInfoKey(in LoginInfo pair) {
+            studentId = pair.studentId;
+        }
+    }
+
+    [Serializable]
+    public class LentInfo : InfoBase<LentInfoKey> {
         public string itemName;
         public int amount;
         public string studentId;
         public string startDate;
 
         public LentInfo() : base(Type.LENT_INFO) { }
-        public override string ToString()
-        {
+        public override string ToString() {
             return $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
         }
-        public override string getKey()
-        {
-            return itemName;
+        public override LentInfoKey getKey() {
+            return new LentInfoKey(this);
+        }
+    }
+    [Serializable]
+    public class LentInfoKey {
+        public readonly string itemName;
+        public readonly string studentId;
+
+        public LentInfoKey(in LentInfo info) {
+            itemName = info.itemName;
+            studentId = info.studentId;
         }
     }
 
     [Serializable]
-    public class ScheduleInfo : InfoBase<string>
-    {
-        public string id;
+    public class ScheduleInfo : InfoBase<ScheduleInfoKey> {
         public string date;
         public string title;
         public string content;
 
         public ScheduleInfo() : base(Type.SCHEDULE_INFO) { }
-        public override string ToString()
-        {
-            return $"{type}{{{id}, {date}, {title}, {content}}}";
+        public override string ToString() {
+            return $"{type}{{{date}, {title}, {content}}}";
         }
-        public override string getKey()
-        {
-            return id;
+        public override ScheduleInfoKey getKey() {
+            return new ScheduleInfoKey(this);
+        }
+    }
+
+    [Serializable]
+    public class ScheduleInfoKey {
+        public readonly string date;
+        public readonly string title;
+
+        public ScheduleInfoKey(in ScheduleInfo schedule) {
+            date = schedule.date;
+            title = schedule.title;
         }
     }
 }

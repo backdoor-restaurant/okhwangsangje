@@ -68,7 +68,7 @@
       <xs:selector xpath=".//mstns:MemberInfo" />
       <xs:field xpath="mstns:StudentID" />
     </xs:unique>
-    <xs:unique name="ItemInfo_Constraint1" msdata:ConstraintName="Constraint1">
+    <xs:unique name="ItemInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:ItemInfo" />
       <xs:field xpath="mstns:ItemName" />
     </xs:unique>
@@ -77,13 +77,18 @@
       <xs:field xpath="mstns:ItemName" />
       <xs:field xpath="mstns:StudentID" />
     </xs:unique>
-    <xs:keyref name="FK_MemberInfo_LentInfo" refer="MemberInfo_Constraint1" msdata:ConstraintOnly="true">
-      <xs:selector xpath=".//mstns:LentInfo" />
-      <xs:field xpath="mstns:StudentID" />
-    </xs:keyref>
+    <xs:unique name="ScheduleInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ScheduleInfo" />
+      <xs:field xpath="mstns:Date" />
+      <xs:field xpath="mstns:Title" />
+    </xs:unique>
     <xs:keyref name="FK_ItemInfo_LentInfo" refer="ItemInfo_Constraint1" msdata:ConstraintOnly="true">
       <xs:selector xpath=".//mstns:LentInfo" />
       <xs:field xpath="mstns:ItemName" />
+    </xs:keyref>
+    <xs:keyref name="FK_MemberInfo_LentInfo" refer="MemberInfo_Constraint1" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:LentInfo" />
+      <xs:field xpath="mstns:StudentID" />
     </xs:keyref>
     <xs:keyref name="FK_MemberInfo_LoginInfo" refer="MemberInfo_Constraint1" msdata:ConstraintOnly="true">
       <xs:selector xpath=".//mstns:LoginInfo" />

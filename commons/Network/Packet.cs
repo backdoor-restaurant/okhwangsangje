@@ -64,10 +64,18 @@ namespace commons.Network {
     [Serializable]
     public class Response : Packet {
         public enum ResponseType {
+            // 작업 성공
             OK,
+            // (구문 오류) 해당 작업 불가.
+            NOT_ACCEPTED,
+            // (R, U, D)에서 해당 row를 찾을 수 없음.
             NOT_FOUND,
+            // (패킷 오류) 해당 작업 불가.
             BAD_REQUEST,
-            REJECTED
+            // 해당 작업에 대한 권한 없음.
+            REJECTED,
+            // 아직 구현되지 않음.
+            NOT_IMPLEMENTED
         }
         public ResponseType responseType;
 
