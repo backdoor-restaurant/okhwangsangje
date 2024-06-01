@@ -75,7 +75,24 @@ namespace server.Database {
             dataSet.ReadXml(path + xmlFileName);
         }
 
-        private void tryUpdate(in MemberInfo member) {
+        public bool create(in MemberInfo member) {
+            Console.WriteLine("CREATE CALLED");
+
+            try {
+                tryCreate(member);
+
+                return true;
+            }
+            catch (NoNullAllowedException e) {
+                Console.WriteLine(e);
+                return false;
+            }
+            catch (ConstraintException e) {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
+        private void tryCreate(in MemberInfo member) {
             dataSet.MemberInfo.AddMemberInfoRow(
                 member.studentId,
                 member.name,
@@ -83,13 +100,6 @@ namespace server.Database {
                 member.phoneNumber,
                 member.isAdministrator
             );
-        }
-
-        public bool create(in MemberInfo member) {
-            var row = dataSet.MemberInfo.FindByStudentID(member.studentId);
-            if (!(row is null)) return false;
-
-            return update(member);
         }
 
         public bool read(string s_id, out MemberInfo member) {
@@ -138,12 +148,23 @@ namespace server.Database {
 
                 return true;
             }
-            catch (NoNullAllowedException) {
+            catch (NoNullAllowedException e) {
+                Console.WriteLine(e);
                 return false;
             }
-            catch (ConstraintException) {
+            catch (ConstraintException e) {
+                Console.WriteLine(e);
                 return false;
             }
+        }
+
+        private void tryUpdate(in MemberInfo member) {
+            var row = dataSet.MemberInfo.FindByStudentID(member.studentId);
+
+            row.Name = member.name;
+            row.Department = member.department;
+            row.PhoneNumber = member.phoneNumber;
+            row.isAdministrator = member.isAdministrator;
         }
 
         public bool deleteMember(in string s_id) {
@@ -151,7 +172,7 @@ namespace server.Database {
             if (row is null) return false;
 
             dataSet.MemberInfo.RemoveMemberInfoRow(row);
-            return false;
+            return true;
         }
 
         ~XmlAccessor() {

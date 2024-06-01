@@ -42,13 +42,6 @@
     <Name>ChatGPT</Name>
     <Department>Software</Department>
   </MemberInfo>
-  <MemberInfo>
-    <StudentID>6</StudentID>
-    <Name>asd</Name>
-    <Department>Physics</Department>
-    <PhoneNumber>010-2435-4657</PhoneNumber>
-    <isAdministrator>false</isAdministrator>
-  </MemberInfo>
   <ItemInfo>
     <ItemName>46 장궁</ItemName>
     <amount>1</amount>

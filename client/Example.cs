@@ -31,7 +31,7 @@ namespace client
             var c_result = memberVDB.create(newMember);
             Console.WriteLine($"Create Result: {c_result}");
 
-            var r_result = memberVDB.read("1", out MemberInfo member);
+            var r_result = memberVDB.read("0", out MemberInfo member);
             Console.WriteLine($"Read Result: {r_result}, {member}");
 
             var u_result = memberVDB.update(newMember);

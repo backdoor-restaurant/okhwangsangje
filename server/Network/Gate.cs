@@ -2,16 +2,12 @@
 using commons.Table;
 using server.Database;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace server.Network {
+    using static commons.Table.Type;
     using static Packet.PacketType;
     using static Request.RequestType;
     using static Response.ResponseType;
-    using static commons.Table.Type;
 
     internal class Gate {
         private readonly XmlAccessor db = new XmlAccessor("Dummy.xml");
@@ -19,11 +15,12 @@ namespace server.Network {
 
         public void start() {
             using (var socket = new ServerSocket()) {
-                while (true) {
+                int cnt = 0;
+                while (cnt < 7) {
                     // wait client connection
                     socket.listen();
-                    Console.WriteLine("asd");
                     // connection established, wait packet
+
                     var recv = socket.read<Packet>();
                     Console.WriteLine($"Receive: {recv}");
 
@@ -31,6 +28,8 @@ namespace server.Network {
                     Console.WriteLine($"Send: {send}");
 
                     socket.write(send);
+
+                    ++cnt;
                 }
             }
         }
@@ -103,6 +102,7 @@ namespace server.Network {
         }
 
         bool haveModifiablePermission(in int authToken) {
+            Console.WriteLine($"Token: {authToken}");
             // check session permission (read-only or all)
             return authToken != 0;
         }
@@ -122,7 +122,6 @@ namespace server.Network {
                     Parser.parse<string>(request.payload),
                     out MemberInfo read
                 );
-                Console.WriteLine(result);
                 if (result)
                     response.payload = Serializer.serialize(read);
                 break;
