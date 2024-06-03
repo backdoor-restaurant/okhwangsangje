@@ -44,6 +44,13 @@ namespace commons.Table {
         public MemberInfoKey(in MemberInfo member) {
             studentId = member.studentId;
         }
+        public MemberInfoKey(in string studentId) {
+            this.studentId = studentId;
+        }
+
+        public override string ToString() {
+            return $"MemberInfoKey{{{studentId}}}";
+        }
     }
 
     [Serializable]
@@ -67,6 +74,13 @@ namespace commons.Table {
         public ItemInfoKey(in ItemInfo item) {
             itemName = item.itemName;
         }
+        public ItemInfoKey(in string itemName) {
+            this.itemName = itemName;
+        }
+
+        public override string ToString() {
+            return $"ItemInfoKey{{{itemName}}}";
+        }
     }
 
     [Serializable]
@@ -89,6 +103,13 @@ namespace commons.Table {
 
         public LoginInfoKey(in LoginInfo pair) {
             studentId = pair.studentId;
+        }
+        public LoginInfoKey(in string studentId) {
+            this.studentId = studentId;
+        }
+
+        public override string ToString() {
+            return $"LoginInfoKey{{{studentId}}}";
         }
     }
 
@@ -116,6 +137,14 @@ namespace commons.Table {
             itemName = info.itemName;
             studentId = info.studentId;
         }
+        public LentInfoKey(in string itemName, in string studentId) {
+            this.itemName = itemName;
+            this.studentId = studentId;
+        }
+
+        public override string ToString() {
+            return $"LentInfoKey{{{itemName}, {studentId}}}";
+        }
     }
 
     [Serializable]
@@ -141,6 +170,14 @@ namespace commons.Table {
         public ScheduleInfoKey(in ScheduleInfo schedule) {
             date = schedule.date;
             title = schedule.title;
+        }
+        public ScheduleInfoKey(in string date, in string title) {
+            this.date = date;
+            this.title = title;
+        }
+
+        public override string ToString() {
+            return $"ScheduleInfoKey{{{date}, {title}}}";
         }
     }
 }

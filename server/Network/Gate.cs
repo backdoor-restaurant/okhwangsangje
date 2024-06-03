@@ -4,7 +4,6 @@ using server.Database;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace server.Network {
     using static commons.Table.Type;
@@ -64,7 +63,7 @@ namespace server.Network {
         private Packet authorize(in Packet recv) {
             var info = Parser.parse<LoginInfo>(recv.payload);
 
-            if (!verified(info)) {
+            if (!verify(info)) {
                 return new Packet(Packet.GUEST) {
                     packetType = Auth
                 };
@@ -78,11 +77,12 @@ namespace server.Network {
             };
         }
 
-        private bool verified(in LoginInfo info) {
+        private bool verify(in LoginInfo info) {
             db.read(new LoginInfoKey(info), out LoginInfo pair);
 
+            var verified = info.password.Equals(pair.password);
             // id - pw pair verification
-            return info.password.Equals(pair.password);
+            return verified;
         }
 
         private Response query(in Request request) {
@@ -125,9 +125,13 @@ namespace server.Network {
         }
 
         bool haveModifiablePermission(in int authToken) {
-            Console.WriteLine($"Token: {authToken}");
+            var id = sessions[authToken];
+            var known = db.read(new MemberInfoKey(id), out MemberInfo member);
+
+            if (!known) return false;
+
             // check session permission (read-only or all)
-            return authToken != 0;
+            return member.isAdministrator;
         }
 
         private void create(in Request request, ref Response response) {
@@ -182,19 +186,31 @@ namespace server.Network {
                     response.payload = Serializer.serialize(pair);
                     break;
                 case LENT_INFO:
-
-                    result = db.readFromStudentID(
-                        Parser.parse<string>(request.payload),
-                        out LentInfo[] info
-                    );
-                    response.payload = Serializer.serialize(info);
+                    var lentKey = Parser.parse<LentInfoKey>(request.payload);
+                    if(lentKey.itemName is null) {
+                        result = db.readFromStudentID(lentKey.studentId,
+                            out LentInfo[] info
+                        );
+                        response.payload = Serializer.serialize(info);
+                    }
+                    else {
+                        result = db.read(lentKey, out LentInfo info);
+                        response.payload = Serializer.serialize(info);
+                    }
                     break;
                 case SCHEDULE_INFO:
-                    result = db.readFromDate(
-                        Parser.parse<string>(request.payload),
-                        out ScheduleInfo[] schedules
-                    );
-                    response.payload = Serializer.serialize(schedules);
+                    var scheduleKey = Parser.parse<ScheduleInfoKey>(request.payload);
+                    if (scheduleKey.title is null) {
+                        result = db.readFromDate(
+                            Parser.parse<string>(request.payload),
+                            out ScheduleInfo[] schedules
+                        );
+                        response.payload = Serializer.serialize(schedules);
+                    }
+                    else {
+                        result = db.read(scheduleKey, out ScheduleInfo schedule);
+                        response.payload = Serializer.serialize(schedule);
+                    }
                     break;
                 default:
                     response.responseType = NOT_IMPLEMENTED;
@@ -246,10 +262,22 @@ namespace server.Network {
                     result = db.delete(Parser.parse<LoginInfoKey>(request.payload));
                     break;
                 case LENT_INFO:
-                    result = db.delete(Parser.parse<LentInfoKey>(request.payload));
+                    var lentKey = Parser.parse<LentInfoKey>(request.payload);
+                    if (lentKey.itemName is null) {
+                        result = db.deleteFromStudentID(lentKey.studentId);
+                    }
+                    else {
+                        result = db.delete(lentKey);
+                    }
                     break;
                 case SCHEDULE_INFO:
-                    result = db.delete(Parser.parse<ScheduleInfoKey>(request.payload));
+                    var scheduleKey = Parser.parse<ScheduleInfoKey>(request.payload);
+                    if (scheduleKey.title is null) {
+                        result = db.deleteFromDate(scheduleKey.date);
+                    }
+                    else {
+                        result = db.delete(scheduleKey);
+                    }
                     break;
                 default:
                     response.responseType = NOT_IMPLEMENTED;

@@ -41,23 +41,7 @@ namespace commons.Network {
             packetType = PacketType.Replication;
         }
         public override string ToString() {
-            string result = $"{requestType} {payloadType} ";
-
-            if (payload is null) return result;
-
-            switch (requestType) {
-            case RequestType.CREATE:
-                switch (payloadType) {
-                case Table.Type.MEMBER_INFO:
-                    return result + Parser.parse<Table.MemberInfo>(payload);
-                default:
-                    return result;
-                }
-            case RequestType.READ:
-                return result + Parser.parse<string>(payload);
-            default:
-                return result;
-            }
+            return $"{requestType} {payloadType}";
         }
     }
 
@@ -83,21 +67,7 @@ namespace commons.Network {
             packetType = PacketType.Replication;
         }
         public override string ToString() {
-            var result = $"{responseType} {payloadType}";
-
-            if (payload is null) return result;
-
-            switch (responseType) {
-            case ResponseType.OK:
-                switch (payloadType) {
-                case Table.Type.MEMBER_INFO:
-                    return $"{result} primary_key={Parser.parse<Table.MemberInfo>(payload)}";
-                default:
-                    return result;
-                }
-            default:
-                return result;
-            }
+            return $"{responseType} {payloadType}";
         }
     }
 }

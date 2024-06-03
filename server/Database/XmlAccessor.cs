@@ -42,6 +42,16 @@ namespace server.Database {
                 password = row.Password
             };
         }
+        internal static LentInfo make(in LentInfoRow row) {
+            if(row is null) return null;
+
+            return new LentInfo {
+                itemName = row.ItemName,
+                amount = row.amount,
+                studentId = row.StudentID,
+                startDate = row.StartDate
+            };
+        }
         internal static LentInfo[] make(in LentInfoRow[] rows) {
             var result = new LentInfo[rows.Length];
 
@@ -55,6 +65,13 @@ namespace server.Database {
             }
 
             return result;
+        }
+        internal static ScheduleInfo make(in ScheduleInfoRow row) {
+            return new ScheduleInfo {
+                date = row.Date,
+                title = row.Title,
+                content = row.Content
+            };
         }
         internal static ScheduleInfo[] make(in ScheduleInfoRow[] rows) {
             var result = new ScheduleInfo[rows.Length];
@@ -221,6 +238,21 @@ namespace server.Database {
             pair = Factory.make(row);
             return true;
         }
+        public bool read(in LentInfoKey key, out LentInfo info) {
+            if(key.studentId.Length == 0 || key.itemName.Length == 0)
+                throw new ArgumentException();
+
+            var row = dataSet.LentInfo.FindByItemNameStudentID(
+                key.itemName, key.studentId
+            );
+            if(row is null) {
+                info = null;
+                return false;
+            }
+
+            info = Factory.make(row);
+            return true;
+        }
         public bool readFromStudentID(string s_id, out LentInfo[] info) {
             if (s_id.Length == 0)
                 throw new ArgumentException();
@@ -230,6 +262,21 @@ namespace server.Database {
                         select l;
             info = Factory.make(query.ToArray());
             return info.Count() > 0;
+        }
+        public bool read(in ScheduleInfoKey key, out ScheduleInfo info) {
+            if (key.date.Length == 0 || key.title.Length == 0)
+                throw new ArgumentException();
+
+            var row = dataSet.ScheduleInfo.FindByDateTitle(
+                key.date, key.title
+            );
+            if (row is null) {
+                info = null;
+                return false;
+            }
+
+            info = Factory.make(row);
+            return true;
         }
         public bool readFromDate(string date, out ScheduleInfo[] schedules) {
             if(date.Length == 0)

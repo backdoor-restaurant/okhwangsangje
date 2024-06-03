@@ -1,5 +1,5 @@
 ﻿using commons.Table;
 
 namespace commons.VirtualDB {
-    public class MemberVT : VirtualTable<string, MemberInfo> { }
+    public class MemberVT : VirtualTable<MemberInfoKey, MemberInfo> { }
 }

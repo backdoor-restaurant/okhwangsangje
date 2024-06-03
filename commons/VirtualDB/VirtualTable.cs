@@ -4,11 +4,12 @@ using commons.Network;
 using commons.Table;
 
 namespace commons.VirtualDB {
-    public class VirtualTable<Key, R> where R : InfoBase<Key>, new() {
-        private readonly Table.Type type = (new R()).type;
+    public abstract class VirtualTable<Key, R> where R : InfoBase<Key>, new() {
+        private readonly Table.Type type = new R().type;
         protected Dictionary<Key, R> cache;
 
-        private int token = Packet.GUEST;
+        private int _token = Packet.GUEST;
+        protected int token { get { return _token; } }
 
         public VirtualTable() {
             cache = new Dictionary<Key, R>();
@@ -23,13 +24,13 @@ namespace commons.VirtualDB {
 
         ~VirtualTable() {
             using (var socket = new ClientSocket()) {
-                socket.write(PacketFactory.newDisconnect(token));
+                socket.write(PacketFactory.newDisconnect(_token));
 
                 var recv = socket.read<Packet>();
             }
         }
 
-        private static bool parseResponse(in Response response) {
+        protected static bool parseResponse(in Response response) {
             switch (response.responseType) {
             case Response.ResponseType.OK:
                 return true;
@@ -53,7 +54,7 @@ namespace commons.VirtualDB {
 
                 var resp = socket.read<Packet>();
 
-                token = resp.authToken;
+                _token = resp.authToken;
             }
         }
 
@@ -63,7 +64,7 @@ namespace commons.VirtualDB {
             // connect to server
             using (var socket = new ClientSocket()) {
                 // sent request
-                socket.write(new Request(token) {
+                socket.write(new Request(_token) {
                     requestType = Request.RequestType.CREATE,
                     payloadType = type,
                     payload = Serializer.serialize(newItem)
@@ -91,7 +92,7 @@ namespace commons.VirtualDB {
             return true;
         }
 
-        public bool read(in Key primaryKey, out R item) {
+        public virtual bool read(in Key primaryKey, out R item) {
             bool succeed = false;
 
             if (cache.TryGetValue(primaryKey, out item)) {
@@ -102,7 +103,7 @@ namespace commons.VirtualDB {
             // connect to server
             using (var socket = new ClientSocket()) {
                 // send request
-                socket.write(new Request(token) {
+                socket.write(new Request(_token) {
                     requestType = Request.RequestType.READ,
                     payloadType = type,
                     payload = Serializer.serialize(primaryKey)
@@ -110,14 +111,11 @@ namespace commons.VirtualDB {
 
                 // receive response
                 var response = socket.read<Response>();
-                if ((succeed = parseResponse(response))) {
+                if (succeed = parseResponse(response)) {
                     item = Parser.parse<R>(response.payload);
+                    // memorize it.
+                    cache.Add(primaryKey, item);
                 }
-            }
-
-            // memorize it.
-            if (succeed) {
-                cache.Add(primaryKey, item);
             }
 
             return succeed;
@@ -145,7 +143,7 @@ namespace commons.VirtualDB {
             // connect to server
             using (var socket = new ClientSocket()) {
                 // send request
-                socket.write(new Request(token) {
+                socket.write(new Request(_token) {
                     requestType = Request.RequestType.UPDATE,
                     payloadType = type,
                     payload = Serializer.serialize(item)
@@ -175,7 +173,7 @@ namespace commons.VirtualDB {
             // connect to server
             using (var socket = new ClientSocket()) {
                 // send request
-                socket.write(new Request(token) {
+                socket.write(new Request(_token) {
                     requestType = Request.RequestType.DELETE,
                     payloadType = type,
                     payload = Serializer.serialize(primaryKey)
