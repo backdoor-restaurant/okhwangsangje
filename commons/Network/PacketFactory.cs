@@ -20,7 +20,7 @@
             };
         }
 
-        public static Packet newDisconnect(in uint authToken)
+        public static Packet newDisconnect(in int authToken)
         {
             return new Packet(authToken)
             {

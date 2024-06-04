@@ -6,16 +6,16 @@ namespace client
 {
     internal class Example
     {
-        private static readonly MemberVBD memberVDB = new MemberVBD();
+        private static readonly MemberVT memberVDB = new MemberVT();
 
         public static void main()
         {
-            commons.Environment.Environment.AllocConsole();
+            // commons.Environment.Environment.AllocConsole();
 
             LoginInfo loginInfo = new LoginInfo()
             {
-                studentId = "1234",
-                password = "secret"
+                studentId = "0",
+                password = "secret1234"
             };
             memberVDB.signin(loginInfo);
 
@@ -31,17 +31,19 @@ namespace client
             var c_result = memberVDB.create(newMember);
             Console.WriteLine($"Create Result: {c_result}");
 
-            var r_result = memberVDB.read(newMember.studentId, out MemberInfo member);
+            var r_result = memberVDB.read(
+                new MemberInfoKey("0"),
+                out MemberInfo member
+            );
             Console.WriteLine($"Read Result: {r_result}, {member}");
 
             var u_result = memberVDB.update(newMember);
             Console.WriteLine($"Update Result: {u_result}");
 
-            var d_result = memberVDB.delete(newMember.studentId);
+            var d_result = memberVDB.delete(
+                newMember.getKey()
+            );
             Console.WriteLine($"Delete Result: {d_result}");
-
-            Console.WriteLine("계속 하시려면 아무 키나 누르세요.");
-            Console.ReadKey();
         }
     }
 }
