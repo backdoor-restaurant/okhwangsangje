@@ -381,6 +381,22 @@ namespace server.Database {
             dataSet.LentInfo.RemoveLentInfoRow(row);
             return true;
         }
+        public bool deleteFromStudentID(string s_id) {
+            if(s_id.Length == 0) 
+                throw new ArgumentException();
+
+            var query = from l in dataSet.LentInfo
+                        where l.StudentID == s_id
+                        select l;
+
+            bool deleted = false;
+            foreach(var r in query) {
+                deleted = true;
+                dataSet.LentInfo.RemoveLentInfoRow(r);
+            }
+
+            return deleted;
+        }
         public bool delete(in ScheduleInfoKey key) {
             if (key.date.Length == 0 ||
                 key.title.Length == 0
@@ -393,6 +409,22 @@ namespace server.Database {
 
             dataSet.ScheduleInfo.RemoveScheduleInfoRow(row);
             return true;
+        }
+        public bool deleteFromDate(string date) {
+            if (date.Length == 0)
+                throw new ArgumentException();
+
+            var query = from s in dataSet.ScheduleInfo
+                        where s.Date == date
+                        select s;
+
+            bool deleted = false;
+            foreach(var r in query) {
+                deleted = true;
+                dataSet.ScheduleInfo.RemoveScheduleInfoRow(r);
+            }
+
+            return deleted;
         }
 
         ~XmlAccessor() {
