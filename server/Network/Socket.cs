@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace server.Network {
     internal class ServerSocket : commons.Network.Socket, IDisposable {
@@ -23,6 +24,13 @@ namespace server.Network {
 
                 throw e;
             }
+        }
+
+        public async Task<T> readAsync<T>(){
+            client = await listener.AcceptTcpClientAsync();
+            nstream = client.GetStream();
+
+            return read<T>();
         }
 
         public void Dispose() => disconnect();

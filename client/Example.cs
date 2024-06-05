@@ -41,7 +41,7 @@ namespace client
             Console.WriteLine($"Update Result: {u_result}");
 
             var d_result = memberVDB.delete(
-                newMember.getKey()
+                new MemberInfoKey("4")
             );
             Console.WriteLine($"Delete Result: {d_result}");
         }

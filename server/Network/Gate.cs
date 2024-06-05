@@ -12,9 +12,19 @@ namespace server.Network {
     using static Response.ResponseType;
 
     internal class Gate {
-        private readonly XmlAccessor db = new XmlAccessor("Dummy.xml");
+        private readonly XmlAccessor db;
         private int tokenSeed = 0;
         private readonly Dictionary<int, string> sessions = new Dictionary<int, string>();
+
+        public Gate() {
+            db = new XmlAccessor("Dummy.xml");
+        }
+        public Gate(in string xmlFile) {
+            db = new XmlAccessor(xmlFile);
+        }
+        public Gate(in Database.DataSet dataSet) {
+            db = new XmlAccessor(dataSet);
+        }
 
         public void start() {
             using (var socket = new ServerSocket()) {
@@ -22,17 +32,31 @@ namespace server.Network {
                 while (cnt < 7) {
                     // wait client connection
                     socket.listen();
-                    // connection established, wait packet
 
+                    // connection established, wait packet
                     var recv = socket.read<Packet>();
                     Console.WriteLine($"Receive: {recv}");
 
                     var send = makePacket(recv);
-                    Console.WriteLine($"Send: {send}");
 
+                    Console.WriteLine($"Send: {send}");
                     socket.write(send);
 
                     ++cnt;
+                }
+            }
+        }
+
+        public async void startAsync() {
+            using (var socket = new ServerSocket()) {
+                while (true) {
+                    var recv = await socket.readAsync<Packet>();
+                    Console.WriteLine($"Receive: {recv}");
+
+                    var send = makePacket(recv);
+
+                    Console.WriteLine($"Send: {send}");
+                    socket.write(send);
                 }
             }
         }
