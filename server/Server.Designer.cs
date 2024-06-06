@@ -95,7 +95,7 @@
             this.dgvTable.Location = new System.Drawing.Point(11, 57);
             this.dgvTable.Name = "dgvTable";
             this.dgvTable.RowTemplate.Height = 23;
-            this.dgvTable.Size = new System.Drawing.Size(777, 381);
+            this.dgvTable.Size = new System.Drawing.Size(582, 287);
             this.dgvTable.TabIndex = 10;
             // 
             // studentIDDataGridViewTextBoxColumn
@@ -142,7 +142,7 @@
             // 
             this.cbTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbTable.FormattingEnabled = true;
-            this.cbTable.Location = new System.Drawing.Point(635, 29);
+            this.cbTable.Location = new System.Drawing.Point(440, 29);
             this.cbTable.Name = "cbTable";
             this.cbTable.Size = new System.Drawing.Size(153, 20);
             this.cbTable.TabIndex = 11;
@@ -150,8 +150,9 @@
             // 
             // lblTable
             // 
+            this.lblTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTable.AutoSize = true;
-            this.lblTable.Location = new System.Drawing.Point(588, 32);
+            this.lblTable.Location = new System.Drawing.Point(393, 32);
             this.lblTable.Name = "lblTable";
             this.lblTable.Size = new System.Drawing.Size(41, 12);
             this.lblTable.TabIndex = 12;
@@ -161,7 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(605, 356);
             this.Controls.Add(this.lblTable);
             this.Controls.Add(this.cbTable);
             this.Controls.Add(this.dgvTable);
