@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using commons.Table;
+using System;
 using System.Data;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using commons.Table;
-using commons.VirtualDB;
-using server.Network;
 using static server.Database.DataSet;
 
 namespace server.Database {
@@ -89,17 +80,20 @@ namespace server.Database {
 
     internal class XmlAccessor {
         const string path = "../../Database/";
-        private readonly DataSet dataSet = new DataSet();
+        private readonly DataSet dataSet;
 
         public XmlAccessor(in string xmlFileName) {
-            dataSet.Locale = CultureInfo.InvariantCulture;
-
+            dataSet = new DataSet();
             dataSet.ReadXml(path + xmlFileName);
+        }
+        public XmlAccessor(in DataSet dataSet) {
+            this.dataSet = dataSet;
         }
 
         public bool create(in MemberInfo member) {
             try {
                 tryCreate(member);
+                dataSet.MemberInfo.AcceptChanges();
 
                 return true;
             }

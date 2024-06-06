@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using commons.Network;
 using commons.Table;
 
@@ -35,6 +36,7 @@ namespace commons.VirtualDB {
             case Response.ResponseType.OK:
                 return true;
             case Response.ResponseType.BAD_REQUEST:
+                Debug.WriteLine("Bad Request");
                 goto default;
                 throw new Exception("Bad Request");
             case Response.ResponseType.REJECTED:
