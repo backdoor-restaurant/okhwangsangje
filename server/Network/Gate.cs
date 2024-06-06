@@ -4,6 +4,7 @@ using server.Database;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 
 namespace server.Network {
     using static commons.Table.Type;
@@ -34,11 +35,11 @@ namespace server.Network {
 
                     // connection established, wait packet
                     var recv = socket.read<Packet>();
-                    Console.WriteLine($"Receive: {recv}");
+                    Debug.WriteLine($"Receive: {recv}");
 
                     var send = makePacket(recv);
 
-                    Console.WriteLine($"Send: {send}");
+                    Debug.WriteLine($"Send: {send}");
                     socket.write(send);
                 }
             }
@@ -48,11 +49,11 @@ namespace server.Network {
             using (var socket = new ServerSocket()) {
                 while (true) {
                     var recv = await socket.readAsync<Packet>();
-                    Console.WriteLine($"Receive: {recv}");
+                    Debug.WriteLine($"Receive: {recv}");
 
                     var send = makePacket(recv);
 
-                    Console.WriteLine($"Send: {send}");
+                    Debug.WriteLine($"Send: {send}");
                     socket.write(send);
                 }
             }
