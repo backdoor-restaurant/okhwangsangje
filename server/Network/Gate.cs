@@ -28,8 +28,7 @@ namespace server.Network {
 
         public void start() {
             using (var socket = new ServerSocket()) {
-                int cnt = 0;
-                while (cnt < 7) {
+                while (true) {
                     // wait client connection
                     socket.listen();
 
@@ -41,8 +40,6 @@ namespace server.Network {
 
                     Console.WriteLine($"Send: {send}");
                     socket.write(send);
-
-                    ++cnt;
                 }
             }
         }
