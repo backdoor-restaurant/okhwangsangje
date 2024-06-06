@@ -31,16 +31,16 @@
     <PhoneNumber>010-3456-7890</PhoneNumber>
   </MemberInfo>
   <MemberInfo>
+    <StudentID>4</StudentID>
+    <Name>Warren Buffett</Name>
+    <Department>Economics</Department>
+    <PhoneNumber>010-1324-5768</PhoneNumber>
+    <isAdministrator>true</isAdministrator>
+  </MemberInfo>
+  <MemberInfo>
     <StudentID>5</StudentID>
     <Name>ChatGPT</Name>
     <Department>Software</Department>
-  </MemberInfo>
-  <MemberInfo>
-    <StudentID>1234</StudentID>
-    <Name>Dummy</Name>
-    <Department>Software</Department>
-    <PhoneNumber>010-0000-0000</PhoneNumber>
-    <isAdministrator>false</isAdministrator>
   </MemberInfo>
   <ItemInfo>
     <ItemName>46 장궁</ItemName>
