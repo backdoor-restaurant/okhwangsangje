@@ -10,18 +10,20 @@ namespace client {
             password = "secret1234"
         };
 
-        public static void testMemberVT() {
-            var memberVT = new MemberVT();
-            memberVT.signin(admin);
+        public static void testMemberVT(in int delay = 0) {
+            var vtable = new MemberVT();
+            vtable.signin(admin);
 
-            var testMember = new MemberInfo() {
+            var test = new MemberInfo() {
                 studentId = "1234",
                 name = "Dummy",
                 department = "Software",
                 phoneNumber = "010-0000-0000"
             };
-            var testKey = testMember.getKey();
-             //var testKey = new MemberInfoKey(testMember);
+            var key = test.getKey();
+            // var key = new MemberInfoKey(test);
+            // var key = new MemberInfoKey("1234");
+            // MemberInfoKey key = "1234";
             var updated = new MemberInfo() {
                 studentId = "1234",
                 name = "Dummy",
@@ -29,122 +31,150 @@ namespace client {
                 phoneNumber = "010-4321-4321"
             };
 
-            var c_result = memberVT.create(testMember);
+            var c_result = vtable.create(test);
             Console.WriteLine($"Create Result: {c_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var r_result = memberVT.read(testKey, out MemberInfo member);
-            // var r_result = memberVT.read("1234", out MemberInfo member);
+            var r_result = vtable.read(key, out MemberInfo member);
+            // var r_result = vtable.read("1234", out MemberInfo member);
             Console.WriteLine($"Read Result: {r_result}, {member}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var u_result = memberVT.update(updated);
+            var u_result = vtable.update(updated);
             Console.WriteLine($"Update Result: {u_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            // var d_result = memberVT.delete(testKey);
-            var d_result = memberVT.delete("1234");
+            // var d_result = vtable.delete(key);
+            var d_result = vtable.delete("1234");
             Console.WriteLine($"Delete Result: {d_result}");
         }
 
-        public static void testItemInfoVT() {
-            var itemVT = new LoginInfoVTB();
-            itemVT.signin(admin);
+        public static void testItemVT(in int delay = 0) {
+            var vtable = new ItemVT();
+            vtable.signin(admin);
 
-            var testItemInfo = new ItemInfo() {
+            var test = new ItemInfo() {
                 itemName = "Newbie Bow",
                 amount = 10
             };
-            //var testKey = testItemInfo.getKey();
-             var testKey = new ItemInfoKey(testItemInfo);
+            var key = test.getKey();
             var updated = new ItemInfo() {
                 itemName = "Newbie Bow",
                 amount = 8
             };
 
-            var c_result = itemVT.create(testItemInfo);
+            var c_result = vtable.create(test);
             Console.WriteLine($"Create Result: {c_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            //var r_result = itemVT.read(testKey, out ItemInfo item);
-             var r_result = itemVT.read("Newbie Bow", out ItemInfo item);
+            var r_result = vtable.read(key, out ItemInfo item);
             Console.WriteLine($"Read Result: {r_result}, {item}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var u_result = itemVT.update(updated);
+            var u_result = vtable.update(updated);
             Console.WriteLine($"Update Result: {u_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-             var d_result = itemVT.delete(testKey);
-            //var d_result = itemVT.delete("Newbie Bow");
+            var d_result = vtable.delete(key);
             Console.WriteLine($"Delete Result: {d_result}");
         }
 
-        public static void testLoginInfoVT() {
-            var loginVT = new LoginVT();
-            loginVT.signin(admin);
+        public static void testLoginVT(in int delay = 0) {
+            var vtable = new LoginVT();
+            vtable.signin(admin);
 
-            var testLoginInfo = new LoginInfo() {
-                studentId = "1357",
+            var test = new LoginInfo() {
+                // student id is foreign key
+                studentId = "6",
                 password = "qwerty1357"
             };
-            var testKey = testLoginInfo.getKey();
-            //var testKey = new LoginInfoKey(testLoginInfo);
+            var key = test.getKey();
             var updated = new LoginInfo() {
-                studentId = "1357",
+                studentId = "6",
                 password = "updated1357"
             };
 
-            var c_result = loginVT.create(testLoginInfo);
+            var c_result = vtable.create(test);
             Console.WriteLine($"Create Result: {c_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var r_result = loginVT.read(testKey, out LoginInfo login);
-            //var r_result = loginVT.read("1357", out LoginInfo login);
+            var r_result = vtable.read(key, out LoginInfo login);
             Console.WriteLine($"Read Result: {r_result}, {login}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var u_result = loginVT.update(updated);
+            var u_result = vtable.update(updated);
             Console.WriteLine($"Update Result: {u_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var d_result = loginVT.delete(testKey);
-            // var d_result = loginVT.delete("1357");
+            var d_result = vtable.delete(key);
             Console.WriteLine($"Delete Result: {d_result}");
         }
 
-        public static void testLentInfoVT() {
-            var lentInfoVT = new LentInfoVT();
-            lentInfoVT.signin(admin);
+        public static void testLentInfoVT(in int delay = 0) {
+            var vtable = new LentInfoVT();
+            vtable.signin(admin);
 
-            var testLentInfo = new LentInfo() {
-                itemName = "Newbie Bow",
+            var test = new LentInfo() {
+                // itemName is foreign key
+                itemName = "Test Bow",
                 amount = 1,
-                studentId = "1357",
+                // student id is foreign key
+                studentId = "6",
                 startDate = DateTime.Today.ToString("yyyy-MM-dd")
             };
-            //var testKey = testLentInfo.getKey();
-            var testKey = new LentInfoKey(testLentInfo);
+            var key = test.getKey();
             var updated = new LentInfo() {
-                itemName = "Newbie Bow",
+                itemName = "Test Bow",
                 amount = 2,
-                studentId = "1357",
+                studentId = "6",
                 startDate = DateTime.Today.ToString("yyyy-MM-dd")
             };
 
-            var c_result = lentInfoVT.create(testLentInfo);
+            var c_result = vtable.create(test);
             Console.WriteLine($"Create Result: {c_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var r_result = lentInfoVT.read(testKey, out LentInfo info);
+            var r_result = vtable.read(key, out LentInfo info);
             Console.WriteLine($"Read Result: {r_result}, {info}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var u_result = lentInfoVT.update(updated);
+            var u_result = vtable.update(updated);
             Console.WriteLine($"Update Result: {u_result}");
-            Thread.Sleep(1000);
+            Thread.Sleep(delay);
 
-            var d_result = lentInfoVT.delete(testKey);
+            var d_result = vtable.delete(key);
+            Console.WriteLine($"Delete Result: {d_result}");
+        }
+
+        public static void testScheduleVT(in int delay = 0) {
+            var vtable = new ScheduleVT();
+            vtable.signin(admin);
+
+            var test = new ScheduleInfo() {
+                date = DateTime.Today.ToString("yyyy-MM-dd"),
+                title = "Schedule Test",
+                content = "Test Contents"
+            };
+            var key = test.getKey();
+            var updated = new ScheduleInfo() {
+                date = DateTime.Today.ToString("yyyy-MM-dd"),
+                title = "Schedule Test",
+                content = "New Test Contents"
+            };
+
+            var c_result = vtable.create(test);
+            Console.WriteLine($"Create Result: {c_result}");
+            Thread.Sleep(delay);
+
+            var r_result = vtable.read(key, out ScheduleInfo schedule);
+            Console.WriteLine($"Read Result: {r_result}, {schedule}");
+            Thread.Sleep(delay);
+
+            var u_result = vtable.update(updated);
+            Console.WriteLine($"Update Result: {u_result}");
+            Thread.Sleep(delay);
+
+            var d_result = vtable.delete(key);
             Console.WriteLine($"Delete Result: {d_result}");
         }
     }

@@ -42,9 +42,18 @@
     <Name>ChatGPT</Name>
     <Department>Software</Department>
   </MemberInfo>
+  <MemberInfo>
+    <StudentID>6</StudentID>
+    <Name>Test Member</Name>
+    <Department>Nothing</Department>
+  </MemberInfo>
   <ItemInfo>
     <ItemName>46 장궁</ItemName>
     <amount>1</amount>
+  </ItemInfo>
+  <ItemInfo>
+    <ItemName>Test Bow</ItemName>
+    <amount>10</amount>
   </ItemInfo>
   <LentInfo>
     <ItemName>46 장궁</ItemName>

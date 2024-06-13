@@ -10,16 +10,28 @@ namespace client {
         [STAThread]
         static void Main() {
             if (ConfigurationManager.AppSettings["Test"] == "true") {
-                Example.testMemberVT();
-                Console.ReadLine();
+                int delay = 0;
 
-                Example.testItemInfoVT();
+                Console.WriteLine("Press Any Key to test MemberInfoVT");
                 Console.ReadLine();
+                Example.testMemberVT(delay);
 
-                Example.testLoginInfoVT();
+                Console.WriteLine("\nPress Any Key to test ItemInfoVT");
                 Console.ReadLine();
+                Example.testItemVT(delay);
 
+                Console.WriteLine("\nPress Any Key to test LoginInfoVT");
                 Console.ReadLine();
+                Example.testLoginVT(delay);
+
+                Console.WriteLine("\nPress Any Key to test LentInfoVT");
+                Console.ReadLine();
+                Example.testLentInfoVT(delay);
+
+                Console.WriteLine("\nPress Any Key to test ScheduleVT");
+                Console.ReadLine();
+                Example.testScheduleVT(delay);
+
                 return;
             }
 

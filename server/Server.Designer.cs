@@ -146,6 +146,7 @@
             this.cbTable.Name = "cbTable";
             this.cbTable.Size = new System.Drawing.Size(153, 20);
             this.cbTable.TabIndex = 11;
+            this.cbTable.Text = "MemberInfo";
             this.cbTable.SelectedIndexChanged += new System.EventHandler(this.cbTable_SelectedIndexChanged);
             // 
             // lblTable
