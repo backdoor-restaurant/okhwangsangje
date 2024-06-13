@@ -9,12 +9,12 @@ namespace server.Network {
 
         public ServerSocket() {
             listener = new TcpListener(IPAddress.Parse(defaultIp), defaultPort);
-            listener.Start();
+            listener?.Start();
         }
 
         public async Task listen() {
-            client = await listener.AcceptTcpClientAsync();
-            nstream = client.GetStream();
+            client = await listener?.AcceptTcpClientAsync();
+            nstream = client?.GetStream();
         }
 
         public void Dispose() => disconnect();

@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Environment.cs" />
     <Compile Include="Network\PacketFactory.cs" />
-    <Compile Include="VirtualDB\ItemInfoVT.cs" />
+    <Compile Include="VirtualDB\LoginInfoVTB.cs" />
     <Compile Include="VirtualDB\LentInfoVT.cs" />
     <Compile Include="VirtualDB\MemberVT.cs" />
     <Compile Include="VirtualDB\VirtualTable.cs" />
