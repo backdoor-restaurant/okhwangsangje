@@ -27,28 +27,14 @@ namespace server.Network {
             db = new XmlAccessor(dataSet);
         }
 
-        public void start() {
+        public async void start() {
             using (var socket = new ServerSocket()) {
                 while (true) {
                     // wait client connection
-                    socket.listen();
+                    await socket.listen();
 
                     // connection established, wait packet
                     var recv = socket.read<Packet>();
-                    Debug.WriteLine($"Receive: {recv}");
-
-                    var send = makePacket(recv);
-
-                    Debug.WriteLine($"Send: {send}");
-                    socket.write(send);
-                }
-            }
-        }
-
-        public async void startAsync() {
-            using (var socket = new ServerSocket()) {
-                while (true) {
-                    var recv = await socket.readAsync<Packet>();
                     Debug.WriteLine($"Receive: {recv}");
 
                     var send = makePacket(recv);

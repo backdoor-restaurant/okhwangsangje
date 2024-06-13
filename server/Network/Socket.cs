@@ -12,25 +12,9 @@ namespace server.Network {
             listener.Start();
         }
 
-        public void listen() {
-            try {
-                client = listener.AcceptTcpClient();
-                nstream = client.GetStream();
-            }
-            catch (Exception e) {
-                nstream.Close();
-                client.Close();
-                listener.Stop();
-
-                throw e;
-            }
-        }
-
-        public async Task<T> readAsync<T>(){
+        public async Task listen() {
             client = await listener.AcceptTcpClientAsync();
             nstream = client.GetStream();
-
-            return read<T>();
         }
 
         public void Dispose() => disconnect();

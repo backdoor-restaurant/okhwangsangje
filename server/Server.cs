@@ -21,7 +21,7 @@ namespace server {
             }
 
             gate = new Gate(dataSet);
-            gate.startAsync();
+            gate.start();
         }
 
         private void cbTable_SelectedIndexChanged(object sender, EventArgs e) {
