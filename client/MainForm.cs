@@ -59,7 +59,6 @@ namespace client
             if (child != null)
                 child.Close();
             this.Controls.Remove(child);
-
             child = new EquipmentHistoryForm(Mode.Admin);
             child.MdiParent = this;
             child.Show();
