@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnTmp = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.LoginUIsigninBtn = new System.Windows.Forms.Button();
             this.LoginUIidtxtBox = new System.Windows.Forms.TextBox();
             this.LoginUIidLabel = new System.Windows.Forms.Label();
@@ -37,32 +35,9 @@
             this.LoginUIpwtxtBox = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LoginUIsignupBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnTmp
-            // 
-            this.btnTmp.Location = new System.Drawing.Point(17, 18);
-            this.btnTmp.Margin = new System.Windows.Forms.Padding(4);
-            this.btnTmp.Name = "btnTmp";
-            this.btnTmp.Size = new System.Drawing.Size(290, 39);
-            this.btnTmp.TabIndex = 0;
-            this.btnTmp.Text = "임시 메인 창 가는 버튼(유저)";
-            this.btnTmp.UseVisualStyleBackColor = true;
-            this.btnTmp.Click += new System.EventHandler(this.btnTmp_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(17, 66);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(290, 39);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "임시 메인 창 가는 버튼(어드민)";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // LoginUIsigninBtn
             // 
@@ -148,8 +123,6 @@
             this.Controls.Add(this.LoginUIidLabel);
             this.Controls.Add(this.LoginUIidtxtBox);
             this.Controls.Add(this.LoginUIsigninBtn);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnTmp);
             this.Controls.Add(this.button2);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginForm";
@@ -161,9 +134,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnTmp;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button LoginUIsigninBtn;
         private System.Windows.Forms.TextBox LoginUIidtxtBox;
         private System.Windows.Forms.Label LoginUIidLabel;
