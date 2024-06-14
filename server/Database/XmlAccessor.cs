@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 using static server.Database.DataSet;
 
 namespace server.Database {
@@ -103,6 +104,9 @@ namespace server.Database {
             catch (ConstraintException) {
                 return false;
             }
+            catch (InvalidConstraintException) {
+                return false;
+            }
         }
         private void tryCreate(in MemberInfo member) {
             dataSet.MemberInfo.AddMemberInfoRow(
@@ -125,6 +129,9 @@ namespace server.Database {
             catch (ConstraintException) {
                 return false;
             }
+            catch (InvalidConstraintException) {
+                return false;
+            }
         }
         private void tryCreate(in ItemInfo item) {
             dataSet.ItemInfo.AddItemInfoRow(
@@ -142,6 +149,9 @@ namespace server.Database {
                 return false;
             }
             catch (ConstraintException) {
+                return false;
+            }
+            catch (InvalidConstraintException) {
                 return false;
             }
         }
@@ -163,6 +173,9 @@ namespace server.Database {
             catch (ConstraintException) {
                 return false;
             }
+            catch (InvalidConstraintException) {
+                return false;
+            }
         }
         private void tryCreate(in LentInfo info) {
             dataSet.LentInfo.AddLentInfoRow(
@@ -182,6 +195,9 @@ namespace server.Database {
                 return false;
             }
             catch (ConstraintException) {
+                return false;
+            }
+            catch (InvalidConstraintException) {
                 return false;
             }
         }
@@ -314,6 +330,7 @@ namespace server.Database {
             var row = dataSet.LentInfo.FindByItemNameStudentID(
                 info.itemName, info.studentId
             );
+
             if (row is null) return false;
 
             row.amount = info.amount;
@@ -384,7 +401,7 @@ namespace server.Database {
                         select l;
 
             bool deleted = false;
-            foreach(var r in query) {
+            foreach(var r in query.ToList()) {
                 deleted = true;
                 dataSet.LentInfo.RemoveLentInfoRow(r);
             }
@@ -413,7 +430,7 @@ namespace server.Database {
                         select s;
 
             bool deleted = false;
-            foreach(var r in query) {
+            foreach(var r in query.ToList()) {
                 deleted = true;
                 dataSet.ScheduleInfo.RemoveScheduleInfoRow(r);
             }

@@ -9,28 +9,12 @@ namespace server.Network {
 
         public ServerSocket() {
             listener = new TcpListener(IPAddress.Parse(defaultIp), defaultPort);
-            listener.Start();
+            listener?.Start();
         }
 
-        public void listen() {
-            try {
-                client = listener.AcceptTcpClient();
-                nstream = client.GetStream();
-            }
-            catch (Exception e) {
-                nstream.Close();
-                client.Close();
-                listener.Stop();
-
-                throw e;
-            }
-        }
-
-        public async Task<T> readAsync<T>(){
-            client = await listener.AcceptTcpClientAsync();
-            nstream = client.GetStream();
-
-            return read<T>();
+        public async Task listen() {
+            client = await listener?.AcceptTcpClientAsync();
+            nstream = client?.GetStream();
         }
 
         public void Dispose() => disconnect();

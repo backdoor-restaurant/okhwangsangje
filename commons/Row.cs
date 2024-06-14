@@ -29,12 +29,10 @@ namespace commons.Table {
         public bool isAdministrator = false;
 
         public MemberInfo() : base(Type.MEMBER_INFO) { }
-        public override string ToString() {
-            return $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
-        }
-        public override MemberInfoKey getKey() {
-            return new MemberInfoKey(this);
-        }
+        public override string ToString()
+            => $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
+        public override MemberInfoKey getKey()
+            => new MemberInfoKey(this);
     }
 
     [Serializable]
@@ -48,9 +46,10 @@ namespace commons.Table {
             this.studentId = studentId;
         }
 
-        public override string ToString() {
-            return $"MemberInfoKey{{{studentId}}}";
-        }
+        public static implicit operator MemberInfoKey(string s_id)
+            => new MemberInfoKey(s_id);
+        public override string ToString()
+            => $"MemberInfoKey{{{studentId}}}";
     }
 
     [Serializable]
@@ -59,12 +58,10 @@ namespace commons.Table {
         public int amount;
 
         public ItemInfo() : base(Type.ITEM_INFO) { }
-        public override string ToString() {
-            return $"{type}{{{itemName}, {amount}}}";
-        }
-        public override ItemInfoKey getKey() {
-            return new ItemInfoKey(this);
-        }
+        public override string ToString()
+            => $"{type}{{{itemName}, {amount}}}";
+        public override ItemInfoKey getKey()
+            => new ItemInfoKey(this);
     }
 
     [Serializable]
@@ -78,9 +75,10 @@ namespace commons.Table {
             this.itemName = itemName;
         }
 
-        public override string ToString() {
-            return $"ItemInfoKey{{{itemName}}}";
-        }
+        public static implicit operator ItemInfoKey(string i_name)
+            => new ItemInfoKey(i_name);
+        public override string ToString()
+            => $"ItemInfoKey{{{itemName}}}";
     }
 
     [Serializable]
@@ -89,12 +87,10 @@ namespace commons.Table {
         public string password = "default password";
 
         public LoginInfo() : base(Type.LOGIN_INFO) { }
-        public override string ToString() {
-            return $"{type}{{{studentId}, {password}}}";
-        }
-        public override LoginInfoKey getKey() {
-            return new LoginInfoKey(this);
-        }
+        public override string ToString()
+            => $"{type}{{{studentId}, {password}}}";
+        public override LoginInfoKey getKey()
+            => new LoginInfoKey(this);
     }
 
     [Serializable]
@@ -108,9 +104,10 @@ namespace commons.Table {
             this.studentId = studentId;
         }
 
-        public override string ToString() {
-            return $"LoginInfoKey{{{studentId}}}";
-        }
+        public static implicit operator LoginInfoKey(string s_id)
+            => new LoginInfoKey(s_id);
+        public override string ToString()
+            => $"LoginInfoKey{{{studentId}}}";
     }
 
     [Serializable]
@@ -121,12 +118,10 @@ namespace commons.Table {
         public string startDate;
 
         public LentInfo() : base(Type.LENT_INFO) { }
-        public override string ToString() {
-            return $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
-        }
-        public override LentInfoKey getKey() {
-            return new LentInfoKey(this);
-        }
+        public override string ToString()
+            => $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
+        public override LentInfoKey getKey()
+            => new LentInfoKey(this);
     }
     [Serializable]
     public class LentInfoKey {
@@ -142,9 +137,8 @@ namespace commons.Table {
             this.studentId = studentId;
         }
 
-        public override string ToString() {
-            return $"LentInfoKey{{{itemName}, {studentId}}}";
-        }
+        public override string ToString()
+            => $"LentInfoKey{{{itemName}, {studentId}}}";
     }
 
     [Serializable]
@@ -154,12 +148,10 @@ namespace commons.Table {
         public string content;
 
         public ScheduleInfo() : base(Type.SCHEDULE_INFO) { }
-        public override string ToString() {
-            return $"{type}{{{date}, {title}, {content}}}";
-        }
-        public override ScheduleInfoKey getKey() {
-            return new ScheduleInfoKey(this);
-        }
+        public override string ToString()
+            => $"{type}{{{date}, {title}, {content}}}";
+        public override ScheduleInfoKey getKey()
+            => new ScheduleInfoKey(this);
     }
 
     [Serializable]
@@ -176,8 +168,7 @@ namespace commons.Table {
             this.title = title;
         }
 
-        public override string ToString() {
-            return $"ScheduleInfoKey{{{date}, {title}}}";
-        }
+        public override string ToString()
+            => $"ScheduleInfoKey{{{date}, {title}}}";
     }
 }

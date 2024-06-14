@@ -11,10 +11,10 @@ namespace commons.Network {
         protected NetworkStream nstream = null;
 
         public T read<T>() {
-            using (var ms = new MemoryStream(1024)) {
+            using (var ms = new MemoryStream()) {
+                byte[] buffer = new byte[1024];
+                
                 do {
-                    byte[] buffer = new byte[1024];
-
                     nstream.Read(buffer, 0, buffer.Length);
                     ms.Write(buffer, 0, buffer.Length);
                 } while (nstream.DataAvailable);
@@ -30,27 +30,17 @@ namespace commons.Network {
         }
 
         public void disconnect() {
-            nstream.Flush();
-            nstream.Close();
-            client.Dispose();
-            client.Close();
+            nstream?.Close();
             nstream = null;
+            client?.Close();
             client = null;
         }
     }
 
     public class ClientSocket : Socket, IDisposable {
         public ClientSocket(string ip = defaultIp, int port = defaultPort) {
-            try {
-                client = new TcpClient(ip, port);
-                nstream = client.GetStream();
-            }
-            catch (Exception e) {
-                nstream.Close();
-                client.Close();
-
-                throw e;
-            }
+            client = new TcpClient(ip, port);
+            nstream = client.GetStream();
         }
         public void Dispose() => disconnect();
     }
