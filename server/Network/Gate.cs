@@ -242,6 +242,15 @@ namespace server.Network {
                 case ITEM_INFO:
                     result = db.tryUpdate(Parser.parse<ItemInfo>(request.payload));
                     break;
+                case LOGIN_INFO:
+                    result = db.tryUpdate(Parser.parse<LoginInfo>(request.payload));
+                    break;
+                case LENT_INFO:
+                    result = db.tryUpdate(Parser.parse<LentInfo>(request.payload));
+                    break;
+                case SCHEDULE_INFO:
+                    result = db.tryUpdate(Parser.parse<ScheduleInfo>(request.payload));
+                    break;
                 default:
                     response.responseType = NOT_IMPLEMENTED;
                     return;
@@ -252,6 +261,9 @@ namespace server.Network {
                 response.responseType = NOT_ACCEPTED;
             }
             catch (ConstraintException) {
+                response.responseType = NOT_ACCEPTED;
+            }
+            catch (InvalidConstraintException) {
                 response.responseType = NOT_ACCEPTED;
             }
         }

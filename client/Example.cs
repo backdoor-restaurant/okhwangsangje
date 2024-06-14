@@ -116,15 +116,15 @@ namespace client {
 
             var test = new LentInfo() {
                 // itemName is foreign key
-                itemName = "Test Bow",
-                amount = 1,
+                itemName = "Dummy",
+                amount = 5,
                 // student id is foreign key
                 studentId = "6",
                 startDate = DateTime.Today.ToString("yyyy-MM-dd")
             };
             var key = test.getKey();
             var updated = new LentInfo() {
-                itemName = "Test Bow",
+                itemName = "Dummy",
                 amount = 2,
                 studentId = "6",
                 startDate = DateTime.Today.ToString("yyyy-MM-dd")
@@ -134,9 +134,15 @@ namespace client {
             Console.WriteLine($"Create Result: {c_result}");
             Thread.Sleep(delay);
 
-            var r_result = vtable.read(key, out LentInfo info);
-            Console.WriteLine($"Read Result: {r_result}, {info}");
+            var r1_result = vtable.read(key, out LentInfo info1);
+            Console.WriteLine($"Read Result: {r1_result}, {info1}");
             Thread.Sleep(delay);
+            
+            var r2_result = vtable.readFromStudentID("6", out LentInfo[] info2);
+            Console.WriteLine($"Read Result: {r2_result}");
+            foreach(var i in info2) {
+                Console.WriteLine(i);
+            }
 
             var u_result = vtable.update(updated);
             Console.WriteLine($"Update Result: {u_result}");
@@ -150,20 +156,36 @@ namespace client {
             var vtable = new ScheduleVT();
             vtable.signin(admin);
 
-            var test = new ScheduleInfo() {
-                date = DateTime.Today.ToString("yyyy-MM-dd"),
-                title = "Schedule Test",
-                content = "Test Contents"
+            var today = DateTime.Today.ToString("yyyy-MM-dd");
+
+            var test1 = new ScheduleInfo() {
+                date = today,
+                title = "Schedule Test 1",
+                content = "Test Contents 1"
             };
-            var key = test.getKey();
+            var test2 = new ScheduleInfo() {
+                date = today,
+                title = "Schedule Test 2",
+                content = "Test Contents 2"
+            };
+            var test3 = new ScheduleInfo() {
+                date = today,
+                title = "Schedule Test 3",
+                content = "Test Contents 3"
+            };
+            var key = test1.getKey();
             var updated = new ScheduleInfo() {
                 date = DateTime.Today.ToString("yyyy-MM-dd"),
-                title = "Schedule Test",
+                title = "Schedule Test 1",
                 content = "New Test Contents"
             };
 
-            var c_result = vtable.create(test);
-            Console.WriteLine($"Create Result: {c_result}");
+            var c_result1 = vtable.create(test1);
+            Console.WriteLine($"Create Result1: {c_result1}");
+            var c_result2 = vtable.create(test2);
+            Console.WriteLine($"Create Result2: {c_result2}");
+            var c_result3 = vtable.create(test3);
+            Console.WriteLine($"Create Result3: {c_result3}");
             Thread.Sleep(delay);
 
             var r_result = vtable.read(key, out ScheduleInfo schedule);
@@ -174,8 +196,12 @@ namespace client {
             Console.WriteLine($"Update Result: {u_result}");
             Thread.Sleep(delay);
 
-            var d_result = vtable.delete(key);
-            Console.WriteLine($"Delete Result: {d_result}");
+            var d_result1 = vtable.delete(key);
+            Console.WriteLine($"Delete Result: {d_result1}");
+            Thread.Sleep(delay);
+
+            var d_result2 = vtable.deleteFromDate(today);
+            Console.WriteLine($"Delete Result: {d_result2}");
         }
     }
 }

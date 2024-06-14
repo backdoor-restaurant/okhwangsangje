@@ -10,25 +10,25 @@ namespace client {
         [STAThread]
         static void Main() {
             if (ConfigurationManager.AppSettings["Test"] == "true") {
-                int delay = 0;
+                int delay = 1000;
 
-                Console.WriteLine("Press Any Key to test MemberInfoVT");
+                Console.Write("Press Enter to test MemberInfoVT...");
                 Console.ReadLine();
                 Example.testMemberVT(delay);
 
-                Console.WriteLine("\nPress Any Key to test ItemInfoVT");
+                Console.Write("\nPress Enter to test ItemInfoVT...");
                 Console.ReadLine();
                 Example.testItemVT(delay);
 
-                Console.WriteLine("\nPress Any Key to test LoginInfoVT");
+                Console.Write("\nPress Enter to test LoginInfoVT...");
                 Console.ReadLine();
                 Example.testLoginVT(delay);
 
-                Console.WriteLine("\nPress Any Key to test LentInfoVT");
+                Console.Write("\nPress Enter to test LentInfoVT...");
                 Console.ReadLine();
                 Example.testLentInfoVT(delay);
 
-                Console.WriteLine("\nPress Any Key to test ScheduleVT");
+                Console.Write("\nPress Enter to test ScheduleVT...");
                 Console.ReadLine();
                 Example.testScheduleVT(delay);
 

@@ -94,6 +94,7 @@
             this.dgvTable.DataSource = this.dataSetBindingSource;
             this.dgvTable.Location = new System.Drawing.Point(11, 57);
             this.dgvTable.Name = "dgvTable";
+            this.dgvTable.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvTable.RowTemplate.Height = 23;
             this.dgvTable.Size = new System.Drawing.Size(582, 287);
             this.dgvTable.TabIndex = 10;
@@ -141,12 +142,11 @@
             // cbTable
             // 
             this.cbTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbTable.FormattingEnabled = true;
+            this.cbTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTable.Location = new System.Drawing.Point(440, 29);
             this.cbTable.Name = "cbTable";
             this.cbTable.Size = new System.Drawing.Size(153, 20);
             this.cbTable.TabIndex = 11;
-            this.cbTable.Text = "MemberInfo";
             this.cbTable.SelectedIndexChanged += new System.EventHandler(this.cbTable_SelectedIndexChanged);
             // 
             // lblTable
@@ -170,6 +170,8 @@
             this.Controls.Add(this.gbDetail);
             this.Name = "wfServer";
             this.Text = "옥황상제 서버";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.wfServer_FormClosed);
+            this.Load += new System.EventHandler(this.wfServer_Load);
             this.gbDetail.ResumeLayout(false);
             this.gbDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
