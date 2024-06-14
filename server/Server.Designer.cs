@@ -1,6 +1,6 @@
 ﻿namespace server
 {
-    partial class Server
+    partial class wfServer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,128 +28,174 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ControlTextBox = new System.Windows.Forms.TextBox();
-            this.ServerLogTextBox = new System.Windows.Forms.RichTextBox();
-            this.PortTextBox = new System.Windows.Forms.TextBox();
-            this.HostTextBox = new System.Windows.Forms.TextBox();
-            this.HostLabel = new System.Windows.Forms.Label();
-            this.PortLabel = new System.Windows.Forms.Label();
-            this.ServerDetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.SendButton = new System.Windows.Forms.Button();
-            this.ServerStartButton = new System.Windows.Forms.Button();
-            this.ServerDetailGroupBox.SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.lblHost = new System.Windows.Forms.Label();
+            this.lblPort = new System.Windows.Forms.Label();
+            this.gbDetail = new System.Windows.Forms.GroupBox();
+            this.dgvTable = new System.Windows.Forms.DataGridView();
+            this.studentIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.departmentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isAdministratorDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet = new server.Database.DataSet();
+            this.cbTable = new System.Windows.Forms.ComboBox();
+            this.lblTable = new System.Windows.Forms.Label();
+            this.gbDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet)).BeginInit();
             this.SuspendLayout();
             // 
-            // ControlTextBox
+            // lblHost
             // 
-            this.ControlTextBox.Location = new System.Drawing.Point(12, 419);
-            this.ControlTextBox.Name = "ControlTextBox";
-            this.ControlTextBox.Size = new System.Drawing.Size(682, 21);
-            this.ControlTextBox.TabIndex = 0;
+            this.lblHost.AutoSize = true;
+            this.lblHost.Location = new System.Drawing.Point(6, 17);
+            this.lblHost.Name = "lblHost";
+            this.lblHost.Size = new System.Drawing.Size(89, 12);
+            this.lblHost.TabIndex = 4;
+            this.lblHost.Text = "Host: localhost";
             // 
-            // ServerLogTextBox
+            // lblPort
             // 
-            this.ServerLogTextBox.Location = new System.Drawing.Point(12, 62);
-            this.ServerLogTextBox.Name = "ServerLogTextBox";
-            this.ServerLogTextBox.Size = new System.Drawing.Size(776, 349);
-            this.ServerLogTextBox.TabIndex = 1;
-            this.ServerLogTextBox.Text = "";
+            this.lblPort.AutoSize = true;
+            this.lblPort.Location = new System.Drawing.Point(122, 17);
+            this.lblPort.Name = "lblPort";
+            this.lblPort.Size = new System.Drawing.Size(65, 12);
+            this.lblPort.TabIndex = 5;
+            this.lblPort.Text = "Port: 49152";
             // 
-            // PortTextBox
+            // gbDetail
             // 
-            this.PortTextBox.Location = new System.Drawing.Point(257, 14);
-            this.PortTextBox.Name = "PortTextBox";
-            this.PortTextBox.Size = new System.Drawing.Size(60, 21);
-            this.PortTextBox.TabIndex = 2;
-            this.PortTextBox.Text = "3000";
+            this.gbDetail.Controls.Add(this.lblHost);
+            this.gbDetail.Controls.Add(this.lblPort);
+            this.gbDetail.Location = new System.Drawing.Point(12, 12);
+            this.gbDetail.Name = "gbDetail";
+            this.gbDetail.Size = new System.Drawing.Size(198, 39);
+            this.gbDetail.TabIndex = 7;
+            this.gbDetail.TabStop = false;
+            this.gbDetail.Text = "Server Details";
             // 
-            // HostTextBox
+            // dgvTable
             // 
-            this.HostTextBox.Location = new System.Drawing.Point(64, 14);
-            this.HostTextBox.Name = "HostTextBox";
-            this.HostTextBox.Size = new System.Drawing.Size(132, 21);
-            this.HostTextBox.TabIndex = 3;
-            this.HostTextBox.Text = "0.0.0.0";
+            this.dgvTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvTable.AutoGenerateColumns = false;
+            this.dgvTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.studentIDDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.departmentDataGridViewTextBoxColumn,
+            this.phoneNumberDataGridViewTextBoxColumn,
+            this.isAdministratorDataGridViewCheckBoxColumn});
+            this.dgvTable.DataMember = "MemberInfo";
+            this.dgvTable.DataSource = this.dataSetBindingSource;
+            this.dgvTable.Location = new System.Drawing.Point(11, 57);
+            this.dgvTable.Name = "dgvTable";
+            this.dgvTable.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvTable.RowTemplate.Height = 23;
+            this.dgvTable.Size = new System.Drawing.Size(582, 287);
+            this.dgvTable.TabIndex = 10;
             // 
-            // HostLabel
+            // studentIDDataGridViewTextBoxColumn
             // 
-            this.HostLabel.AutoSize = true;
-            this.HostLabel.Location = new System.Drawing.Point(6, 18);
-            this.HostLabel.Name = "HostLabel";
-            this.HostLabel.Size = new System.Drawing.Size(30, 12);
-            this.HostLabel.TabIndex = 4;
-            this.HostLabel.Text = "Host";
+            this.studentIDDataGridViewTextBoxColumn.DataPropertyName = "StudentID";
+            this.studentIDDataGridViewTextBoxColumn.HeaderText = "StudentID";
+            this.studentIDDataGridViewTextBoxColumn.Name = "studentIDDataGridViewTextBoxColumn";
             // 
-            // PortLabel
+            // nameDataGridViewTextBoxColumn
             // 
-            this.PortLabel.AutoSize = true;
-            this.PortLabel.Location = new System.Drawing.Point(212, 18);
-            this.PortLabel.Name = "PortLabel";
-            this.PortLabel.Size = new System.Drawing.Size(27, 12);
-            this.PortLabel.TabIndex = 5;
-            this.PortLabel.Text = "Port";
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             // 
-            // ServerDetailGroupBox
+            // departmentDataGridViewTextBoxColumn
             // 
-            this.ServerDetailGroupBox.Controls.Add(this.PortTextBox);
-            this.ServerDetailGroupBox.Controls.Add(this.HostLabel);
-            this.ServerDetailGroupBox.Controls.Add(this.PortLabel);
-            this.ServerDetailGroupBox.Controls.Add(this.HostTextBox);
-            this.ServerDetailGroupBox.Location = new System.Drawing.Point(12, 12);
-            this.ServerDetailGroupBox.Name = "ServerDetailGroupBox";
-            this.ServerDetailGroupBox.Size = new System.Drawing.Size(340, 44);
-            this.ServerDetailGroupBox.TabIndex = 7;
-            this.ServerDetailGroupBox.TabStop = false;
-            this.ServerDetailGroupBox.Text = "Server Details";
+            this.departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
+            this.departmentDataGridViewTextBoxColumn.HeaderText = "Department";
+            this.departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
             // 
-            // SendButton
+            // phoneNumberDataGridViewTextBoxColumn
             // 
-            this.SendButton.Location = new System.Drawing.Point(713, 417);
-            this.SendButton.Name = "SendButton";
-            this.SendButton.Size = new System.Drawing.Size(75, 23);
-            this.SendButton.TabIndex = 8;
-            this.SendButton.Text = "Send";
-            this.SendButton.UseVisualStyleBackColor = true;
+            this.phoneNumberDataGridViewTextBoxColumn.DataPropertyName = "PhoneNumber";
+            this.phoneNumberDataGridViewTextBoxColumn.HeaderText = "PhoneNumber";
+            this.phoneNumberDataGridViewTextBoxColumn.Name = "phoneNumberDataGridViewTextBoxColumn";
             // 
-            // ServerStartButton
+            // isAdministratorDataGridViewCheckBoxColumn
             // 
-            this.ServerStartButton.Location = new System.Drawing.Point(611, 12);
-            this.ServerStartButton.Name = "ServerStartButton";
-            this.ServerStartButton.Size = new System.Drawing.Size(177, 44);
-            this.ServerStartButton.TabIndex = 9;
-            this.ServerStartButton.Text = "Server Start";
-            this.ServerStartButton.UseVisualStyleBackColor = true;
+            this.isAdministratorDataGridViewCheckBoxColumn.DataPropertyName = "isAdministrator";
+            this.isAdministratorDataGridViewCheckBoxColumn.HeaderText = "isAdministrator";
+            this.isAdministratorDataGridViewCheckBoxColumn.Name = "isAdministratorDataGridViewCheckBoxColumn";
             // 
-            // Server
+            // dataSetBindingSource
+            // 
+            this.dataSetBindingSource.DataSource = this.dataSet;
+            this.dataSetBindingSource.Position = 0;
+            // 
+            // dataSet
+            // 
+            this.dataSet.DataSetName = "DataSet";
+            this.dataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // cbTable
+            // 
+            this.cbTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTable.Location = new System.Drawing.Point(440, 29);
+            this.cbTable.Name = "cbTable";
+            this.cbTable.Size = new System.Drawing.Size(153, 20);
+            this.cbTable.TabIndex = 11;
+            this.cbTable.SelectedIndexChanged += new System.EventHandler(this.cbTable_SelectedIndexChanged);
+            // 
+            // lblTable
+            // 
+            this.lblTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTable.AutoSize = true;
+            this.lblTable.Location = new System.Drawing.Point(393, 32);
+            this.lblTable.Name = "lblTable";
+            this.lblTable.Size = new System.Drawing.Size(41, 12);
+            this.lblTable.TabIndex = 12;
+            this.lblTable.Text = "Table:";
+            // 
+            // wfServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ServerStartButton);
-            this.Controls.Add(this.SendButton);
-            this.Controls.Add(this.ServerDetailGroupBox);
-            this.Controls.Add(this.ServerLogTextBox);
-            this.Controls.Add(this.ControlTextBox);
-            this.Name = "Server";
+            this.ClientSize = new System.Drawing.Size(605, 356);
+            this.Controls.Add(this.lblTable);
+            this.Controls.Add(this.cbTable);
+            this.Controls.Add(this.dgvTable);
+            this.Controls.Add(this.gbDetail);
+            this.Name = "wfServer";
             this.Text = "옥황상제 서버";
-            this.ServerDetailGroupBox.ResumeLayout(false);
-            this.ServerDetailGroupBox.PerformLayout();
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.wfServer_FormClosed);
+            this.Load += new System.EventHandler(this.wfServer_Load);
+            this.gbDetail.ResumeLayout(false);
+            this.gbDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox ControlTextBox;
-        private System.Windows.Forms.RichTextBox ServerLogTextBox;
-        private System.Windows.Forms.TextBox PortTextBox;
-        private System.Windows.Forms.TextBox HostTextBox;
-        private System.Windows.Forms.Label HostLabel;
-        private System.Windows.Forms.Label PortLabel;
-        private System.Windows.Forms.GroupBox ServerDetailGroupBox;
-        private System.Windows.Forms.Button SendButton;
-        private System.Windows.Forms.Button ServerStartButton;
+        private System.Windows.Forms.Label lblHost;
+        private System.Windows.Forms.Label lblPort;
+        private System.Windows.Forms.GroupBox gbDetail;
+        private System.Windows.Forms.DataGridView dgvTable;
+        private System.Windows.Forms.BindingSource dataSetBindingSource;
+        private Database.DataSet dataSet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn studentIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isAdministratorDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.Label lblTable;
+        private System.Windows.Forms.ComboBox cbTable;
     }
 }
 
