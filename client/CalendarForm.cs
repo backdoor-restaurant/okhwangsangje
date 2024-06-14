@@ -1,4 +1,6 @@
-﻿using System;
+﻿using commons.Table;
+using commons.VirtualDB;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,32 +16,16 @@ namespace client
     public partial class CalendarForm : Form
     {
         public Form parent;
-        public class CalData
+        public ScheduleVT vtable;
+        private static readonly LoginInfo admin = new LoginInfo()
         {
-            //"2024-4-5"
-            public string YMD;
-            public List<CalMemo> memos;
-            public CalData(string yMD, List<CalMemo> memos)
-            {
-                YMD = yMD;
-                this.memos = memos;
-            }
-        }
-        public class CalMemo
-        {
-            public string title;
-            public string content;
-            public CalMemo(string title, string content)
-            {
-                this.title = title;
-                this.content = content;
-            }
-        }
+            studentId = "0",
+            password = "secret1234"
+        };
 
         private LoginForm.Mode mode;
         private DateTime date;
         private DayDetailForm selectDay;
-        public Dictionary<string, CalData> dicDays = new Dictionary<string, CalData>();
         public CalendarForm(LoginForm.Mode mode)
         {
             this.mode = mode;
@@ -53,10 +39,8 @@ namespace client
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            List<CalMemo> list = new List<CalMemo>();
-            list.Add(new CalMemo("정기 활 쏘기","인원수 : 5\r\n장소:공원"));
-            list.Add(new CalMemo("활 교육", "인원수 : 5\r\n장소:공원"));
-            dicDays["2024-5-3"] = new CalData("2024-5-3",list);
+            vtable = new ScheduleVT();
+            vtable.signin(admin);
             displayDays();
         }
 

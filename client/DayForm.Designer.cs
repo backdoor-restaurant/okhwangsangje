@@ -44,6 +44,7 @@
             this.lbDay.TabIndex = 0;
             this.lbDay.Text = "0";
             this.lbDay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbDay.Click += new System.EventHandler(this.lbDay_Click);
             // 
             // tbDayMemo
             // 
@@ -58,6 +59,7 @@
             this.tbDayMemo.Size = new System.Drawing.Size(152, 89);
             this.tbDayMemo.TabIndex = 1;
             this.tbDayMemo.WordWrap = false;
+            this.tbDayMemo.TextChanged += new System.EventHandler(this.tbDayMemo_TextChanged);
             this.tbDayMemo.DoubleClick += new System.EventHandler(this.tbDayMemo_DoubleClick);
             // 
             // DayForm

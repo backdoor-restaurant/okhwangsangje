@@ -92,5 +92,10 @@ namespace client
         {
             ShowEquipStatus();
         }
+
+        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
     }
 }
