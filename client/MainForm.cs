@@ -26,7 +26,9 @@ namespace client
 
         private void ShowCalendar()
         {
-            if(child != null)
+            calBar.Visible = true;
+            equipBar.Visible = false;
+            if (child != null)
                 child.Close();
             this.Controls.Remove(child);
 
@@ -39,6 +41,8 @@ namespace client
         }
         private void ShowEquip()
         {
+            calBar.Visible = false;
+            equipBar.Visible = true;
             if (child != null)
                 child.Close();
             this.Controls.Remove(child);
@@ -63,20 +67,26 @@ namespace client
             child.AutoScroll = false;
             child.Location = new Point(25, 0);
         }
-        private void CalendarBtn_Click(object sender, EventArgs e)
-        {
-            ShowCalendar();
-        }
-
-        private void EquipBtn_Click(object sender, EventArgs e)
-        {
-            ShowEquip();
-        }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (child != null)
                 child.Close();
+        }
+
+        private void equipBtn_Click(object sender, EventArgs e)
+        {
+            ShowEquip();
+        }
+
+        private void calBtn_Click(object sender, EventArgs e)
+        {
+            ShowCalendar();
+        }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void EquipStatusBtn_Click(object sender, EventArgs e)

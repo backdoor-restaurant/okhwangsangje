@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet" targetNamespace="http://tempuri.org/DataSet.xsd" xmlns:mstns="http://tempuri.org/DataSet.xsd" xmlns="http://tempuri.org/DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSet" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="LoginInfo" msprop:Generator_RowEvHandlerName="LoginInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="LoginInfoRowDeleted" msprop:Generator_RowDeletingName="LoginInfoRowDeleting" msprop:Generator_RowEvArgName="LoginInfoRowChangeEvent" msprop:Generator_TablePropName="LoginInfo" msprop:Generator_RowChangedName="LoginInfoRowChanged" msprop:Generator_UserTableName="LoginInfo" msprop:Generator_RowChangingName="LoginInfoRowChanging" msprop:Generator_RowClassName="LoginInfoRow" msprop:Generator_TableClassName="LoginInfoDataTable" msprop:Generator_TableVarName="tableLoginInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StudentID" msprop:Generator_ColumnPropNameInTable="StudentIDColumn" msprop:Generator_ColumnPropNameInRow="StudentID" msprop:Generator_UserColumnName="StudentID" msprop:Generator_ColumnVarNameInTable="columnStudentID" type="xs:string" />
+              <xs:element name="Password" msprop:Generator_ColumnPropNameInTable="PasswordColumn" msprop:Generator_ColumnPropNameInRow="Password" msprop:Generator_UserColumnName="Password" msprop:Generator_ColumnVarNameInTable="columnPassword" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MemberInfo" msprop:Generator_RowEvHandlerName="MemberInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="MemberInfoRowDeleted" msprop:Generator_RowDeletingName="MemberInfoRowDeleting" msprop:Generator_RowEvArgName="MemberInfoRowChangeEvent" msprop:Generator_TablePropName="MemberInfo" msprop:Generator_RowChangedName="MemberInfoRowChanged" msprop:Generator_UserTableName="MemberInfo" msprop:Generator_RowChangingName="MemberInfoRowChanging" msprop:Generator_RowClassName="MemberInfoRow" msprop:Generator_TableClassName="MemberInfoDataTable" msprop:Generator_TableVarName="tableMemberInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StudentID" msprop:Generator_ColumnPropNameInTable="StudentIDColumn" msprop:Generator_ColumnPropNameInRow="StudentID" msprop:Generator_UserColumnName="StudentID" msprop:Generator_ColumnVarNameInTable="columnStudentID" type="xs:string" />
+              <xs:element name="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnVarNameInTable="columnName" type="xs:string" />
+              <xs:element name="Department" msprop:Generator_ColumnPropNameInTable="DepartmentColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Department" msprop:Generator_UserColumnName="Department" msprop:Generator_ColumnVarNameInTable="columnDepartment" type="xs:string" minOccurs="0" />
+              <xs:element name="PhoneNumber" msprop:Generator_ColumnPropNameInTable="PhoneNumberColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="PhoneNumber" msprop:Generator_UserColumnName="PhoneNumber" msprop:Generator_ColumnVarNameInTable="columnPhoneNumber" type="xs:string" minOccurs="0" />
+              <xs:element name="isAdministrator" msprop:Generator_ColumnPropNameInTable="isAdministratorColumn" msprop:nullValue="false" msprop:Generator_ColumnPropNameInRow="isAdministrator" msprop:Generator_UserColumnName="isAdministrator" msprop:Generator_ColumnVarNameInTable="columnisAdministrator" type="xs:boolean" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ItemInfo" msprop:Generator_RowEvHandlerName="ItemInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="ItemInfoRowDeleted" msprop:Generator_RowDeletingName="ItemInfoRowDeleting" msprop:Generator_RowEvArgName="ItemInfoRowChangeEvent" msprop:Generator_TablePropName="ItemInfo" msprop:Generator_RowChangedName="ItemInfoRowChanged" msprop:Generator_UserTableName="ItemInfo" msprop:Generator_RowChangingName="ItemInfoRowChanging" msprop:Generator_RowClassName="ItemInfoRow" msprop:Generator_TableClassName="ItemInfoDataTable" msprop:Generator_TableVarName="tableItemInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItemName" msprop:Generator_ColumnPropNameInTable="ItemNameColumn" msprop:Generator_ColumnPropNameInRow="ItemName" msprop:Generator_UserColumnName="ItemName" msprop:Generator_ColumnVarNameInTable="columnItemName" type="xs:string" />
+              <xs:element name="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_UserColumnName="amount" msprop:Generator_ColumnVarNameInTable="columnamount" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LentInfo" msprop:Generator_RowEvHandlerName="LentInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="LentInfoRowDeleted" msprop:Generator_RowDeletingName="LentInfoRowDeleting" msprop:Generator_RowEvArgName="LentInfoRowChangeEvent" msprop:Generator_TablePropName="LentInfo" msprop:Generator_RowChangedName="LentInfoRowChanged" msprop:Generator_UserTableName="LentInfo" msprop:Generator_RowChangingName="LentInfoRowChanging" msprop:Generator_RowClassName="LentInfoRow" msprop:Generator_TableClassName="LentInfoDataTable" msprop:Generator_TableVarName="tableLentInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ItemName" msprop:Generator_ColumnPropNameInTable="ItemNameColumn" msprop:Generator_ColumnPropNameInRow="ItemName" msprop:Generator_UserColumnName="ItemName" msprop:Generator_ColumnVarNameInTable="columnItemName" type="xs:string" />
+              <xs:element name="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_UserColumnName="amount" msprop:Generator_ColumnVarNameInTable="columnamount" type="xs:int" />
+              <xs:element name="StudentID" msprop:Generator_ColumnPropNameInTable="StudentIDColumn" msprop:Generator_ColumnPropNameInRow="StudentID" msprop:Generator_UserColumnName="StudentID" msprop:Generator_ColumnVarNameInTable="columnStudentID" type="xs:string" />
+              <xs:element name="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_UserColumnName="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ScheduleInfo" msprop:Generator_RowEvHandlerName="ScheduleInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="ScheduleInfoRowDeleted" msprop:Generator_RowDeletingName="ScheduleInfoRowDeleting" msprop:Generator_RowEvArgName="ScheduleInfoRowChangeEvent" msprop:Generator_TablePropName="ScheduleInfo" msprop:Generator_RowChangedName="ScheduleInfoRowChanged" msprop:Generator_UserTableName="ScheduleInfo" msprop:Generator_RowChangingName="ScheduleInfoRowChanging" msprop:Generator_RowClassName="ScheduleInfoRow" msprop:Generator_TableClassName="ScheduleInfoDataTable" msprop:Generator_TableVarName="tableScheduleInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_UserColumnName="Date" msprop:Generator_ColumnVarNameInTable="columnDate" type="xs:string" />
+              <xs:element name="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_UserColumnName="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" type="xs:string" />
+              <xs:element name="Content" msprop:Generator_ColumnPropNameInTable="ContentColumn" msprop:Generator_ColumnPropNameInRow="Content" msprop:Generator_UserColumnName="Content" msprop:Generator_ColumnVarNameInTable="columnContent" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:LoginInfo" />
+      <xs:field xpath="mstns:StudentID" />
+    </xs:unique>
+    <xs:unique name="MemberInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MemberInfo" />
+      <xs:field xpath="mstns:StudentID" />
+    </xs:unique>
+    <xs:unique name="ItemInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ItemInfo" />
+      <xs:field xpath="mstns:ItemName" />
+    </xs:unique>
+    <xs:unique name="LentInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:LentInfo" />
+      <xs:field xpath="mstns:ItemName" />
+      <xs:field xpath="mstns:StudentID" />
+    </xs:unique>
+    <xs:unique name="ScheduleInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ScheduleInfo" />
+      <xs:field xpath="mstns:Date" />
+      <xs:field xpath="mstns:Title" />
+    </xs:unique>
+    <xs:keyref name="FK_ItemInfo_LentInfo" refer="ItemInfo_Constraint1" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:LentInfo" />
+      <xs:field xpath="mstns:ItemName" />
+    </xs:keyref>
+    <xs:keyref name="FK_MemberInfo_LentInfo" refer="MemberInfo_Constraint1" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:LentInfo" />
+      <xs:field xpath="mstns:StudentID" />
+    </xs:keyref>
+    <xs:keyref name="FK_MemberInfo_LoginInfo" refer="MemberInfo_Constraint1" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:LoginInfo" />
+      <xs:field xpath="mstns:StudentID" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

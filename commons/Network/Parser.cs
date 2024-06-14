@@ -34,14 +34,4 @@ namespace commons.Network
             return (T)(new BinaryFormatter()).Deserialize(mstream);
         }
     }
-
-    public static class PacketParser
-    {
-        public static T parse<T>(Request request)
-            => Parser.parse<T>(request.payload);
-        public static string parse(Request request)
-            => Parser.parse<string>(request.payload);
-        public static T parse<T>(Response response)
-            => Parser.parse<T>(response.payload);
-    }
 }
