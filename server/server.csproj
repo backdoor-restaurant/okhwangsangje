@@ -131,7 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\Dummy.xml" />
-    <Content Include="Database\DummyBackup.xml" />
     <Content Include="Database\Result.xml" />
   </ItemGroup>
   <ItemGroup>
