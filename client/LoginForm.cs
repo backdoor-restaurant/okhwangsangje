@@ -118,6 +118,8 @@ namespace client
                 MessageBox.Show("중간에 데이터가 바뀌는 등 말도 안되는 일이 일어났습니다.", "ID/PW Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+
             // 사용자 이름 == userName
             MainForm newForm = new MainForm();
             // 현재 폼 닫기

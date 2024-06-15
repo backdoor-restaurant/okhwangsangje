@@ -78,6 +78,7 @@
             // 
             this.LoginUIpwtxtBox.Location = new System.Drawing.Point(499, 309);
             this.LoginUIpwtxtBox.Name = "LoginUIpwtxtBox";
+            this.LoginUIpwtxtBox.PasswordChar = '*';
             this.LoginUIpwtxtBox.Size = new System.Drawing.Size(167, 21);
             this.LoginUIpwtxtBox.TabIndex = 6;
             // 
