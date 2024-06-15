@@ -54,17 +54,16 @@ namespace client
             if (!isValidData())
             {
                 MessageBox.Show("입력 값이 잘못되었습니다", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
                 return;
             }
             if(!send(IDTxtBox.Text, PWTxtBox.Text, nameTxtBox.Text, phoneTxtBox.Text, departmentTxtBox.Text))
             {
                 MessageBox.Show("이미 가입되어 있는 회원입니다", "sign Up Error", MessageBoxButtons.OK);
-                this.Close();
                 return;
             }
             send(IDTxtBox.Text, PWTxtBox.Text, nameTxtBox.Text, phoneTxtBox.Text, departmentTxtBox.Text);
             MessageBox.Show("회원가입 성공", "Success", MessageBoxButtons.OK);
+            this.Close();
         }
 
         private void closeBtn_Click(object sender, EventArgs e)
