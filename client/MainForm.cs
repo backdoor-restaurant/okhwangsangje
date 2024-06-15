@@ -14,14 +14,19 @@ namespace client
     public partial class MainForm : Form
     {
         Form child;
-        public MainForm()
+        private string userName;
+        public MainForm(string userName)
         {
+            this.userName = userName;
+            if (userName == null) userName = "사용자";
+            
             InitializeComponent();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             ShowCalendar();
+            lbNickname.Text = userName;
         }
 
         private void ShowCalendar()

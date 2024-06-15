@@ -28,30 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LoginUIsigninBtn = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.LoginUIidtxtBox = new System.Windows.Forms.TextBox();
             this.LoginUIidLabel = new System.Windows.Forms.Label();
             this.LoginUIpasswordLabel = new System.Windows.Forms.Label();
             this.LoginUIpwtxtBox = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.LoginUIsignupBtn = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.회원가입 = new Guna.UI2.WinForms.Guna2Button();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
-            // 
-            // LoginUIsigninBtn
-            // 
-            this.LoginUIsigninBtn.Location = new System.Drawing.Point(682, 262);
-            this.LoginUIsigninBtn.Name = "LoginUIsigninBtn";
-            this.LoginUIsigninBtn.Size = new System.Drawing.Size(75, 75);
-            this.LoginUIsigninBtn.TabIndex = 2;
-            this.LoginUIsigninBtn.Text = "Login";
-            this.LoginUIsigninBtn.UseVisualStyleBackColor = true;
-            this.LoginUIsigninBtn.Click += new System.EventHandler(this.LoginUIsigninBtn_Click);
             // 
             // LoginUIidtxtBox
             // 
-            this.LoginUIidtxtBox.Location = new System.Drawing.Point(499, 257);
+            this.LoginUIidtxtBox.Location = new System.Drawing.Point(386, 123);
             this.LoginUIidtxtBox.Name = "LoginUIidtxtBox";
             this.LoginUIidtxtBox.Size = new System.Drawing.Size(167, 21);
             this.LoginUIidtxtBox.TabIndex = 3;
@@ -59,90 +49,106 @@
             // LoginUIidLabel
             // 
             this.LoginUIidLabel.AutoSize = true;
-            this.LoginUIidLabel.Location = new System.Drawing.Point(427, 262);
+            this.LoginUIidLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.LoginUIidLabel.ForeColor = System.Drawing.Color.White;
+            this.LoginUIidLabel.Location = new System.Drawing.Point(291, 122);
             this.LoginUIidLabel.Name = "LoginUIidLabel";
-            this.LoginUIidLabel.Size = new System.Drawing.Size(29, 12);
+            this.LoginUIidLabel.Size = new System.Drawing.Size(50, 25);
             this.LoginUIidLabel.TabIndex = 4;
             this.LoginUIidLabel.Text = "학번";
             // 
             // LoginUIpasswordLabel
             // 
             this.LoginUIpasswordLabel.AutoSize = true;
-            this.LoginUIpasswordLabel.Location = new System.Drawing.Point(413, 312);
+            this.LoginUIpasswordLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.LoginUIpasswordLabel.ForeColor = System.Drawing.Color.White;
+            this.LoginUIpasswordLabel.Location = new System.Drawing.Point(275, 176);
             this.LoginUIpasswordLabel.Name = "LoginUIpasswordLabel";
-            this.LoginUIpasswordLabel.Size = new System.Drawing.Size(53, 12);
+            this.LoginUIpasswordLabel.Size = new System.Drawing.Size(88, 25);
             this.LoginUIpasswordLabel.TabIndex = 5;
             this.LoginUIpasswordLabel.Text = "비밀번호";
             // 
             // LoginUIpwtxtBox
             // 
-            this.LoginUIpwtxtBox.Location = new System.Drawing.Point(499, 309);
+            this.LoginUIpwtxtBox.Location = new System.Drawing.Point(386, 176);
             this.LoginUIpwtxtBox.Name = "LoginUIpwtxtBox";
             this.LoginUIpwtxtBox.PasswordChar = '*';
             this.LoginUIpwtxtBox.Size = new System.Drawing.Size(167, 21);
             this.LoginUIpwtxtBox.TabIndex = 6;
             // 
-            // pictureBox1
+            // pictureBox2
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(430, 172);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(327, 64);
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(28, 29);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(196, 294);
+            this.pictureBox2.TabIndex = 9;
+            this.pictureBox2.TabStop = false;
             // 
-            // LoginUIsignupBtn
+            // guna2Button1
             // 
-            this.LoginUIsignupBtn.Location = new System.Drawing.Point(511, 367);
-            this.LoginUIsignupBtn.Name = "LoginUIsignupBtn";
-            this.LoginUIsignupBtn.Size = new System.Drawing.Size(155, 23);
-            this.LoginUIsignupBtn.TabIndex = 8;
-            this.LoginUIsignupBtn.Text = "회원가입";
-            this.LoginUIsignupBtn.UseVisualStyleBackColor = true;
-            this.LoginUIsignupBtn.Click += new System.EventHandler(this.LoginUIsignupBtn_Click);
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.White;
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.Location = new System.Drawing.Point(589, 122);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(90, 75);
+            this.guna2Button1.TabIndex = 10;
+            this.guna2Button1.Text = "로그인";
+            this.guna2Button1.Click += new System.EventHandler(this.LoginUIsigninBtn_Click);
             // 
-            // button2
+            // 회원가입
             // 
-            this.button2.Location = new System.Drawing.Point(470, 175);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(52, 15);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Login";
-            this.button2.UseVisualStyleBackColor = true;
+            this.회원가입.BackColor = System.Drawing.Color.White;
+            this.회원가입.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.회원가입.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.회원가입.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.회원가입.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.회원가입.FillColor = System.Drawing.Color.White;
+            this.회원가입.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.회원가입.ForeColor = System.Drawing.Color.Black;
+            this.회원가입.Location = new System.Drawing.Point(386, 225);
+            this.회원가입.Name = "회원가입";
+            this.회원가입.Size = new System.Drawing.Size(167, 26);
+            this.회원가입.TabIndex = 11;
+            this.회원가입.Text = "회원가입";
+            this.회원가입.Click += new System.EventHandler(this.LoginUIsignupBtn_Click);
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1143, 675);
-            this.Controls.Add(this.LoginUIsignupBtn);
-            this.Controls.Add(this.pictureBox1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(43)))), ((int)(((byte)(60)))));
+            this.ClientSize = new System.Drawing.Size(713, 365);
+            this.Controls.Add(this.회원가입);
+            this.Controls.Add(this.guna2Button1);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.LoginUIpwtxtBox);
             this.Controls.Add(this.LoginUIpasswordLabel);
             this.Controls.Add(this.LoginUIidLabel);
             this.Controls.Add(this.LoginUIidtxtBox);
-            this.Controls.Add(this.LoginUIsigninBtn);
-            this.Controls.Add(this.button2);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "LoginForm";
             this.Text = "Login";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button LoginUIsigninBtn;
         private System.Windows.Forms.TextBox LoginUIidtxtBox;
         private System.Windows.Forms.Label LoginUIidLabel;
         private System.Windows.Forms.Label LoginUIpasswordLabel;
         private System.Windows.Forms.TextBox LoginUIpwtxtBox;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button LoginUIsignupBtn;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button 회원가입;
     }
 }
 
