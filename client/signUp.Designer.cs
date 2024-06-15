@@ -38,13 +38,17 @@
             this.phoneTxtBox = new System.Windows.Forms.TextBox();
             this.signUpBtn = new System.Windows.Forms.Button();
             this.closeBtn = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.PWTxtBoxRe = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.departmentTxtBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label1.Location = new System.Drawing.Point(76, 71);
+            this.label1.Location = new System.Drawing.Point(76, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 0;
@@ -54,7 +58,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label2.Location = new System.Drawing.Point(61, 112);
+            this.label2.Location = new System.Drawing.Point(61, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 12);
             this.label2.TabIndex = 1;
@@ -64,7 +68,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label3.Location = new System.Drawing.Point(76, 155);
+            this.label3.Location = new System.Drawing.Point(76, 151);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 2;
@@ -74,7 +78,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label4.Location = new System.Drawing.Point(65, 197);
+            this.label4.Location = new System.Drawing.Point(61, 185);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 3;
@@ -82,7 +86,7 @@
             // 
             // IDTxtBox
             // 
-            this.IDTxtBox.Location = new System.Drawing.Point(168, 68);
+            this.IDTxtBox.Location = new System.Drawing.Point(168, 39);
             this.IDTxtBox.Name = "IDTxtBox";
             this.IDTxtBox.Size = new System.Drawing.Size(134, 21);
             this.IDTxtBox.TabIndex = 4;
@@ -90,7 +94,7 @@
             // 
             // PWTxtBox
             // 
-            this.PWTxtBox.Location = new System.Drawing.Point(168, 112);
+            this.PWTxtBox.Location = new System.Drawing.Point(168, 77);
             this.PWTxtBox.Name = "PWTxtBox";
             this.PWTxtBox.PasswordChar = '*';
             this.PWTxtBox.Size = new System.Drawing.Size(134, 21);
@@ -98,14 +102,14 @@
             // 
             // nameTxtBox
             // 
-            this.nameTxtBox.Location = new System.Drawing.Point(168, 151);
+            this.nameTxtBox.Location = new System.Drawing.Point(168, 148);
             this.nameTxtBox.Name = "nameTxtBox";
             this.nameTxtBox.Size = new System.Drawing.Size(134, 21);
             this.nameTxtBox.TabIndex = 6;
             // 
             // phoneTxtBox
             // 
-            this.phoneTxtBox.Location = new System.Drawing.Point(168, 191);
+            this.phoneTxtBox.Location = new System.Drawing.Point(168, 183);
             this.phoneTxtBox.Name = "phoneTxtBox";
             this.phoneTxtBox.Size = new System.Drawing.Size(134, 21);
             this.phoneTxtBox.TabIndex = 7;
@@ -131,11 +135,51 @@
             this.closeBtn.UseVisualStyleBackColor = true;
             this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label5.Location = new System.Drawing.Point(43, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(102, 12);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Password 재확인";
+            // 
+            // PWTxtBoxRe
+            // 
+            this.PWTxtBoxRe.Location = new System.Drawing.Point(168, 111);
+            this.PWTxtBoxRe.Name = "PWTxtBoxRe";
+            this.PWTxtBoxRe.PasswordChar = '*';
+            this.PWTxtBoxRe.Size = new System.Drawing.Size(134, 21);
+            this.PWTxtBoxRe.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label6.Location = new System.Drawing.Point(76, 219);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "학과";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // departmentTxtBox
+            // 
+            this.departmentTxtBox.Location = new System.Drawing.Point(168, 216);
+            this.departmentTxtBox.Name = "departmentTxtBox";
+            this.departmentTxtBox.Size = new System.Drawing.Size(134, 21);
+            this.departmentTxtBox.TabIndex = 13;
+            // 
             // signUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(371, 322);
+            this.Controls.Add(this.departmentTxtBox);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.PWTxtBoxRe);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.signUpBtn);
             this.Controls.Add(this.phoneTxtBox);
@@ -165,5 +209,9 @@
         private System.Windows.Forms.TextBox phoneTxtBox;
         private System.Windows.Forms.Button signUpBtn;
         private System.Windows.Forms.Button closeBtn;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox PWTxtBoxRe;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox departmentTxtBox;
     }
 }

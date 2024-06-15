@@ -97,5 +97,10 @@ namespace client
         {
 
         }
+
+        private void lbNickname_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

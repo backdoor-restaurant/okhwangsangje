@@ -1,4 +1,7 @@
-﻿using System;
+﻿using commons.Table;
+using commons.VirtualDB;
+using System.Threading;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +15,12 @@ namespace client
 {
     public partial class LoginForm : Form
     {
+        private static readonly LoginInfo admin = new LoginInfo()
+        {
+            studentId = "0",
+            password = "secret1234"
+        };
+
         public enum Mode
         {
             User = 0,
@@ -56,44 +65,75 @@ namespace client
 
         private bool isValidDataUser(string id, string pw)
         {
-            if(id == ""||pw == "")
+            // false가 아니라 -1을 돌려줘서 입력안했다고 해야하나.
+            return !(id == "" || pw == "");
+        }
+        private bool signIn(string id, string pw)
+        {
+            // 회원가입부터 완성해야 한다. // 회원가입에 있는 data를 찾는거다.  
+            // 만약 ID가 있다면, 안에서 그리고 PW가 같다면 true;
+
+            var vtable = new LoginVT();
+            vtable.signin(admin);
+
+            var tryUser = new LoginInfo() { studentId = id, password = pw };
+            var key = tryUser.getKey();
+            var login_result = vtable.read(key, out LoginInfo login);
+            if (!login_result)
             {
+                // table에 없음
                 return false;
             }
-            if (true)
-            {
-                // 데이터베이스
-                return true;
-            }
-            return false;
+
+            return true;
+        }
+        private string findUserName(string id)
+        {
+            var vtable = new MemberVT();
+            vtable.signin(admin);
+
+            var key = (MemberInfoKey)id;
+            var find_result = vtable.read(key, out MemberInfo member);
+            if(!find_result) { return ""; }
+            return member.name;
         }
         private void LoginUIsigninBtn_Click(object sender, EventArgs e)
         {
             string userId = this.LoginUIidtxtBox.Text;
             string userPw = this.LoginUIpwtxtBox.Text;
             
-            // 함수명에 대해 기준을 세우는 회의가 필요할 듯
-            if (isValidDataUser(userId, userPw))
+            if (!isValidDataUser(userId, userPw))
             {
-                MainForm newForm = new MainForm();
-                // 현재 폼 닫기
-                this.Hide();
-                // 새로운 폼 표시
-                newForm.ShowDialog();
-                // 새로운 폼이 닫히면 현재 폼 다시 보이기
-                this.Show();
-                MessageBox.Show("test Login sucesss");
+                MessageBox.Show("ID, PASSWORD를 전부 입력해주세요.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+            if (!signIn(userId, userPw))
             {
-                MessageBox.Show("test Login fail");
+                MessageBox.Show("ID, PASSWORD가 일치하지 않습니다.", "ID/PW Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            string userName = findUserName(userId); 
+            if(userName == "")
+            {
+                MessageBox.Show("중간에 데이터가 바뀌는 등 말도 안되는 일이 일어났습니다.", "ID/PW Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            // 사용자 이름 == userName
+            MainForm newForm = new MainForm();
+            // 현재 폼 닫기
+            this.Hide();
+            // 새로운 폼 표시
+            newForm.ShowDialog();
+            // 새로운 폼이 닫히면 현재 폼 다시 보이기
+            this.Show();
 
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            // 사진을 넣을 것
+            // 사진을 넣을 것 사진은 구했다.
         }
 
         private void LoginUIsignupBtn_Click(object sender, EventArgs e)
