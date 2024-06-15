@@ -129,6 +129,7 @@
             this.lbNickname.Size = new System.Drawing.Size(69, 19);
             this.lbNickname.TabIndex = 17;
             this.lbNickname.Text = "김석희님";
+            this.lbNickname.Click += new System.EventHandler(this.lbNickname_Click);
             // 
             // exitBtn
             // 
