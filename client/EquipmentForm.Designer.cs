@@ -30,8 +30,6 @@
         {
             this.equipView = new System.Windows.Forms.ListView();
             this.Equipment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Pound = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Number = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pieces = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.AddBtn = new System.Windows.Forms.Button();
             this.DelBtn = new System.Windows.Forms.Button();
@@ -39,8 +37,6 @@
             this.ReturnBtn = new System.Windows.Forms.Button();
             this.rentView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -50,9 +46,7 @@
             // 
             this.equipView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Equipment,
-            this.Pound,
-            this.Pieces,
-            this.Number});
+            this.Pieces});
             this.equipView.HideSelection = false;
             this.equipView.Location = new System.Drawing.Point(12, 294);
             this.equipView.Name = "equipView";
@@ -65,15 +59,6 @@
             // 
             this.Equipment.DisplayIndex = 1;
             this.Equipment.Text = "장비";
-            // 
-            // Pound
-            // 
-            this.Pound.DisplayIndex = 0;
-            this.Pound.Text = "파운드";
-            // 
-            // Number
-            // 
-            this.Number.Text = "넘버";
             // 
             // Pieces
             // 
@@ -124,8 +109,6 @@
             // 
             this.rentView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
             this.columnHeader4});
             this.rentView.HideSelection = false;
             this.rentView.Location = new System.Drawing.Point(12, 89);
@@ -141,17 +124,6 @@
             this.columnHeader1.Text = "장비";
             this.columnHeader1.Width = 114;
             // 
-            // columnHeader2
-            // 
-            this.columnHeader2.DisplayIndex = 0;
-            this.columnHeader2.Text = "파운드";
-            this.columnHeader2.Width = 75;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "넘버";
-            this.columnHeader3.Width = 121;
-            // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "개수";
@@ -161,6 +133,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Dotum", 15F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.Location = new System.Drawing.Point(10, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 20);
@@ -171,6 +144,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Dotum", 15F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label2.Location = new System.Drawing.Point(10, 246);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 20);
@@ -181,7 +155,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(43)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(1145, 688);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -203,9 +177,7 @@
         #endregion
 
         private System.Windows.Forms.ListView equipView;
-        private System.Windows.Forms.ColumnHeader Pound;
         private System.Windows.Forms.ColumnHeader Equipment;
-        private System.Windows.Forms.ColumnHeader Number;
         private System.Windows.Forms.ColumnHeader Pieces;
         private System.Windows.Forms.Button AddBtn;
         private System.Windows.Forms.Button DelBtn;
@@ -213,8 +185,6 @@
         private System.Windows.Forms.Button ReturnBtn;
         private System.Windows.Forms.ListView rentView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

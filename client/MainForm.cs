@@ -54,18 +54,6 @@ namespace client
             child.AutoScroll = false;
             child.Location = new Point(25, 0);
         }
-        private void ShowEquipStatus()
-        {
-            if (child != null)
-                child.Close();
-            this.Controls.Remove(child);
-            child = new EquipmentHistoryForm(Mode.Admin);
-            child.MdiParent = this;
-            child.Show();
-            (child as EquipmentHistoryForm).parent = this;
-            child.AutoScroll = false;
-            child.Location = new Point(25, 0);
-        }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -88,9 +76,5 @@ namespace client
             Close();
         }
 
-        private void EquipStatusBtn_Click(object sender, EventArgs e)
-        {
-            ShowEquipStatus();
-        }
     }
 }

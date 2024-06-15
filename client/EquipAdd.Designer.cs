@@ -28,44 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.tbxName = new System.Windows.Forms.TextBox();
+            this.tbxCount = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.파운드 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
-            // textBox1
+            // tbxName
             // 
-            this.textBox1.Location = new System.Drawing.Point(106, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(208, 21);
-            this.textBox1.TabIndex = 0;
+            this.tbxName.Location = new System.Drawing.Point(106, 32);
+            this.tbxName.Name = "tbxName";
+            this.tbxName.Size = new System.Drawing.Size(208, 21);
+            this.tbxName.TabIndex = 0;
             // 
-            // textBox2
+            // tbxCount
             // 
-            this.textBox2.Location = new System.Drawing.Point(106, 59);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(208, 21);
-            this.textBox2.TabIndex = 1;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(106, 86);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(208, 21);
-            this.textBox3.TabIndex = 2;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(106, 113);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(208, 21);
-            this.textBox4.TabIndex = 3;
+            this.tbxCount.Location = new System.Drawing.Point(106, 59);
+            this.tbxCount.Name = "tbxCount";
+            this.tbxCount.Size = new System.Drawing.Size(208, 21);
+            this.tbxCount.TabIndex = 2;
             // 
             // label1
             // 
@@ -76,56 +60,41 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "장비 이름";
             // 
-            // 파운드
-            // 
-            this.파운드.AutoSize = true;
-            this.파운드.Location = new System.Drawing.Point(29, 68);
-            this.파운드.Name = "파운드";
-            this.파운드.Size = new System.Drawing.Size(41, 12);
-            this.파운드.TabIndex = 5;
-            this.파운드.Text = "파운드";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 95);
+            this.label3.Location = new System.Drawing.Point(29, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 12);
             this.label3.TabIndex = 6;
             this.label3.Text = "개수";
             // 
-            // label4
+            // btnAdd
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(29, 122);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "넘버";
+            this.btnAdd.Location = new System.Drawing.Point(239, 96);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 8;
+            this.btnAdd.Text = "추가";
+            this.btnAdd.UseMnemonic = false;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // button1
+            // contextMenuStrip1
             // 
-            this.button1.Location = new System.Drawing.Point(234, 148);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "추가";
-            this.button1.UseVisualStyleBackColor = true;
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // EquipAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 183);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label4);
+            this.ClientSize = new System.Drawing.Size(326, 128);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.파운드);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbxCount);
+            this.Controls.Add(this.tbxName);
             this.Name = "EquipAdd";
             this.Text = "EquipAdd";
             this.ResumeLayout(false);
@@ -135,14 +104,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbxName;
+        private System.Windows.Forms.TextBox tbxCount;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label 파운드;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
