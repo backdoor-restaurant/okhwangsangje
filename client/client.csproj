@@ -87,6 +87,18 @@
       <DependentUpon>EquipmentHistoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Example.cs" />
+    <Compile Include="FindPWForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindPWForm.Designer.cs">
+      <DependentUpon>FindPWForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fixPWForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fixPWForm.Designer.cs">
+      <DependentUpon>fixPWForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +145,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EquipmentHistoryForm.resx">
       <DependentUpon>EquipmentHistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindPWForm.resx">
+      <DependentUpon>FindPWForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fixPWForm.resx">
+      <DependentUpon>fixPWForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

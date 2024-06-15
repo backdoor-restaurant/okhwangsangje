@@ -36,6 +36,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.회원가입 = new Guna.UI2.WinForms.Guna2Button();
+            this.findPWBtn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,12 +112,29 @@
             this.회원가입.FillColor = System.Drawing.Color.White;
             this.회원가입.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.회원가입.ForeColor = System.Drawing.Color.Black;
-            this.회원가입.Location = new System.Drawing.Point(386, 225);
+            this.회원가입.Location = new System.Drawing.Point(479, 225);
             this.회원가입.Name = "회원가입";
             this.회원가입.Size = new System.Drawing.Size(167, 26);
             this.회원가입.TabIndex = 11;
             this.회원가입.Text = "회원가입";
             this.회원가입.Click += new System.EventHandler(this.LoginUIsignupBtn_Click);
+            // 
+            // findPWBtn
+            // 
+            this.findPWBtn.BackColor = System.Drawing.Color.White;
+            this.findPWBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.findPWBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.findPWBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.findPWBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.findPWBtn.FillColor = System.Drawing.Color.White;
+            this.findPWBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.findPWBtn.ForeColor = System.Drawing.Color.Black;
+            this.findPWBtn.Location = new System.Drawing.Point(296, 225);
+            this.findPWBtn.Name = "findPWBtn";
+            this.findPWBtn.Size = new System.Drawing.Size(167, 26);
+            this.findPWBtn.TabIndex = 12;
+            this.findPWBtn.Text = "비밀번호 찾기";
+            this.findPWBtn.Click += new System.EventHandler(this.findPWBtn_Click);
             // 
             // LoginForm
             // 
@@ -125,6 +143,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(43)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(713, 365);
+            this.Controls.Add(this.findPWBtn);
             this.Controls.Add(this.회원가입);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.pictureBox2);
@@ -149,6 +168,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button 회원가입;
+        private Guna.UI2.WinForms.Guna2Button findPWBtn;
     }
 }
 

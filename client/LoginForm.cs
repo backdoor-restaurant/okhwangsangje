@@ -142,5 +142,11 @@ namespace client
             signupForm.ShowDialog();
 
         }
+
+        private void findPWBtn_Click(object sender, EventArgs e)
+        {
+            FindPW findPWform = new FindPW();
+            findPWform.ShowDialog();
+        }
     }
 }
