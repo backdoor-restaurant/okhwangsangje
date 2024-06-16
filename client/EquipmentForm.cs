@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using commons.Table;
 using commons.VirtualDB;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace client
@@ -27,6 +28,8 @@ namespace client
             studentId = "0",
             password = "secret1234"
         };
+        private LoginInfoKey loginKey;
+        private string userId;
 
         public class Equip
         {
@@ -45,9 +48,11 @@ namespace client
                 this.rentable = rentable;
             }
         }
-        public EquipmentForm(LoginForm.Mode mode)
+        public EquipmentForm(LoginForm.Mode mode, string userId)
         {
             this.mode = mode;
+            this.userId = userId;
+            loginKey = (LoginInfoKey)userId;
             InitializeComponent();
         }
 
@@ -81,6 +86,8 @@ namespace client
                     };
                     RentTable.create(rent);
                     lvi = (ListViewItem)selected.Clone();
+                    lvi.SubItems.Add(DateTime.Now.ToString("yyyyMMdd"));
+                    lvi.SubItems.Add(DateTime.Now.AddDays(7).ToString("yyyyMMdd"));
                     lvi.Tag = rent.getKey();
                     rentView.Items.Add(lvi);
                 }
@@ -93,6 +100,13 @@ namespace client
             {
                 if (equipView.Items[i].Selected)
                 {
+                    RentInfoKey rentKey = new RentInfoKey(equipView.Items[i].SubItems[0].Text, admin.studentId);
+                    bool result = RentTable.read(rentKey, out RentInfo item);
+                    if (result)
+                    {
+                        System.Windows.Forms.MessageBox.Show("대여중인 물품은 삭제 할 수 없습니다. 먼저 반납을 해주세요.");
+                        continue;
+                    }
                     ItemInfoKey key = (ItemInfoKey)equipView.Items[i].Tag;
                     ItemTable.delete(key);
                     equipView.Items[i].Remove();
@@ -118,41 +132,25 @@ namespace client
             RentTable = new LentInfoVT();
             RentTable.signin(admin);
 
-         //   var r_result = vtable.read(key, out ItemInfo item);
-           // Console.WriteLine($"Read Result: {r_result}, {item}");
 
-
-
+            RentTable.readFromStudentID(admin.studentId, out RentInfo[] info);
+            if (mode == LoginForm.Mode.User)
+            {
+                AddBtn.Visible = false;
+                DelBtn.Visible = false;
+            }
             ListViewItem lvi;
-            lvi = new ListViewItem(new string[] {"현무궁 25(중장)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 26","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 28 (중장)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 30 (1, 장궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 32(장궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 34","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 35 (1, 장궁) ","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 35 (2, 중장좌)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 35 (3)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 40 (1, 중궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 40 (2, 중궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"화살 대여용 빈 가방","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"활 운반 용 큰 가방","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"활 운반 용 배낭","1"});
-this.equipView.Items.Add(lvi);
-
+            foreach (var i in info)
+            {
+                lvi = new ListViewItem(new string[] { i.itemName, i.amount.ToString(), i.startDate });
+                rentView.Items.Add(lvi);
+            }
+            ItemTable.readAll(out ItemInfo[] items);
+            foreach (var i in items)
+            {
+                lvi = new ListViewItem(new string[] { i.itemName, i.amount });
+                equipView.Items.Add(lvi);
+            }
         }
     }
 }

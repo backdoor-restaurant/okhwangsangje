@@ -121,7 +121,7 @@ namespace client
 
 
             // 사용자 이름 == userName
-            MainForm newForm = new MainForm(userName);
+            MainForm newForm = new MainForm(userName, userId);
             // 현재 폼 닫기
             this.Hide();
             // 새로운 폼 표시
