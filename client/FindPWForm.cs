@@ -51,8 +51,8 @@ namespace client
             var Key = tryUser.getKey();
             var find_user = vtable.read(Key, out MemberInfo member);
             if (!find_user) return false;
-            return (member.studentId == id) ||
-                    (member.name == name) ||
+            return (member.studentId == id) &&
+                    (member.name == name) &&
                    (member.phoneNumber == phone);
         }
         private void signUpBtn_Click(object sender, EventArgs e)

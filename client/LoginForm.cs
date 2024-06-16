@@ -85,7 +85,7 @@ namespace client
                 return false;
             }
 
-            return true;
+            return login.password == pw;
         }
         private string findUserName(string id)
         {
