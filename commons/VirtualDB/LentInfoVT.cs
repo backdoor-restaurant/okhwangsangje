@@ -5,16 +5,16 @@ namespace commons.VirtualDB {
     using static Table.TableType;
     using static RequestType;
 
-    public class LentInfoVT : VirtualTable<LentInfoKey, LentInfo> {
-        public bool readFromStudentID(in string s_id, out LentInfo[] info) {
+    public class LentInfoVT : VirtualTable<RentInfoKey, RentInfo> {
+        public bool readFromStudentID(in string s_id, out RentInfo[] info) {
             bool succeed = false;
 
             using (var socket = new ClientSocket()) {
-                var incompleteKey = new LentInfoKey(null, s_id);
+                var incompleteKey = new RentInfoKey(null, s_id);
 
                 var reqExp = new RequestExpression() {
                     request = READ,
-                    table = LENT_INFO
+                    table = RENT_INFO
                 };
                 reqExp.setArg(incompleteKey);
 
@@ -28,7 +28,7 @@ namespace commons.VirtualDB {
                 var response = socket.read<Packet>();
                 var resExp = response.getPayload<ResponseExpression>();
                 if (succeed = parseResponse(resExp)) {
-                    info = resExp.getArg<LentInfo[]>();
+                    info = resExp.getArg<RentInfo[]>();
                     // memorize it.
                     foreach (var i in info) {
                         var key = i.getKey();
@@ -36,7 +36,7 @@ namespace commons.VirtualDB {
                     }
                 }
                 else {
-                    info = new LentInfo[0];
+                    info = new RentInfo[0];
                 }
             }
 
@@ -44,11 +44,11 @@ namespace commons.VirtualDB {
         }
         public bool deleteFromStudentID(in string s_id) {
             using (var socket = new ClientSocket()) {
-                var incompleteKey = new LentInfoKey(null, s_id);
+                var incompleteKey = new RentInfoKey(null, s_id);
 
                 var reqExp = new RequestExpression() {
                     request = DELETE,
-                    table = LENT_INFO
+                    table = RENT_INFO
                 };
                 reqExp.setArg(incompleteKey);
 

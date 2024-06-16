@@ -114,7 +114,7 @@ namespace client {
             var vtable = new LentInfoVT();
             vtable.signin(admin);
 
-            var test = new LentInfo() {
+            var test = new RentInfo() {
                 // itemName is foreign key
                 itemName = "Dummy",
                 amount = 5,
@@ -123,7 +123,7 @@ namespace client {
                 startDate = DateTime.Today.ToString("yyyy-MM-dd")
             };
             var key = test.getKey();
-            var updated = new LentInfo() {
+            var updated = new RentInfo() {
                 itemName = "Dummy",
                 amount = 2,
                 studentId = "6",
@@ -134,11 +134,11 @@ namespace client {
             Console.WriteLine($"Create Result: {c_result}");
             Thread.Sleep(delay);
 
-            var r1_result = vtable.read(key, out LentInfo info1);
+            var r1_result = vtable.read(key, out RentInfo info1);
             Console.WriteLine($"Read Result: {r1_result}, {info1}");
             Thread.Sleep(delay);
             
-            var r2_result = vtable.readFromStudentID("6", out LentInfo[] info2);
+            var r2_result = vtable.readFromStudentID("6", out RentInfo[] info2);
             Console.WriteLine($"Read Result: {r2_result}");
             foreach(var i in info2) {
                 Console.WriteLine(i);

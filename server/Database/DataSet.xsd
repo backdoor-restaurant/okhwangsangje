@@ -39,7 +39,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="LentInfo" msprop:Generator_RowEvHandlerName="LentInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="LentInfoRowDeleted" msprop:Generator_RowDeletingName="LentInfoRowDeleting" msprop:Generator_RowEvArgName="LentInfoRowChangeEvent" msprop:Generator_TablePropName="LentInfo" msprop:Generator_RowChangedName="LentInfoRowChanged" msprop:Generator_UserTableName="LentInfo" msprop:Generator_RowChangingName="LentInfoRowChanging" msprop:Generator_RowClassName="LentInfoRow" msprop:Generator_TableClassName="LentInfoDataTable" msprop:Generator_TableVarName="tableLentInfo">
+        <xs:element name="RentInfo" msprop:Generator_RowEvHandlerName="RentInfoRowChangeEventHandler" msprop:Generator_RowDeletedName="RentInfoRowDeleted" msprop:Generator_RowDeletingName="RentInfoRowDeleting" msprop:Generator_RowEvArgName="RentInfoRowChangeEvent" msprop:Generator_TablePropName="RentInfo" msprop:Generator_RowChangedName="RentInfoRowChanged" msprop:Generator_UserTableName="RentInfo" msprop:Generator_RowChangingName="RentInfoRowChanging" msprop:Generator_RowClassName="RentInfoRow" msprop:Generator_TableClassName="RentInfoDataTable" msprop:Generator_TableVarName="tableRentInfo">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ItemName" msprop:Generator_ColumnPropNameInTable="ItemNameColumn" msprop:Generator_ColumnPropNameInRow="ItemName" msprop:Generator_UserColumnName="ItemName" msprop:Generator_ColumnVarNameInTable="columnItemName" type="xs:string" />
@@ -72,8 +72,8 @@
       <xs:selector xpath=".//mstns:ItemInfo" />
       <xs:field xpath="mstns:ItemName" />
     </xs:unique>
-    <xs:unique name="LentInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:LentInfo" />
+    <xs:unique name="RentInfo_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:RentInfo" />
       <xs:field xpath="mstns:ItemName" />
       <xs:field xpath="mstns:StudentID" />
     </xs:unique>
@@ -82,13 +82,13 @@
       <xs:field xpath="mstns:Date" />
       <xs:field xpath="mstns:Title" />
     </xs:unique>
-    <xs:keyref name="FK_ItemInfo_LentInfo" refer="ItemInfo_Constraint1" msdata:ConstraintOnly="true">
-      <xs:selector xpath=".//mstns:LentInfo" />
-      <xs:field xpath="mstns:ItemName" />
-    </xs:keyref>
     <xs:keyref name="FK_MemberInfo_LentInfo" refer="MemberInfo_Constraint1" msdata:ConstraintOnly="true">
-      <xs:selector xpath=".//mstns:LentInfo" />
+      <xs:selector xpath=".//mstns:RentInfo" />
       <xs:field xpath="mstns:StudentID" />
+    </xs:keyref>
+    <xs:keyref name="FK_ItemInfo_LentInfo" refer="ItemInfo_Constraint1" msdata:ConstraintOnly="true">
+      <xs:selector xpath=".//mstns:RentInfo" />
+      <xs:field xpath="mstns:ItemName" />
     </xs:keyref>
     <xs:keyref name="FK_MemberInfo_LoginInfo" refer="MemberInfo_Constraint1" msdata:ConstraintOnly="true">
       <xs:selector xpath=".//mstns:LoginInfo" />

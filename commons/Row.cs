@@ -5,7 +5,7 @@ namespace commons.Table {
         LOGIN_INFO,
         MEMBER_INFO,
         ITEM_INFO,
-        LENT_INFO,
+        RENT_INFO,
         SCHEDULE_INFO
     }
 
@@ -111,28 +111,28 @@ namespace commons.Table {
     }
 
     [Serializable]
-    public class LentInfo : InfoBase<LentInfoKey> {
+    public class RentInfo : InfoBase<RentInfoKey> {
         public string itemName;
         public int amount;
         public string studentId;
         public string startDate;
 
-        public LentInfo() : base(TableType.LENT_INFO) { }
+        public RentInfo() : base(TableType.RENT_INFO) { }
         public override string ToString()
             => $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
-        public override LentInfoKey getKey()
-            => new LentInfoKey(this);
+        public override RentInfoKey getKey()
+            => new RentInfoKey(this);
     }
     [Serializable]
-    public class LentInfoKey {
+    public class RentInfoKey {
         public readonly string itemName;
         public readonly string studentId;
 
-        public LentInfoKey(in LentInfo info) {
+        public RentInfoKey(in RentInfo info) {
             itemName = info.itemName;
             studentId = info.studentId;
         }
-        public LentInfoKey(in string itemName, in string studentId) {
+        public RentInfoKey(in string itemName, in string studentId) {
             this.itemName = itemName;
             this.studentId = studentId;
         }

@@ -57,7 +57,7 @@ namespace client
             {
                 if (rentView.Items[i].Selected)
                 {
-                    LentInfoKey key = (LentInfoKey)rentView.Items[i].Tag;
+                    RentInfoKey key = (RentInfoKey)rentView.Items[i].Tag;
                     RentTable.delete(key);
                     rentView.Items[i].Remove();
                 }
@@ -72,7 +72,7 @@ namespace client
                 {
                     ListViewItem selected = equipView.Items[i];
                     ListViewItem lvi;
-                    var rent = new LentInfo()
+                    var rent = new RentInfo()
                     {
                         itemName = selected.SubItems[0].Text,
                         amount = Int32.Parse(selected.SubItems[1].Text),
