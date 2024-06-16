@@ -40,10 +40,6 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.대여일 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.반납예정일 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.countTbx = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // equipView
@@ -61,17 +57,17 @@
             // 
             // Equipment
             // 
+            this.Equipment.DisplayIndex = 1;
             this.Equipment.Text = "장비";
-            this.Equipment.Width = 360;
             // 
             // Pieces
             // 
             this.Pieces.Text = "개수";
-            this.Pieces.Width = 75;
+            this.Pieces.Width = 165;
             // 
             // AddBtn
             // 
-            this.AddBtn.Location = new System.Drawing.Point(785, 217);
+            this.AddBtn.Location = new System.Drawing.Point(608, 217);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(171, 71);
             this.AddBtn.TabIndex = 17;
@@ -81,7 +77,7 @@
             // 
             // DelBtn
             // 
-            this.DelBtn.Location = new System.Drawing.Point(961, 217);
+            this.DelBtn.Location = new System.Drawing.Point(785, 217);
             this.DelBtn.Name = "DelBtn";
             this.DelBtn.Size = new System.Drawing.Size(171, 71);
             this.DelBtn.TabIndex = 18;
@@ -91,7 +87,7 @@
             // 
             // RentBtn
             // 
-            this.RentBtn.Location = new System.Drawing.Point(785, 12);
+            this.RentBtn.Location = new System.Drawing.Point(962, 217);
             this.RentBtn.Name = "RentBtn";
             this.RentBtn.Size = new System.Drawing.Size(171, 71);
             this.RentBtn.TabIndex = 19;
@@ -113,9 +109,7 @@
             // 
             this.rentView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader4,
-            this.대여일,
-            this.반납예정일});
+            this.columnHeader4});
             this.rentView.HideSelection = false;
             this.rentView.Location = new System.Drawing.Point(12, 89);
             this.rentView.Name = "rentView";
@@ -126,13 +120,14 @@
             // 
             // columnHeader1
             // 
+            this.columnHeader1.DisplayIndex = 1;
             this.columnHeader1.Text = "장비";
-            this.columnHeader1.Width = 367;
+            this.columnHeader1.Width = 114;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "개수";
-            this.columnHeader4.Width = 65;
+            this.columnHeader4.Width = 165;
             // 
             // label1
             // 
@@ -156,41 +151,12 @@
             this.label2.TabIndex = 23;
             this.label2.Text = "장비 목록";
             // 
-            // 대여일
-            // 
-            this.대여일.Text = "대여일";
-            this.대여일.Width = 168;
-            // 
-            // 반납예정일
-            // 
-            this.반납예정일.Text = "반납예정일";
-            this.반납예정일.Width = 211;
-            // 
-            // countTbx
-            // 
-            this.countTbx.Location = new System.Drawing.Point(679, 45);
-            this.countTbx.Name = "countTbx";
-            this.countTbx.Size = new System.Drawing.Size(100, 21);
-            this.countTbx.TabIndex = 24;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(700, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 12);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "대여 개수";
-            // 
             // EquipmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(43)))), ((int)(((byte)(60)))));
             this.ClientSize = new System.Drawing.Size(1145, 688);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.countTbx);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rentView);
@@ -222,9 +188,5 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ColumnHeader 대여일;
-        private System.Windows.Forms.ColumnHeader 반납예정일;
-        private System.Windows.Forms.TextBox countTbx;
-        private System.Windows.Forms.Label label3;
     }
 }
