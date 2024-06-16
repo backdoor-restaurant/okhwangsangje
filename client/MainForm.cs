@@ -19,7 +19,7 @@ namespace client
         public MainForm(string userName)
         {
             this.userName = userName;
-            if (userName == null) mode = Mode.Admin;
+            if (userName == "root") mode = Mode.Admin;
             else mode = Mode.User;
             InitializeComponent();
         }
