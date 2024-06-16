@@ -118,41 +118,6 @@ namespace client
             RentTable = new LentInfoVT();
             RentTable.signin(admin);
 
-         //   var r_result = vtable.read(key, out ItemInfo item);
-           // Console.WriteLine($"Read Result: {r_result}, {item}");
-
-
-
-            ListViewItem lvi;
-            lvi = new ListViewItem(new string[] {"현무궁 25(중장)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 26","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 28 (중장)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 30 (1, 장궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 32(장궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 34","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 35 (1, 장궁) ","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 35 (2, 중장좌)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 35 (3)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 40 (1, 중궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"현무궁 40 (2, 중궁)","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"화살 대여용 빈 가방","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"활 운반 용 큰 가방","1"});
-this.equipView.Items.Add(lvi);
-            lvi = new ListViewItem(new string[] {"활 운반 용 배낭","1"});
-this.equipView.Items.Add(lvi);
-
         }
     }
 }
