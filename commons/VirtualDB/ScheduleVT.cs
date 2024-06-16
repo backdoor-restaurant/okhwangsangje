@@ -2,8 +2,8 @@
 using commons.Table;
 
 namespace commons.VirtualDB {
-    using static Request.RequestType;
-    using static Table.Type;
+    using static Table.TableType;
+    using static RequestType;
 
     public class ScheduleVT : VirtualTable<ScheduleInfoKey, ScheduleInfo> {
         public bool readFromDate(in string date, out ScheduleInfo[] schedules) {
@@ -12,17 +12,25 @@ namespace commons.VirtualDB {
             using (var socket = new ClientSocket()) {
                 var incompleteKey = new ScheduleInfoKey(date, null);
 
-                socket.write(new Request(token) {
-                    requestType = READ,
-                    payloadType = SCHEDULE_INFO,
-                    payload = Serializer.serialize(incompleteKey)
-                });
+                var reqExp = new RequestExpression() {
+                    request = READ,
+                    table = SCHEDULE_INFO
+                };
+                reqExp.setArg(incompleteKey);
 
-                var response = socket.read<Response>();
-                if(succeed = parseResponse(response)) {
-                    schedules = Parser.parse<ScheduleInfo[]>(response.payload);
+                var request = PacketFactory.newReplication(_token);
+                request.setPayload(reqExp);
 
-                    foreach(var schedule in schedules) {
+                // sent request
+                socket.write(request);
+
+                // recv response
+                var response = socket.read<Packet>();
+                var resExp = response.getPayload<ResponseExpression>();
+                if (succeed = parseResponse(resExp)) {
+                    schedules = resExp.getArg<ScheduleInfo[]>();
+                    // memorize it.
+                    foreach (var schedule in schedules) {
                         var key = schedule.getKey();
                         cache[key] = schedule;
                     }
@@ -38,14 +46,22 @@ namespace commons.VirtualDB {
             using (var socket = new ClientSocket()) {
                 var incompleteKey = new ScheduleInfoKey(date, null);
 
-                socket.write(new Request(token) {
-                    requestType = DELETE,
-                    payloadType = SCHEDULE_INFO,
-                    payload = Serializer.serialize(incompleteKey)
-                });
+                var reqExp = new RequestExpression() {
+                    request = DELETE,
+                    table = SCHEDULE_INFO
+                };
+                reqExp.setArg(incompleteKey);
 
-                var response = socket.read<Response>();
-                return parseResponse(response);
+                var request = PacketFactory.newReplication(_token);
+                request.setPayload(reqExp);
+
+                // sent request
+                socket.write(request);
+
+                // recv response
+                var response = socket.read<Packet>();
+                var resExp = response.getPayload<ResponseExpression>();
+                return parseResponse(resExp);
             }
         }
     }

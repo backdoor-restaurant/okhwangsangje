@@ -1,14 +1,9 @@
 ﻿using commons.Network;
 using commons.Table;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace commons.VirtualDB {
-    using static Request.RequestType;
-    using static Table.Type;
+    using static Table.TableType;
+    using static RequestType;
 
     public class LentInfoVT : VirtualTable<LentInfoKey, LentInfo> {
         public bool readFromStudentID(in string s_id, out LentInfo[] info) {
@@ -17,17 +12,25 @@ namespace commons.VirtualDB {
             using (var socket = new ClientSocket()) {
                 var incompleteKey = new LentInfoKey(null, s_id);
 
-                socket.write(new Request(token) {
-                    requestType = READ,
-                    payloadType = LENT_INFO,
-                    payload = Serializer.serialize(incompleteKey)
-                });
+                var reqExp = new RequestExpression() {
+                    request = READ,
+                    table = LENT_INFO
+                };
+                reqExp.setArg(incompleteKey);
 
-                var response = socket.read<Response>();
-                if(succeed = parseResponse(response)) {
-                    info = Parser.parse<LentInfo[]>(response.payload);
+                var request = PacketFactory.newReplication(_token);
+                request.setPayload(reqExp);
 
-                    foreach(var i in info) {
+                // sent request
+                socket.write(request);
+
+                // recv response
+                var response = socket.read<Packet>();
+                var resExp = response.getPayload<ResponseExpression>();
+                if (succeed = parseResponse(resExp)) {
+                    info = resExp.getArg<LentInfo[]>();
+                    // memorize it.
+                    foreach (var i in info) {
                         var key = i.getKey();
                         cache[key] = i;
                     }
@@ -40,17 +43,25 @@ namespace commons.VirtualDB {
             return succeed;
         }
         public bool deleteFromStudentID(in string s_id) {
-            using(var socket = new ClientSocket()){
+            using (var socket = new ClientSocket()) {
                 var incompleteKey = new LentInfoKey(null, s_id);
 
-                socket.write(new Request(token) {
-                    requestType = DELETE,
-                    payloadType = LENT_INFO,
-                    payload = Serializer.serialize(incompleteKey)
-                });
+                var reqExp = new RequestExpression() {
+                    request = DELETE,
+                    table = LENT_INFO
+                };
+                reqExp.setArg(incompleteKey);
 
-                var response = socket.read<Response>();
-                return parseResponse(response);
+                var request = PacketFactory.newReplication(_token);
+                request.setPayload(reqExp);
+
+                // sent request
+                socket.write(request);
+
+                // recv response
+                var response = socket.read<Packet>();
+                var resExp = response.getPayload<ResponseExpression>();
+                return parseResponse(resExp);
             }
         }
     }
