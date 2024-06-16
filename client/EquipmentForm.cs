@@ -82,6 +82,8 @@ namespace client
                     };
                     RentTable.create(rent);
                     lvi = (ListViewItem)selected.Clone();
+                    lvi.SubItems.Add(DateTime.Now.ToString("yyyyMMdd"));
+                    lvi.SubItems.Add(DateTime.Now.AddDays(7).ToString("yyyyMMdd"));
                     lvi.Tag = rent.getKey();
                     rentView.Items.Add(lvi);
                 }

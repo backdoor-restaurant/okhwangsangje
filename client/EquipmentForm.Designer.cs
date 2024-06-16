@@ -40,6 +40,8 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.대여일 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // equipView
@@ -57,8 +59,8 @@
             // 
             // Equipment
             // 
-            this.Equipment.DisplayIndex = 1;
             this.Equipment.Text = "장비";
+            this.Equipment.Width = 431;
             // 
             // Pieces
             // 
@@ -109,7 +111,9 @@
             // 
             this.rentView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader4});
+            this.columnHeader4,
+            this.대여일,
+            this.columnHeader2});
             this.rentView.HideSelection = false;
             this.rentView.Location = new System.Drawing.Point(12, 89);
             this.rentView.Name = "rentView";
@@ -120,9 +124,8 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.DisplayIndex = 1;
             this.columnHeader1.Text = "장비";
-            this.columnHeader1.Width = 114;
+            this.columnHeader1.Width = 438;
             // 
             // columnHeader4
             // 
@@ -150,6 +153,16 @@
             this.label2.Size = new System.Drawing.Size(101, 20);
             this.label2.TabIndex = 23;
             this.label2.Text = "장비 목록";
+            // 
+            // 대여일
+            // 
+            this.대여일.Text = "대여일";
+            this.대여일.Width = 125;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "반납예정일";
+            this.columnHeader2.Width = 141;
             // 
             // EquipmentForm
             // 
@@ -188,5 +201,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader 대여일;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
