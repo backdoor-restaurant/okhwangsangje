@@ -44,6 +44,18 @@ namespace server.Database {
                 startDate = row.StartDate
             };
         }
+        internal static ItemInfo[] make(in ItemInfoRow[] rows) {
+            var result = new ItemInfo[rows.Length];
+
+            for (int i = 0; i < rows.Length; ++i) {
+                result[i] = new ItemInfo {
+                    itemName = rows[i].ItemName,
+                    amount = rows[i].amount
+                };
+            }
+
+            return result;
+        }
         internal static RentInfo[] make(in RentInfoRow[] rows) {
             var result = new RentInfo[rows.Length];
 
@@ -263,6 +275,14 @@ namespace server.Database {
             info = Factory.make(row);
             return true;
         }
+
+        public bool readAll(out ItemInfo[] items) {
+            var query = from i in dataSet.ItemInfo
+                        select i;
+            items = Factory.make(query.ToArray());
+            return true;
+        }
+
         public bool readFromStudentID(string s_id, out RentInfo[] info) {
             if (s_id.Length == 0)
                 throw new ArgumentException();

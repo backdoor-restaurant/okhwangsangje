@@ -184,8 +184,15 @@ namespace server.Network {
                     resExp.setArg(member);
                     break;
                 case ITEM_INFO:
-                    result = db.read(obj as ItemInfoKey, out ItemInfo item);
-                    resExp.setArg(item);
+                    var itemKey = obj as ItemInfoKey;
+                    if(itemKey.itemName is null) {
+                        result = db.readAll(out ItemInfo[] items);
+                        resExp.setArg(itemKey);
+                    }
+                    else {
+                        result = db.read(obj as ItemInfoKey, out ItemInfo item);
+                        resExp.setArg(item);
+                    }
                     break;
                 case LOGIN_INFO:
                     result = db.read(obj as LoginInfoKey, out LoginInfo pair);
