@@ -2,7 +2,7 @@
 
 namespace commons.Network {
     [Serializable]
-    public class Packet2 {
+    public class Packet {
         // packet header
         public enum PacketType {
             Hello,
@@ -18,7 +18,7 @@ namespace commons.Network {
         // packet body
         public byte[] payload = null;
 
-        public Packet2(in int token) {
+        public Packet(in int token) {
             authToken = token;
         }
         public void setPayload<T>(in T t)

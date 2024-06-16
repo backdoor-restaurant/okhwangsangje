@@ -97,12 +97,12 @@ namespace server.Network {
             var response = new Packet(request.authToken);
             var resExp = new ResponseExpression();
 
-            if (request.payload is null) {
-                resExp.response = BAD_REQUEST;
-                response.setPayload(resExp);
+            //if (request.payload is null) {
+            //    resExp.response = BAD_REQUEST;
+            //    response.setPayload(resExp);
 
-                return response;
-            }
+            //    return response;
+            //}
 
             var reqExp = request.getPayload<RequestExpression>();
             
@@ -135,6 +135,7 @@ namespace server.Network {
                 break;
             }
 
+            response.setPayload(resExp);
             return response;
         }
 
@@ -155,7 +156,7 @@ namespace server.Network {
                 result = db.create(obj as MemberInfo);
                 break;
             case ITEM_INFO:
-                result = db.create(obj as MemberInfo);
+                result = db.create(obj as ItemInfo);
                 break;
             case LOGIN_INFO:
                 result = db.create(obj as LoginInfo);

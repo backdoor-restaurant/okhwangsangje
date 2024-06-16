@@ -8,14 +8,14 @@ namespace commons.VirtualDB {
     using static ResponseType;
     using static RequestType;
 
-    public abstract class VirtualTable2<Key, R> where R : InfoBase<Key>, new() {
+    public abstract class VirtualTable<Key, R> where R : InfoBase<Key>, new() {
         private readonly TableType type = new R().type;
         protected Dictionary<Key, R> cache;
 
         protected int _token = Packet.GUEST;
         protected int token { get { return _token; } }
 
-        public VirtualTable2() {
+        public VirtualTable() {
             cache = new Dictionary<Key, R>();
 
             using (var socket = new ClientSocket()) {
@@ -26,7 +26,7 @@ namespace commons.VirtualDB {
             }
         }
 
-        ~VirtualTable2() {
+        ~VirtualTable() {
             using (var socket = new ClientSocket()) {
                 socket.write(PacketFactory.newDisconnect(_token));
 
