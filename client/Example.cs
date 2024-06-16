@@ -188,8 +188,12 @@ namespace client {
             Console.WriteLine($"Create Result3: {c_result3}");
             Thread.Sleep(delay);
 
-            var r_result = vtable.read(key, out ScheduleInfo schedule);
-            Console.WriteLine($"Read Result: {r_result}, {schedule}");
+            var r_result1 = vtable.read(key, out ScheduleInfo schedule);
+            Console.WriteLine($"Read Result: {r_result1}, {schedule}");
+            Thread.Sleep(delay);
+
+            var r_result2 = vtable.readFromDate(today, out ScheduleInfo[] schedules);
+            Console.WriteLine($"Read Result: {r_result1}, {schedules.Length}");
             Thread.Sleep(delay);
 
             var u_result = vtable.update(updated);

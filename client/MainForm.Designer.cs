@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitter1 = new System.Windows.Forms.Splitter();
-
             this.calBtn = new Guna.UI2.WinForms.Guna2Button();
             this.calBar = new Guna.UI2.WinForms.Guna2Panel();
             this.equipBar = new Guna.UI2.WinForms.Guna2Panel();
@@ -50,6 +49,7 @@
             this.splitter1.Size = new System.Drawing.Size(1184, 76);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
+            this.splitter1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter1_SplitterMoved);
             // 
             // calBtn
             // 
@@ -73,7 +73,6 @@
             // 
             // calBar
             // 
-
             this.calBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(232)))), ((int)(((byte)(166)))));
             this.calBar.Location = new System.Drawing.Point(17, 57);
             this.calBar.Name = "calBar";
@@ -130,6 +129,7 @@
             this.lbNickname.Size = new System.Drawing.Size(69, 19);
             this.lbNickname.TabIndex = 17;
             this.lbNickname.Text = "김석희님";
+            this.lbNickname.Click += new System.EventHandler(this.lbNickname_Click);
             // 
             // exitBtn
             // 
@@ -154,7 +154,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-
             this.ClientSize = new System.Drawing.Size(1184, 877);
             this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.lbNickname);

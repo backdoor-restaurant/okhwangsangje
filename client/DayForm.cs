@@ -1,4 +1,5 @@
-﻿using System;
+﻿using commons.Table;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +17,7 @@ namespace client
     {
         private LoginForm.Mode mode;
         private DateTime date;
-        private CalendarForm mainForm;
+        private CalendarForm calForm;
 
         public DayForm(LoginForm.Mode mode, DateTime date)
         {
@@ -31,19 +32,20 @@ namespace client
 
         private void DayForm_Load(object sender, EventArgs e)
         {
-            mainForm = ParentForm as CalendarForm;
+            calForm = ParentForm as CalendarForm;
             lbDay.Text = date.Day.ToString();
-            if (mainForm.dicDays.ContainsKey(date.ToString("yyyy-M-d")))
+
+            var result = calForm.vtable.readFromDate(date.ToString("yyyy-MM-dd"),out ScheduleInfo[] schedules);
+            if (result)
             {
                 int count = 0;
-                CalendarForm.CalData c = mainForm.dicDays[date.ToString("yyyy-M-d")];
-                foreach(CalendarForm.CalMemo m in c.memos)
+                foreach(ScheduleInfo s in schedules)
                 {
                     if (count > 4) break;
-                    if (count == 4 && c.memos.Count>3)
+                    if (count == 4 && schedules.Length>3)
                         tbDayMemo.Text += "•••";
                     else
-                        tbDayMemo.Text += m.title + "\r\n";
+                        tbDayMemo.Text += s.title + "\r\n";
                     count++;
                 }
             }
@@ -59,23 +61,23 @@ namespace client
 
         private void tbDayMemo_DoubleClick(object sender, EventArgs e)
         {
-            DayDetailForm preForm = mainForm.getSelectDay();
+            DayDetailForm preForm = calForm.getSelectDay();
             if (preForm != null)
             {
                 preForm.Close();
                 preForm = null;
             }
-            DayDetailForm newForm = new DayDetailForm(date, mainForm);
+            DayDetailForm newForm = new DayDetailForm(date, calForm);
             newForm.Show();
-            newForm.Location = new Point(this.Location.X + mainForm.Location.X + mainForm.GetCalendarLocation().X+15, this.Location.Y + mainForm.Location.Y + mainForm.GetCalendarLocation().Y+130);
-            mainForm.setSelectDay(newForm);
+            newForm.Location = new Point(this.Location.X + calForm.Location.X + calForm.GetCalendarLocation().X+15, this.Location.Y + calForm.Location.Y + calForm.GetCalendarLocation().Y+130);
+            calForm.setSelectDay(newForm);
             newForm.setMode(mode);
         }
 
 
         private void DayForm_Click(object sender, EventArgs e)
         {
-            DayDetailForm preForm = mainForm.getSelectDay();
+            DayDetailForm preForm = calForm.getSelectDay();
             if (preForm != null)
             {
                 preForm.Close();
@@ -83,5 +85,14 @@ namespace client
             }
         }
 
+        private void tbDayMemo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbDay_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

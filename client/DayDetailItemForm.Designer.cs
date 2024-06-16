@@ -40,6 +40,7 @@
             this.txContent.Name = "txContent";
             this.txContent.Size = new System.Drawing.Size(363, 40);
             this.txContent.TabIndex = 1;
+            this.txContent.TextChanged += new System.EventHandler(this.txContent_TextChanged);
             this.txContent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txContent_KeyDown);
             // 
             // tbTitle
@@ -51,6 +52,7 @@
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(115, 22);
             this.tbTitle.TabIndex = 2;
+            this.tbTitle.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
             // 
             // btnRemove
             // 

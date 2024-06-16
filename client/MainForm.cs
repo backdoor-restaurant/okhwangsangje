@@ -14,14 +14,19 @@ namespace client
     public partial class MainForm : Form
     {
         Form child;
-        public MainForm()
+        private string userName;
+        public MainForm(string userName)
         {
+            this.userName = userName;
+            if (userName == null) userName = "사용자";
+            
             InitializeComponent();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             ShowCalendar();
+            lbNickname.Text = userName;
         }
 
         private void ShowCalendar()
@@ -76,5 +81,14 @@ namespace client
             Close();
         }
 
+        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
+        }
+
+        private void lbNickname_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

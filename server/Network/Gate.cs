@@ -210,7 +210,7 @@ namespace server.Network {
                     var scheduleKey = Parser.parse<ScheduleInfoKey>(request.payload);
                     if (scheduleKey.title is null) {
                         result = db.readFromDate(
-                            Parser.parse<string>(request.payload),
+                            scheduleKey.date,
                             out ScheduleInfo[] schedules
                         );
                         response.payload = Serializer.serialize(schedules);
