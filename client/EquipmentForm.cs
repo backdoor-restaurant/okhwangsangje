@@ -148,7 +148,7 @@ namespace client
             ItemTable.readAll(out ItemInfo[] items);
             foreach (var i in items)
             {
-                lvi = new ListViewItem(new string[] { i.itemName, i.amount });
+                lvi = new ListViewItem(new string[] { i.itemName, i.amount.ToString() });
                 equipView.Items.Add(lvi);
             }
         }
