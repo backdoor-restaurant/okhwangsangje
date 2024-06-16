@@ -84,6 +84,11 @@ namespace client
                         studentId = admin.studentId,
                         startDate = DateTime.Now.ToString("yyyyMMdd"),
                     };
+                    if (RentTable.read(rent.getKey(), out RentInfo item))
+                    {
+                        System.Windows.Forms.MessageBox.Show("이미 대여중인 항목입니다.");
+                        continue;
+                    }
                     RentTable.create(rent);
                     lvi = (ListViewItem)selected.Clone();
                     lvi.SubItems.Add(DateTime.Now.ToString("yyyyMMdd"));
