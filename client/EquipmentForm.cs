@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using commons.Table;
 using commons.VirtualDB;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace client
@@ -118,6 +119,18 @@ namespace client
             RentTable = new LentInfoVT();
             RentTable.signin(admin);
 
+            RentTable.readFromStudentID(admin.studentId, out RentInfo[] info);
+            if (mode == LoginForm.Mode.User)
+            {
+                AddBtn.Visible = false;
+                DelBtn.Visible = false;
+            }
+            ListViewItem lvi;
+            foreach (var i in info)
+            {
+                lvi = new ListViewItem(new string[] { i.itemName, i.amount.ToString(), i.startDate });
+                rentView.Items.Add(lvi);
+            }
         }
     }
 }
