@@ -37,6 +37,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lbNickname = new System.Windows.Forms.Label();
             this.exitBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,6 +149,10 @@
             this.exitBtn.TabIndex = 19;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -184,5 +189,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbNickname;
         private Guna.UI2.WinForms.Guna2Button exitBtn;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

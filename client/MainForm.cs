@@ -15,11 +15,12 @@ namespace client
     {
         Form child;
         private string userName;
+        private Mode mode;
         public MainForm(string userName)
         {
             this.userName = userName;
-            if (userName == null) userName = "사용자";
-            
+            if (userName == null) mode = Mode.Admin;
+            else mode = Mode.User;
             InitializeComponent();
         }
 
@@ -37,7 +38,7 @@ namespace client
                 child.Close();
             this.Controls.Remove(child);
 
-            child = new CalendarForm(Mode.Admin);
+            child = new CalendarForm(mode);
             child.MdiParent = this; 
             child.Show();
             (child as CalendarForm).parent = this;
@@ -52,7 +53,7 @@ namespace client
                 child.Close();
             this.Controls.Remove(child);
 
-            child = new EquipmentForm(Mode.Admin);
+            child = new EquipmentForm(mode);
             child.MdiParent = this;
             child.Show();
             (child as EquipmentForm).parent = this;
@@ -87,6 +88,11 @@ namespace client
         }
 
         private void lbNickname_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
         }
