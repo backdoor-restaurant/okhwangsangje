@@ -96,7 +96,7 @@ namespace client
                 {
                     RentInfoKey rentKey = new RentInfoKey(equipView.Items[i].SubItems[0].Text, admin.studentId);
                     bool result = RentTable.read(rentKey, out RentInfo item);
-                    if (!result)
+                    if (result)
                     {
                         System.Windows.Forms.MessageBox.Show("대여중인 물품은 삭제 할 수 없습니다. 먼저 반납을 해주세요.");
                         continue;
