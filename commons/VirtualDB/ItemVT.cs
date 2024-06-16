@@ -10,7 +10,7 @@ namespace commons.VirtualDB {
             bool succeed = false;
 
             using (var socket = new ClientSocket()) {
-                var incompleteKey = new ItemInfoKey((string)null);
+                var incompleteKey = new ItemInfoKey();
 
                 var reqExp = new RequestExpression() {
                     request = READ,

@@ -67,6 +67,10 @@ namespace client {
             Console.WriteLine($"Create Result: {c_result}");
             Thread.Sleep(delay);
 
+            var ra_result = vtable.readAll(out ItemInfo[] items);
+            Console.WriteLine($"Read Result: {ra_result}, {items.Length}");
+            Thread.Sleep(delay);
+
             var r_result = vtable.read(key, out ItemInfo item);
             Console.WriteLine($"Read Result: {r_result}, {item}");
             Thread.Sleep(delay);

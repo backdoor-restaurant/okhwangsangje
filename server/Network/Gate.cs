@@ -187,7 +187,7 @@ namespace server.Network {
                     var itemKey = obj as ItemInfoKey;
                     if(itemKey.itemName is null) {
                         result = db.readAll(out ItemInfo[] items);
-                        resExp.setArg(itemKey);
+                        resExp.setArg(items);
                     }
                     else {
                         result = db.read(obj as ItemInfoKey, out ItemInfo item);

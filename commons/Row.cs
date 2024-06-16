@@ -68,6 +68,9 @@ namespace commons.Table {
     public class ItemInfoKey {
         public readonly string itemName;
 
+        public ItemInfoKey() {
+            itemName = null;
+        }
         public ItemInfoKey(in ItemInfo item) {
             itemName = item.itemName;
         }
