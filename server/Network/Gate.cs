@@ -161,8 +161,8 @@ namespace server.Network {
             case LOGIN_INFO:
                 result = db.create(obj as LoginInfo);
                 break;
-            case LENT_INFO:
-                result = db.create(obj as LentInfo);
+            case RENT_INFO:
+                result = db.create(obj as RentInfo);
                 break;
             case SCHEDULE_INFO:
                 result = db.create(obj as ScheduleInfo);
@@ -191,16 +191,16 @@ namespace server.Network {
                     result = db.read(obj as LoginInfoKey, out LoginInfo pair);
                     resExp.setArg(pair);
                     break;
-                case LENT_INFO:
-                    var lentKey = obj as LentInfoKey;
+                case RENT_INFO:
+                    var lentKey = obj as RentInfoKey;
                     if (lentKey.itemName is null) {
                         result = db.readFromStudentID(lentKey.studentId,
-                            out LentInfo[] info
+                            out RentInfo[] info
                         );
                         resExp.setArg(info);
                     }
                     else {
-                        result = db.read(lentKey, out LentInfo info);
+                        result = db.read(lentKey, out RentInfo info);
                         resExp.setArg(info);
                     }
                     break;
@@ -242,8 +242,8 @@ namespace server.Network {
                 case LOGIN_INFO:
                     result = db.tryUpdate(obj as LoginInfo);
                     break;
-                case LENT_INFO:
-                    result = db.tryUpdate(obj as LentInfo);
+                case RENT_INFO:
+                    result = db.tryUpdate(obj as RentInfo);
                     break;
                 case SCHEDULE_INFO:
                     result = db.tryUpdate(obj as ScheduleInfo);
@@ -278,8 +278,8 @@ namespace server.Network {
                 case LOGIN_INFO:
                     result = db.delete(obj as LoginInfoKey);
                     break;
-                case LENT_INFO:
-                    var lentKey = obj as LentInfoKey;
+                case RENT_INFO:
+                    var lentKey = obj as RentInfoKey;
                     if (lentKey.itemName is null) {
                         result = db.deleteFromStudentID(lentKey.studentId);
                     }

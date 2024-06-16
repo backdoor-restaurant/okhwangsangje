@@ -18,8 +18,8 @@ namespace server.Network {
                     return exp.getArg<ItemInfo>();
                 case LOGIN_INFO:
                     return exp.getArg<LoginInfo>();
-                case LENT_INFO:
-                    return exp.getArg<LentInfo>();
+                case RENT_INFO:
+                    return exp.getArg<RentInfo>();
                 case SCHEDULE_INFO:
                     return exp.getArg<ScheduleInfo>();
                 default:
@@ -34,8 +34,8 @@ namespace server.Network {
                     return exp.getArg<ItemInfoKey>();
                 case LOGIN_INFO:
                     return exp.getArg<LoginInfoKey>();
-                case LENT_INFO:
-                    return exp.getArg<LentInfoKey>();
+                case RENT_INFO:
+                    return exp.getArg<RentInfoKey>();
                 case SCHEDULE_INFO:
                     return exp.getArg<ScheduleInfoKey>();
                 default:

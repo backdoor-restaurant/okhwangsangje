@@ -34,21 +34,21 @@ namespace server.Database {
                 password = row.Password
             };
         }
-        internal static LentInfo make(in LentInfoRow row) {
+        internal static RentInfo make(in RentInfoRow row) {
             if(row is null) return null;
 
-            return new LentInfo {
+            return new RentInfo {
                 itemName = row.ItemName,
                 amount = row.amount,
                 studentId = row.StudentID,
                 startDate = row.StartDate
             };
         }
-        internal static LentInfo[] make(in LentInfoRow[] rows) {
-            var result = new LentInfo[rows.Length];
+        internal static RentInfo[] make(in RentInfoRow[] rows) {
+            var result = new RentInfo[rows.Length];
 
             for (int i = 0; i < rows.Length; ++i) {
-                result[i] = new LentInfo {
+                result[i] = new RentInfo {
                     itemName = rows[i].ItemName,
                     amount = rows[i].amount,
                     studentId = rows[i].StudentID,
@@ -161,7 +161,7 @@ namespace server.Database {
                 info.password
             );
         }
-        public bool create(in LentInfo info) {
+        public bool create(in RentInfo info) {
             try {
                 tryCreate(info);
 
@@ -177,8 +177,8 @@ namespace server.Database {
                 return false;
             }
         }
-        private void tryCreate(in LentInfo info) {
-            dataSet.LentInfo.AddLentInfoRow(
+        private void tryCreate(in RentInfo info) {
+            dataSet.RentInfo.AddRentInfoRow(
                 info.itemName,
                 info.amount,
                 info.studentId,
@@ -248,11 +248,11 @@ namespace server.Database {
             pair = Factory.make(row);
             return true;
         }
-        public bool read(in LentInfoKey key, out LentInfo info) {
+        public bool read(in RentInfoKey key, out RentInfo info) {
             if(key.studentId.Length == 0 || key.itemName.Length == 0)
                 throw new ArgumentException();
 
-            var row = dataSet.LentInfo.FindByItemNameStudentID(
+            var row = dataSet.RentInfo.FindByItemNameStudentID(
                 key.itemName, key.studentId
             );
             if(row is null) {
@@ -263,11 +263,11 @@ namespace server.Database {
             info = Factory.make(row);
             return true;
         }
-        public bool readFromStudentID(string s_id, out LentInfo[] info) {
+        public bool readFromStudentID(string s_id, out RentInfo[] info) {
             if (s_id.Length == 0)
                 throw new ArgumentException();
 
-            var query = from l in dataSet.LentInfo
+            var query = from l in dataSet.RentInfo
                         where l.StudentID == s_id
                         select l;
             info = Factory.make(query.ToArray());
@@ -326,8 +326,8 @@ namespace server.Database {
 
             return true;
         }
-        public bool tryUpdate(in LentInfo info) {
-            var row = dataSet.LentInfo.FindByItemNameStudentID(
+        public bool tryUpdate(in RentInfo info) {
+            var row = dataSet.RentInfo.FindByItemNameStudentID(
                 info.itemName, info.studentId
             );
 
@@ -379,31 +379,31 @@ namespace server.Database {
             dataSet.LoginInfo.RemoveLoginInfoRow(row);
             return true;
         }
-        public bool delete(in LentInfoKey key) {
+        public bool delete(in RentInfoKey key) {
             if (key.studentId.Length == 0 ||
                 key.itemName.Length == 0 
             ) throw new ArgumentException();
 
-            var row = dataSet.LentInfo.FindByItemNameStudentID(
+            var row = dataSet.RentInfo.FindByItemNameStudentID(
                 key.itemName, key.studentId
             );
             if (row is null) return false;
 
-            dataSet.LentInfo.RemoveLentInfoRow(row);
+            dataSet.RentInfo.RemoveRentInfoRow(row);
             return true;
         }
         public bool deleteFromStudentID(string s_id) {
             if(s_id.Length == 0) 
                 throw new ArgumentException();
 
-            var query = from l in dataSet.LentInfo
+            var query = from l in dataSet.RentInfo
                         where l.StudentID == s_id
                         select l;
 
             bool deleted = false;
             foreach(var r in query.ToList()) {
                 deleted = true;
-                dataSet.LentInfo.RemoveLentInfoRow(r);
+                dataSet.RentInfo.RemoveRentInfoRow(r);
             }
 
             return deleted;
