@@ -7,23 +7,23 @@ using System.Data;
 using System.Diagnostics;
 
 namespace server.Network {
+    using static Packet2.PacketType;
+    using static RequestType;
+    using static ResponseType;
     using static commons.Table.TableType;
-    using static Packet.PacketType;
-    using static Request.RequestType;
-    using static Response.ResponseType;
 
-    internal class Gate {
+    internal class Gate2 {
         private readonly XmlAccessor db;
         private int tokenSeed = 0;
         private readonly Dictionary<int, string> sessions = new Dictionary<int, string>();
 
-        public Gate() {
+        public Gate2() {
             db = new XmlAccessor("Dummy.xml");
         }
-        public Gate(in string xmlFile) {
+        public Gate2(in string xmlFile) {
             db = new XmlAccessor(xmlFile);
         }
-        public Gate(in Database.DataSet dataSet) {
+        public Gate2(in Database.DataSet dataSet) {
             db = new XmlAccessor(dataSet);
         }
 
@@ -34,7 +34,7 @@ namespace server.Network {
                     await socket.listen();
 
                     // connection established, wait packet
-                    var recv = socket.read<Packet>();
+                    var recv = socket.read<Packet2>();
                     Debug.WriteLine($"Receive: {recv}");
 
                     var send = makePacket(recv);
@@ -45,14 +45,14 @@ namespace server.Network {
             }
         }
 
-        private Packet makePacket(in Packet recv) {
+        private Packet2 makePacket(in Packet2 recv) {
             switch (recv.packetType) {
             case Hello:
                 return pong(recv);
             case Auth:
                 return authorize(recv);
             case Replication:
-                return query(recv as Request);
+                return query(recv);
             case Disconnect:
                 return disconnect(recv);
             default:
@@ -60,19 +60,19 @@ namespace server.Network {
             }
         }
 
-        private Packet pong(in Packet ping) {
-            var pong = PacketFactory.newHello();
+        private Packet2 pong(in Packet2 ping) {
+            var pong = PacketFactory2.newHello();
             pong.authToken = ping.authToken;
             pong.payload = Serializer.serialize("Hello, World!");
 
             return pong;
         }
 
-        private Packet authorize(in Packet recv) {
-            var info = Parser.parse<LoginInfo>(recv.payload);
+        private Packet2 authorize(in Packet2 recv) {
+            var info = recv.getPayload<LoginInfo>();
 
             if (!verify(info)) {
-                return new Packet(Packet.GUEST) {
+                return new Packet2(Packet2.GUEST) {
                     packetType = Auth
                 };
             }
@@ -80,52 +80,58 @@ namespace server.Network {
             int newToken = ++tokenSeed;
             sessions.Add(newToken, info.studentId);
 
-            return new Packet(newToken) {
+            return new Packet2(newToken) {
                 packetType = Auth,
             };
         }
 
         private bool verify(in LoginInfo info) {
-            db.read(new LoginInfoKey(info), out LoginInfo pair);
+            db.read(info.getKey(), out LoginInfo pair);
 
             var verified = info.password.Equals(pair.password);
             // id - pw pair verification
             return verified;
         }
 
-        private Response query(in Request request) {
-            Response response = new Response(request.authToken) {
-                payloadType = request.payloadType,
-                payload = null
-            };
+        private Packet2 query(in Packet2 request) {
+            var response = new Packet2(request.authToken);
+            var resExp = new ResponseExpression();
 
-            bool havePermission = request.requestType == READ ||
+            if (request.payload is null) {
+                resExp.response = BAD_REQUEST;
+                response.setPayload(resExp);
+
+                return response;
+            }
+
+            var reqExp = request.getPayload<RequestExpression>();
+            
+            bool havePermission = reqExp.request == READ ||
                 haveModifiablePermission(request.authToken);
             if (!havePermission) {
-                response.responseType = REJECTED;
+                resExp.response = NOT_ACCEPTED;
+                response.setPayload(resExp);
+
                 return response;
             }
 
-            if(request.payload is null) {
-                response.responseType = BAD_REQUEST;
-                return response;
-            }
+            var obj = RequestInterpreter.interpret(reqExp);
 
-            switch (request.requestType) {
+            switch (reqExp.request) {
             case CREATE:
-                create(request, ref response);
+                create(reqExp.table, obj, ref resExp);
                 break;
             case READ:
-                read(request, ref response);
+                read(reqExp.table, obj, ref resExp);
                 break;
             case UPDATE:
-                update(request, ref response);
+                update(reqExp.table, obj, ref resExp);
                 break;
             case DELETE:
-                delete(request, ref response);
+                delete(reqExp.table, obj, ref resExp);
                 break;
             default:
-                response.responseType = NOT_IMPLEMENTED;
+                resExp.response = NOT_IMPLEMENTED;
                 break;
             }
 
@@ -142,147 +148,137 @@ namespace server.Network {
             return member.isAdministrator;
         }
 
-        private void create(in Request request, ref Response response) {
-            bool result;
-            switch (request.payloadType) {
+        private void create(in TableType table, in object obj, ref ResponseExpression resExp) {
+            bool result = false;
+            switch (table) {
             case MEMBER_INFO:
-                result = db.create(Parser.parse<MemberInfo>(request.payload));
+                result = db.create(obj as MemberInfo);
                 break;
             case ITEM_INFO:
-                result = db.create(Parser.parse<ItemInfo>(request.payload));
+                result = db.create(obj as MemberInfo);
                 break;
             case LOGIN_INFO:
-                result = db.create(Parser.parse<LoginInfo>(request.payload));
+                result = db.create(obj as LoginInfo);
                 break;
             case LENT_INFO:
-                result = db.create(Parser.parse<LentInfo>(request.payload));
+                result = db.create(obj as LentInfo);
                 break;
             case SCHEDULE_INFO:
-                result = db.create(Parser.parse<ScheduleInfo>(request.payload));
+                result = db.create(obj as ScheduleInfo);
                 break;
             default:
-                response.responseType = NOT_IMPLEMENTED;
+                resExp.response = NOT_IMPLEMENTED;
                 return;
             }
 
-            response.responseType = result ? OK : NOT_ACCEPTED;
+            resExp.response = result ? OK : NOT_ACCEPTED;
         }
 
-        private void read(in Request request, ref Response response) {
+        private void read(in TableType table, in object obj, ref ResponseExpression resExp) {
             try {
-                bool result;
-                switch (request.payloadType) {
+                bool result = false;
+                switch (table) {
                 case MEMBER_INFO:
-                    result = db.read(
-                        Parser.parse<MemberInfoKey>(request.payload),
-                        out MemberInfo member
-                    );
-                    response.payload = Serializer.serialize(member);
+                    result = db.read(obj as MemberInfoKey, out MemberInfo member);
+                    resExp.setArg(member);
                     break;
                 case ITEM_INFO:
-                    result = db.read(
-                        Parser.parse<ItemInfoKey>(request.payload),
-                        out ItemInfo item
-                    );
-                    response.payload = Serializer.serialize(item);
+                    result = db.read(obj as ItemInfoKey, out ItemInfo item);
+                    resExp.setArg(item);
                     break;
                 case LOGIN_INFO:
-                    result = db.read(
-                        Parser.parse<LoginInfoKey>(request.payload),
-                        out LoginInfo pair
-                    );
-                    response.payload = Serializer.serialize(pair);
+                    result = db.read(obj as LoginInfoKey, out LoginInfo pair);
+                    resExp.setArg(pair);
                     break;
                 case LENT_INFO:
-                    var lentKey = Parser.parse<LentInfoKey>(request.payload);
-                    if(lentKey.itemName is null) {
+                    var lentKey = obj as LentInfoKey;
+                    if (lentKey.itemName is null) {
                         result = db.readFromStudentID(lentKey.studentId,
                             out LentInfo[] info
                         );
-                        response.payload = Serializer.serialize(info);
+                        resExp.setArg(info);
                     }
                     else {
                         result = db.read(lentKey, out LentInfo info);
-                        response.payload = Serializer.serialize(info);
+                        resExp.setArg(info);
                     }
                     break;
                 case SCHEDULE_INFO:
-                    var scheduleKey = Parser.parse<ScheduleInfoKey>(request.payload);
+                    var scheduleKey = obj as ScheduleInfoKey;
                     if (scheduleKey.title is null) {
-                        result = db.readFromDate(
-                            scheduleKey.date,
+                        result = db.readFromDate(scheduleKey.date,
                             out ScheduleInfo[] schedules
                         );
-                        response.payload = Serializer.serialize(schedules);
+                        resExp.setArg(schedules);
                     }
                     else {
                         result = db.read(scheduleKey, out ScheduleInfo schedule);
-                        response.payload = Serializer.serialize(schedule);
+                        resExp.setArg(schedule);
                     }
                     break;
                 default:
-                    response.responseType = NOT_IMPLEMENTED;
+                    resExp.response = NOT_IMPLEMENTED;
                     return;
                 }
 
-                response.responseType = result ? OK : NOT_FOUND;
+                resExp.response = result ? OK : NOT_FOUND;
             }
             catch (ArgumentException) {
-                response.responseType = NOT_ACCEPTED;
+                resExp.response = NOT_ACCEPTED;
             }
         }
 
-        private void update(in Request request, ref Response response) {
+        private void update(in TableType table, in object obj, ref ResponseExpression resExp) {
             try {
-                bool result;
-                switch (request.payloadType) {
+                bool result = false;
+                switch (table) {
                 case MEMBER_INFO:
-                    result = db.tryUpdate(Parser.parse<MemberInfo>(request.payload));
+                    result = db.tryUpdate(obj as MemberInfo);
                     break;
                 case ITEM_INFO:
-                    result = db.tryUpdate(Parser.parse<ItemInfo>(request.payload));
+                    result = db.tryUpdate(obj as ItemInfo);
                     break;
                 case LOGIN_INFO:
-                    result = db.tryUpdate(Parser.parse<LoginInfo>(request.payload));
+                    result = db.tryUpdate(obj as LoginInfo);
                     break;
                 case LENT_INFO:
-                    result = db.tryUpdate(Parser.parse<LentInfo>(request.payload));
+                    result = db.tryUpdate(obj as LentInfo);
                     break;
                 case SCHEDULE_INFO:
-                    result = db.tryUpdate(Parser.parse<ScheduleInfo>(request.payload));
+                    result = db.tryUpdate(obj as ScheduleInfo);
                     break;
                 default:
-                    response.responseType = NOT_IMPLEMENTED;
+                    resExp.response = NOT_IMPLEMENTED;
                     return;
                 }
-                response.responseType = result ? OK : NOT_FOUND;
+                resExp.response = result ? OK : NOT_FOUND;
             }
             catch (NoNullAllowedException) {
-                response.responseType = NOT_ACCEPTED;
+                resExp.response = NOT_ACCEPTED;
             }
             catch (ConstraintException) {
-                response.responseType = NOT_ACCEPTED;
+                resExp.response = NOT_ACCEPTED;
             }
             catch (InvalidConstraintException) {
-                response.responseType = NOT_ACCEPTED;
+                resExp.response = NOT_ACCEPTED;
             }
         }
 
-        private void delete(in Request request, ref Response response) {
+        private void delete(in TableType table, in object obj, ref ResponseExpression resExp) {
             try {
-                bool result;
-                switch(request.payloadType) {
+                bool result = false;
+                switch (table) {
                 case MEMBER_INFO:
-                    result = db.delete(Parser.parse<MemberInfoKey>(request.payload));
+                    result = db.delete(obj as MemberInfoKey);
                     break;
                 case ITEM_INFO:
-                    result = db.delete(Parser.parse<ItemInfoKey>(request.payload));
+                    result = db.delete(obj as ItemInfoKey);
                     break;
                 case LOGIN_INFO:
-                    result = db.delete(Parser.parse<LoginInfoKey>(request.payload));
+                    result = db.delete(obj as LoginInfoKey);
                     break;
                 case LENT_INFO:
-                    var lentKey = Parser.parse<LentInfoKey>(request.payload);
+                    var lentKey = obj as LentInfoKey;
                     if (lentKey.itemName is null) {
                         result = db.deleteFromStudentID(lentKey.studentId);
                     }
@@ -291,7 +287,7 @@ namespace server.Network {
                     }
                     break;
                 case SCHEDULE_INFO:
-                    var scheduleKey = Parser.parse<ScheduleInfoKey>(request.payload);
+                    var scheduleKey = obj as ScheduleInfoKey;
                     if (scheduleKey.title is null) {
                         result = db.deleteFromDate(scheduleKey.date);
                     }
@@ -300,17 +296,17 @@ namespace server.Network {
                     }
                     break;
                 default:
-                    response.responseType = NOT_IMPLEMENTED;
+                    resExp.response = NOT_IMPLEMENTED;
                     return;
                 }
-                response.responseType = result ? OK : NOT_FOUND;
+                resExp.response = result ? OK : NOT_FOUND;
             }
             catch (ArgumentException) {
-                response.responseType = NOT_ACCEPTED;
+                resExp.response = NOT_ACCEPTED;
             }
         }
 
-        private Packet disconnect(in Packet recv) {
+        private Packet2 disconnect(in Packet2 recv) {
             if (recv.authToken != 0) {
                 closeSession(recv.authToken);
             }

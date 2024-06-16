@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace commons.Table {
-    public enum Type {
+    public enum TableType {
         LOGIN_INFO,
         MEMBER_INFO,
         ITEM_INFO,
@@ -15,8 +15,8 @@ namespace commons.Table {
 
     [Serializable]
     public abstract class InfoBase<Key> : Row {
-        public readonly Type type;
-        public InfoBase(Type type) { this.type = type; }
+        public readonly TableType type;
+        public InfoBase(TableType type) { this.type = type; }
         public abstract Key getKey();
     }
 
@@ -28,7 +28,7 @@ namespace commons.Table {
         public string phoneNumber = "";
         public bool isAdministrator = false;
 
-        public MemberInfo() : base(Type.MEMBER_INFO) { }
+        public MemberInfo() : base(TableType.MEMBER_INFO) { }
         public override string ToString()
             => $"{type}{{{studentId}, {name}, {department}, {phoneNumber}, {isAdministrator}}}";
         public override MemberInfoKey getKey()
@@ -57,7 +57,7 @@ namespace commons.Table {
         public string itemName;
         public int amount;
 
-        public ItemInfo() : base(Type.ITEM_INFO) { }
+        public ItemInfo() : base(TableType.ITEM_INFO) { }
         public override string ToString()
             => $"{type}{{{itemName}, {amount}}}";
         public override ItemInfoKey getKey()
@@ -86,7 +86,7 @@ namespace commons.Table {
         public string studentId;
         public string password = "default password";
 
-        public LoginInfo() : base(Type.LOGIN_INFO) { }
+        public LoginInfo() : base(TableType.LOGIN_INFO) { }
         public override string ToString()
             => $"{type}{{{studentId}, {password}}}";
         public override LoginInfoKey getKey()
@@ -117,7 +117,7 @@ namespace commons.Table {
         public string studentId;
         public string startDate;
 
-        public LentInfo() : base(Type.LENT_INFO) { }
+        public LentInfo() : base(TableType.LENT_INFO) { }
         public override string ToString()
             => $"{type}{{{itemName}, {amount}, {studentId}, {startDate}}}";
         public override LentInfoKey getKey()
@@ -147,7 +147,7 @@ namespace commons.Table {
         public string title;
         public string content;
 
-        public ScheduleInfo() : base(Type.SCHEDULE_INFO) { }
+        public ScheduleInfo() : base(TableType.SCHEDULE_INFO) { }
         public override string ToString()
             => $"{type}{{{date}, {title}, {content}}}";
         public override ScheduleInfoKey getKey()

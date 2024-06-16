@@ -16,7 +16,7 @@ namespace commons.Network {
         public int authToken = GUEST;
 
         // packet body
-        public Table.Type payloadType;
+        public Table.TableType payloadType;
         public byte[] payload = null;
 
         public Packet(in int token) {

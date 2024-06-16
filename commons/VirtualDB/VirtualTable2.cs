@@ -5,43 +5,46 @@ using commons.Network;
 using commons.Table;
 
 namespace commons.VirtualDB {
-    public abstract class VirtualTable<Key, R> where R : InfoBase<Key>, new() {
+    using static ResponseType;
+    using static RequestType;
+
+    public abstract class VirtualTable2<Key, R> where R : InfoBase<Key>, new() {
         private readonly TableType type = new R().type;
         protected Dictionary<Key, R> cache;
 
-        private int _token = Packet.GUEST;
+        protected int _token = Packet2.GUEST;
         protected int token { get { return _token; } }
 
-        public VirtualTable() {
+        public VirtualTable2() {
             cache = new Dictionary<Key, R>();
 
             using (var socket = new ClientSocket()) {
                 // ping
-                socket.write(PacketFactory.newHello());
+                socket.write(PacketFactory2.newHello());
 
-                var pong = socket.read<Packet>();
+                var pong = socket.read<Packet2>();
             }
         }
 
-        ~VirtualTable() {
+        ~VirtualTable2() {
             using (var socket = new ClientSocket()) {
-                socket.write(PacketFactory.newDisconnect(_token));
+                socket.write(PacketFactory2.newDisconnect(_token));
 
-                var recv = socket.read<Packet>();
+                var recv = socket.read<Packet2>();
             }
         }
 
-        protected static bool parseResponse(in Response response) {
-            switch (response.responseType) {
-            case Response.ResponseType.OK:
+        protected static bool parseResponse(in ResponseExpression exp) {
+            switch (exp.response) {
+            case OK:
                 return true;
-            case Response.ResponseType.BAD_REQUEST:
+            case BAD_REQUEST:
                 Debug.WriteLine("Bad Request");
                 goto default;
                 throw new Exception("Bad Request");
-            case Response.ResponseType.REJECTED:
+            case REJECTED:
                 goto default;
-            case Response.ResponseType.NOT_FOUND:
+            case NOT_FOUND:
                 goto default;
             default:
                 return false;
@@ -54,7 +57,7 @@ namespace commons.VirtualDB {
             using (var socket = new ClientSocket()) {
                 socket.write(PacketFactory.newAuth(loginInfo));
 
-                var resp = socket.read<Packet>();
+                var resp = socket.read<Packet2>();
 
                 _token = resp.authToken;
             }
@@ -65,16 +68,22 @@ namespace commons.VirtualDB {
 
             // connect to server
             using (var socket = new ClientSocket()) {
+                var reqExp = new RequestExpression() {
+                    request = CREATE,
+                    table = type
+                };
+                reqExp.setArg(newItem);
+
+                var request = PacketFactory2.newReplication(_token);
+                request.setPayload(reqExp);
+
                 // sent request
-                socket.write(new Request(_token) {
-                    requestType = Request.RequestType.CREATE,
-                    payloadType = type,
-                    payload = Serializer.serialize(newItem)
-                });
+                socket.write(request);
 
                 // recv response
-                var response = socket.read<Response>();
-                succeed = parseResponse(response);
+                var response = socket.read<Packet2>();
+                var resExp = response.getPayload<ResponseExpression>();
+                succeed = parseResponse(resExp);
             }
 
             if (succeed) {
@@ -104,17 +113,23 @@ namespace commons.VirtualDB {
             // item not found in cache
             // connect to server
             using (var socket = new ClientSocket()) {
-                // send request
-                socket.write(new Request(_token) {
-                    requestType = Request.RequestType.READ,
-                    payloadType = type,
-                    payload = Serializer.serialize(primaryKey)
-                });
+                var reqExp = new RequestExpression() {
+                    request = READ,
+                    table = type
+                };
+                reqExp.setArg(primaryKey);
 
-                // receive response
-                var response = socket.read<Response>();
-                if (succeed = parseResponse(response)) {
-                    item = Parser.parse<R>(response.payload);
+                var request = PacketFactory2.newReplication(_token);
+                request.setPayload(reqExp);
+
+                // sent request
+                socket.write(request);
+
+                // recv response
+                var response = socket.read<Packet2>();
+                var resExp = response.getPayload<ResponseExpression>();
+                if (succeed = parseResponse(resExp)) {
+                    item = resExp.getArg<R>();
                     // memorize it.
                     cache.Add(primaryKey, item);
                 }
@@ -144,16 +159,22 @@ namespace commons.VirtualDB {
 
             // connect to server
             using (var socket = new ClientSocket()) {
-                // send request
-                socket.write(new Request(_token) {
-                    requestType = Request.RequestType.UPDATE,
-                    payloadType = type,
-                    payload = Serializer.serialize(item)
-                });
+                var reqExp = new RequestExpression() {
+                    request = UPDATE,
+                    table = type
+                };
+                reqExp.setArg(item);
 
-                // receive response
-                var response = socket.read<Response>();
-                succeed = parseResponse(response);
+                var request = PacketFactory2.newReplication(_token);
+                request.setPayload(reqExp);
+
+                // sent request
+                socket.write(request);
+
+                // recv response
+                var response = socket.read<Packet2>();
+                var resExp = response.getPayload<ResponseExpression>();
+                succeed = parseResponse(resExp);
             }
 
             if (succeed) {
@@ -174,16 +195,22 @@ namespace commons.VirtualDB {
         public bool delete(in Key primaryKey) {
             // connect to server
             using (var socket = new ClientSocket()) {
-                // send request
-                socket.write(new Request(_token) {
-                    requestType = Request.RequestType.DELETE,
-                    payloadType = type,
-                    payload = Serializer.serialize(primaryKey)
-                });
+                var reqExp = new RequestExpression() {
+                    request = DELETE,
+                    table = type
+                };
+                reqExp.setArg(primaryKey);
 
-                // receive response
-                var response = socket.read<Response>();
-                return parseResponse(response);
+                var request = PacketFactory2.newReplication(_token);
+                request.setPayload(reqExp);
+
+                // sent request
+                socket.write(request);
+
+                // recv response
+                var response = socket.read<Packet2>();
+                var resExp = response.getPayload<ResponseExpression>();
+                return parseResponse(resExp);
             }
         }
         public bool deleteItems(in Key[] keys) {
