@@ -28,6 +28,8 @@ namespace client
             studentId = "0",
             password = "secret1234"
         };
+        private LoginInfoKey loginKey;
+        private string userId;
 
         public class Equip
         {
@@ -46,9 +48,11 @@ namespace client
                 this.rentable = rentable;
             }
         }
-        public EquipmentForm(LoginForm.Mode mode)
+        public EquipmentForm(LoginForm.Mode mode, string userId)
         {
             this.mode = mode;
+            this.userId = userId;
+            loginKey = (LoginInfoKey)userId;
             InitializeComponent();
         }
 
@@ -128,6 +132,7 @@ namespace client
             RentTable = new LentInfoVT();
             RentTable.signin(admin);
 
+
             RentTable.readFromStudentID(admin.studentId, out RentInfo[] info);
             if (mode == LoginForm.Mode.User)
             {
@@ -139,6 +144,12 @@ namespace client
             {
                 lvi = new ListViewItem(new string[] { i.itemName, i.amount.ToString(), i.startDate });
                 rentView.Items.Add(lvi);
+            }
+            ItemTable.readAll(out ItemInfo[] items);
+            foreach (var i in items)
+            {
+                lvi = new ListViewItem(new string[] { i.itemName, i.amount });
+                equipView.Items.Add(lvi);
             }
         }
     }

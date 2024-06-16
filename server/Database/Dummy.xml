@@ -37,50 +37,30 @@
     <PhoneNumber>010-1324-5768</PhoneNumber>
     <isAdministrator>true</isAdministrator>
   </MemberInfo>
-  <MemberInfo>
-    <StudentID>5</StudentID>
-    <Name>ChatGPT</Name>
-    <Department>Software</Department>
-  </MemberInfo>
-  <MemberInfo>
-    <StudentID>6</StudentID>
-    <Name>Test Member</Name>
-    <Department>Nothing</Department>
-  </MemberInfo>
-  <ItemInfo>
-    <ItemName>46 장궁</ItemName>
-    <amount>1</amount>
-  </ItemInfo>
-  <ItemInfo>
-    <ItemName>Test Bow</ItemName>
-    <amount>10</amount>
-  </ItemInfo>
-  <ItemInfo>
-    <ItemName>Arrow</ItemName>
-    <amount>30</amount>
-  </ItemInfo>
-  <ItemInfo>
-    <ItemName>Dummy</ItemName>
-    <amount>100</amount>
-  </ItemInfo>
-  <LentInfo>
-    <ItemName>46 장궁</ItemName>
-    <amount>1</amount>
-    <StudentID>1</StudentID>
-    <StartDate>2024-03-21</StartDate>
-  </LentInfo>
-  <LentInfo>
-    <ItemName>Test Bow</ItemName>
-    <amount>1</amount>
-    <StudentID>6</StudentID>
-    <StartDate>2024-06-14</StartDate>
-  </LentInfo>
-  <LentInfo>
-    <ItemName>Arrow</ItemName>
-    <amount>20</amount>
-    <StudentID>6</StudentID>
-    <StartDate>2024-06-14</StartDate>
-  </LentInfo>
+	<ItemInfo>
+		<ItemName>현무궁 25</ItemName>
+		<amount>1</amount>
+	</ItemInfo>
+	<ItemInfo>
+		<ItemName>현무궁 27</ItemName>
+		<amount>1</amount>
+	</ItemInfo>
+	<ItemInfo>
+		<ItemName>7.5x7.5 카본화살</ItemName>
+		<amount>20</amount>
+	</ItemInfo>
+	<ItemInfo>
+		<ItemName>6.5x6.5 카본화살</ItemName>
+		<amount>10</amount>
+	</ItemInfo>
+	<ItemInfo>
+		<ItemName>가야궁 30</ItemName>
+		<amount>10</amount>
+	</ItemInfo>
+	<ItemInfo>
+		<ItemName>활 운반용 대형가방</ItemName>
+		<amount>1</amount>
+	</ItemInfo>
   <ScheduleInfo>
     <Date>2024-04-30</Date>
     <Title>간식행사</Title>

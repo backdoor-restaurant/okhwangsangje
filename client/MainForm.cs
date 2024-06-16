@@ -15,12 +15,14 @@ namespace client
     {
         Form child;
         private string userName;
+        private string userId;
         private Mode mode;
-        public MainForm(string userName)
+        public MainForm(string userName, string userId)
         {
             this.userName = userName;
             if (userName == "root") mode = Mode.Admin;
             else mode = Mode.User;
+            this.userId = userId;
             InitializeComponent();
         }
 
@@ -53,7 +55,7 @@ namespace client
                 child.Close();
             this.Controls.Remove(child);
 
-            child = new EquipmentForm(mode);
+            child = new EquipmentForm(mode, userId);
             child.MdiParent = this;
             child.Show();
             (child as EquipmentForm).parent = this;
